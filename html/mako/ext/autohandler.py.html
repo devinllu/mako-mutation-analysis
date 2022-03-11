@@ -1,0 +1,318 @@
+<html><body><h1>mako/ext/autohandler.py</h1>Killed 0 out of 29 mutants<h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 3226</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -30,7 +30,7 @@
+ import re
+ 
+ 
+-def autohandler(template, context, name="autohandler"):
++def autohandler(template, context, name="XXautohandlerXX"):
+     lookup = context.lookup
+     _template_uri = template.module._template_uri
+     if not lookup.filesystem_checks:
+</pre><h3>Mutant 3227</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -31,7 +31,7 @@
+ 
+ 
+ def autohandler(template, context, name="autohandler"):
+-    lookup = context.lookup
++    lookup = None
+     _template_uri = template.module._template_uri
+     if not lookup.filesystem_checks:
+         try:
+</pre><h3>Mutant 3228</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -32,7 +32,7 @@
+ 
+ def autohandler(template, context, name="autohandler"):
+     lookup = context.lookup
+-    _template_uri = template.module._template_uri
++    _template_uri = None
+     if not lookup.filesystem_checks:
+         try:
+             return lookup._uri_cache[(autohandler, _template_uri, name)]
+</pre><h3>Mutant 3229</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -33,7 +33,7 @@
+ def autohandler(template, context, name="autohandler"):
+     lookup = context.lookup
+     _template_uri = template.module._template_uri
+-    if not lookup.filesystem_checks:
++    if  lookup.filesystem_checks:
+         try:
+             return lookup._uri_cache[(autohandler, _template_uri, name)]
+         except KeyError:
+</pre><h3>Mutant 3230</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -39,7 +39,7 @@
+         except KeyError:
+             pass
+ 
+-    tokens = re.findall(r"([^/]+)", posixpath.dirname(_template_uri)) + [name]
++    tokens = re.findall(r"XX([^/]+)XX", posixpath.dirname(_template_uri)) + [name]
+     while len(tokens):
+         path = "/" + "/".join(tokens)
+         if path != _template_uri and _file_exists(lookup, path):
+</pre><h3>Mutant 3231</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -39,7 +39,7 @@
+         except KeyError:
+             pass
+ 
+-    tokens = re.findall(r"([^/]+)", posixpath.dirname(_template_uri)) + [name]
++    tokens = re.findall(r"([^/]+)", posixpath.dirname(_template_uri)) - [name]
+     while len(tokens):
+         path = "/" + "/".join(tokens)
+         if path != _template_uri and _file_exists(lookup, path):
+</pre><h3>Mutant 3232</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -39,7 +39,7 @@
+         except KeyError:
+             pass
+ 
+-    tokens = re.findall(r"([^/]+)", posixpath.dirname(_template_uri)) + [name]
++    tokens = None
+     while len(tokens):
+         path = "/" + "/".join(tokens)
+         if path != _template_uri and _file_exists(lookup, path):
+</pre><h3>Mutant 3233</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -41,7 +41,7 @@
+ 
+     tokens = re.findall(r"([^/]+)", posixpath.dirname(_template_uri)) + [name]
+     while len(tokens):
+-        path = "/" + "/".join(tokens)
++        path = "XX/XX" + "/".join(tokens)
+         if path != _template_uri and _file_exists(lookup, path):
+             if not lookup.filesystem_checks:
+                 return lookup._uri_cache.setdefault(
+</pre><h3>Mutant 3234</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -41,7 +41,7 @@
+ 
+     tokens = re.findall(r"([^/]+)", posixpath.dirname(_template_uri)) + [name]
+     while len(tokens):
+-        path = "/" + "/".join(tokens)
++        path = "/" - "/".join(tokens)
+         if path != _template_uri and _file_exists(lookup, path):
+             if not lookup.filesystem_checks:
+                 return lookup._uri_cache.setdefault(
+</pre><h3>Mutant 3235</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -41,7 +41,7 @@
+ 
+     tokens = re.findall(r"([^/]+)", posixpath.dirname(_template_uri)) + [name]
+     while len(tokens):
+-        path = "/" + "/".join(tokens)
++        path = "/" + "XX/XX".join(tokens)
+         if path != _template_uri and _file_exists(lookup, path):
+             if not lookup.filesystem_checks:
+                 return lookup._uri_cache.setdefault(
+</pre><h3>Mutant 3236</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -41,7 +41,7 @@
+ 
+     tokens = re.findall(r"([^/]+)", posixpath.dirname(_template_uri)) + [name]
+     while len(tokens):
+-        path = "/" + "/".join(tokens)
++        path = None
+         if path != _template_uri and _file_exists(lookup, path):
+             if not lookup.filesystem_checks:
+                 return lookup._uri_cache.setdefault(
+</pre><h3>Mutant 3237</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -42,7 +42,7 @@
+     tokens = re.findall(r"([^/]+)", posixpath.dirname(_template_uri)) + [name]
+     while len(tokens):
+         path = "/" + "/".join(tokens)
+-        if path != _template_uri and _file_exists(lookup, path):
++        if path == _template_uri and _file_exists(lookup, path):
+             if not lookup.filesystem_checks:
+                 return lookup._uri_cache.setdefault(
+                     (autohandler, _template_uri, name), path
+</pre><h3>Mutant 3238</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -42,7 +42,7 @@
+     tokens = re.findall(r"([^/]+)", posixpath.dirname(_template_uri)) + [name]
+     while len(tokens):
+         path = "/" + "/".join(tokens)
+-        if path != _template_uri and _file_exists(lookup, path):
++        if path != _template_uri or _file_exists(lookup, path):
+             if not lookup.filesystem_checks:
+                 return lookup._uri_cache.setdefault(
+                     (autohandler, _template_uri, name), path
+</pre><h3>Mutant 3239</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -43,7 +43,7 @@
+     while len(tokens):
+         path = "/" + "/".join(tokens)
+         if path != _template_uri and _file_exists(lookup, path):
+-            if not lookup.filesystem_checks:
++            if  lookup.filesystem_checks:
+                 return lookup._uri_cache.setdefault(
+                     (autohandler, _template_uri, name), path
+                 )
+</pre><h3>Mutant 3240</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -49,7 +49,7 @@
+                 )
+             else:
+                 return path
+-        if len(tokens) == 1:
++        if len(tokens) != 1:
+             break
+         tokens[-2:] = [name]
+ 
+</pre><h3>Mutant 3241</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -49,7 +49,7 @@
+                 )
+             else:
+                 return path
+-        if len(tokens) == 1:
++        if len(tokens) == 2:
+             break
+         tokens[-2:] = [name]
+ 
+</pre><h3>Mutant 3242</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -50,7 +50,7 @@
+             else:
+                 return path
+         if len(tokens) == 1:
+-            break
++            continue
+         tokens[-2:] = [name]
+ 
+     if not lookup.filesystem_checks:
+</pre><h3>Mutant 3243</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -51,7 +51,7 @@
+                 return path
+         if len(tokens) == 1:
+             break
+-        tokens[-2:] = [name]
++        tokens[+2:] = [name]
+ 
+     if not lookup.filesystem_checks:
+         return lookup._uri_cache.setdefault(
+</pre><h3>Mutant 3244</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -51,7 +51,7 @@
+                 return path
+         if len(tokens) == 1:
+             break
+-        tokens[-2:] = [name]
++        tokens[-3:] = [name]
+ 
+     if not lookup.filesystem_checks:
+         return lookup._uri_cache.setdefault(
+</pre><h3>Mutant 3245</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -51,7 +51,7 @@
+                 return path
+         if len(tokens) == 1:
+             break
+-        tokens[-2:] = [name]
++        tokens[-2:] = None
+ 
+     if not lookup.filesystem_checks:
+         return lookup._uri_cache.setdefault(
+</pre><h3>Mutant 3246</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -53,7 +53,7 @@
+             break
+         tokens[-2:] = [name]
+ 
+-    if not lookup.filesystem_checks:
++    if  lookup.filesystem_checks:
+         return lookup._uri_cache.setdefault(
+             (autohandler, _template_uri, name), None
+         )
+</pre><h3>Mutant 3247</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -62,7 +62,7 @@
+ 
+ 
+ def _file_exists(lookup, path):
+-    psub = re.sub(r"^/", "", path)
++    psub = re.sub(r"XX^/XX", "", path)
+     for d in lookup.directories:
+         if os.path.exists(d + "/" + psub):
+             return True
+</pre><h3>Mutant 3248</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -62,7 +62,7 @@
+ 
+ 
+ def _file_exists(lookup, path):
+-    psub = re.sub(r"^/", "", path)
++    psub = re.sub(r"^/", "XXXX", path)
+     for d in lookup.directories:
+         if os.path.exists(d + "/" + psub):
+             return True
+</pre><h3>Mutant 3249</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -62,7 +62,7 @@
+ 
+ 
+ def _file_exists(lookup, path):
+-    psub = re.sub(r"^/", "", path)
++    psub = None
+     for d in lookup.directories:
+         if os.path.exists(d + "/" + psub):
+             return True
+</pre><h3>Mutant 3250</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -64,7 +64,7 @@
+ def _file_exists(lookup, path):
+     psub = re.sub(r"^/", "", path)
+     for d in lookup.directories:
+-        if os.path.exists(d + "/" + psub):
++        if os.path.exists(d - "/" + psub):
+             return True
+     else:
+         return False
+</pre><h3>Mutant 3251</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -64,7 +64,7 @@
+ def _file_exists(lookup, path):
+     psub = re.sub(r"^/", "", path)
+     for d in lookup.directories:
+-        if os.path.exists(d + "/" + psub):
++        if os.path.exists(d + "XX/XX" + psub):
+             return True
+     else:
+         return False
+</pre><h3>Mutant 3252</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -64,7 +64,7 @@
+ def _file_exists(lookup, path):
+     psub = re.sub(r"^/", "", path)
+     for d in lookup.directories:
+-        if os.path.exists(d + "/" + psub):
++        if os.path.exists(d + "/" - psub):
+             return True
+     else:
+         return False
+</pre><h3>Mutant 3253</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -65,7 +65,7 @@
+     psub = re.sub(r"^/", "", path)
+     for d in lookup.directories:
+         if os.path.exists(d + "/" + psub):
+-            return True
++            return False
+     else:
+         return False
+ 
+</pre><h3>Mutant 3254</h3><pre>--- mako/ext/autohandler.py
++++ mako/ext/autohandler.py
+@@ -67,5 +67,5 @@
+         if os.path.exists(d + "/" + psub):
+             return True
+     else:
+-        return False
++        return True
+ 
+</pre></body></html>

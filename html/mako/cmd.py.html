@@ -1,0 +1,285 @@
+<html><body><h1>mako/cmd.py</h1>Killed 21 out of 47 mutants<h2>Timeouts</h2>Mutants that made the test suite take a lot longer so the tests were killed.<h3>Mutant 524</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -59,7 +59,7 @@
+     output_encoding = options.output_encoding
+     output_file = options.output_file
+ 
+-    if options.input == "-":
++    if options.input != "-":
+         lookup_dirs = options.template_dir or ["."]
+         lookup = TemplateLookup(lookup_dirs)
+         try:
+</pre><h3>Mutant 542</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -99,6 +99,6 @@
+             sys.stdout.write(rendered)
+ 
+ 
+-if __name__ == "__main__":
++if __name__ != "__main__":
+     cmdline()
+ 
+</pre><h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 499</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -16,7 +16,7 @@
+ 
+ def varsplit(var):
+     if "=" not in var:
+-        return (var, "")
++        return (var, "XXXX")
+     return var.split("=", 1)
+ 
+ 
+</pre><h3>Mutant 501</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -17,7 +17,7 @@
+ def varsplit(var):
+     if "=" not in var:
+         return (var, "")
+-    return var.split("=", 1)
++    return var.split("=", 2)
+ 
+ 
+ def _exit():
+</pre><h3>Mutant 502</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -22,7 +22,7 @@
+ 
+ def _exit():
+     sys.stderr.write(exceptions.text_error_template().render())
+-    sys.exit(1)
++    sys.exit(2)
+ 
+ 
+ def cmdline(argv=None):
+</pre><h3>Mutant 506</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -32,7 +32,7 @@
+         "--var",
+         default=[],
+         action="append",
+-        help="variable (can be used multiple times, use name=value)",
++        help="XXvariable (can be used multiple times, use name=value)XX",
+     )
+     parser.add_argument(
+         "--template-dir",
+</pre><h3>Mutant 509</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -38,7 +38,7 @@
+         "--template-dir",
+         default=[],
+         action="append",
+-        help="Directory to use for template lookup (multiple "
++        help="XXDirectory to use for template lookup (multiple XX"
+         "directories may be provided). If not given then if the "
+         "template is read from stdin, the value defaults to be "
+         "the current directory, otherwise it defaults to be the "
+</pre><h3>Mutant 510</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -39,7 +39,7 @@
+         default=[],
+         action="append",
+         help="Directory to use for template lookup (multiple "
+-        "directories may be provided). If not given then if the "
++        "XXdirectories may be provided). If not given then if the XX"
+         "template is read from stdin, the value defaults to be "
+         "the current directory, otherwise it defaults to be the "
+         "parent directory of the file provided.",
+</pre><h3>Mutant 511</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -40,7 +40,7 @@
+         action="append",
+         help="Directory to use for template lookup (multiple "
+         "directories may be provided). If not given then if the "
+-        "template is read from stdin, the value defaults to be "
++        "XXtemplate is read from stdin, the value defaults to be XX"
+         "the current directory, otherwise it defaults to be the "
+         "parent directory of the file provided.",
+     )
+</pre><h3>Mutant 512</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -41,7 +41,7 @@
+         help="Directory to use for template lookup (multiple "
+         "directories may be provided). If not given then if the "
+         "template is read from stdin, the value defaults to be "
+-        "the current directory, otherwise it defaults to be the "
++        "XXthe current directory, otherwise it defaults to be the XX"
+         "parent directory of the file provided.",
+     )
+     parser.add_argument(
+</pre><h3>Mutant 513</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -42,7 +42,7 @@
+         "directories may be provided). If not given then if the "
+         "template is read from stdin, the value defaults to be "
+         "the current directory, otherwise it defaults to be the "
+-        "parent directory of the file provided.",
++        "XXparent directory of the file provided.XX",
+     )
+     parser.add_argument(
+         "--output-encoding", default=None, help="force output encoding"
+</pre><h3>Mutant 515</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -45,7 +45,7 @@
+         "parent directory of the file provided.",
+     )
+     parser.add_argument(
+-        "--output-encoding", default=None, help="force output encoding"
++        "--output-encoding", default=None, help="XXforce output encodingXX"
+     )
+     parser.add_argument(
+         "--output-file",
+</pre><h3>Mutant 517</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -50,7 +50,7 @@
+     parser.add_argument(
+         "--output-file",
+         default=None,
+-        help="Write to file upon successful render instead of stdout",
++        help="XXWrite to file upon successful render instead of stdoutXX",
+     )
+     parser.add_argument("input", nargs="?", default="-")
+ 
+</pre><h3>Mutant 520</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -52,7 +52,7 @@
+         default=None,
+         help="Write to file upon successful render instead of stdout",
+     )
+-    parser.add_argument("input", nargs="?", default="-")
++    parser.add_argument("input", nargs="?", default="XX-XX")
+ 
+     options = parser.parse_args(argv)
+ 
+</pre><h3>Mutant 522</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -56,7 +56,7 @@
+ 
+     options = parser.parse_args(argv)
+ 
+-    output_encoding = options.output_encoding
++    output_encoding = None
+     output_file = options.output_file
+ 
+     if options.input == "-":
+</pre><h3>Mutant 523</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -57,7 +57,7 @@
+     options = parser.parse_args(argv)
+ 
+     output_encoding = options.output_encoding
+-    output_file = options.output_file
++    output_file = None
+ 
+     if options.input == "-":
+         lookup_dirs = options.template_dir or ["."]
+</pre><h3>Mutant 526</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -60,7 +60,7 @@
+     output_file = options.output_file
+ 
+     if options.input == "-":
+-        lookup_dirs = options.template_dir or ["."]
++        lookup_dirs = options.template_dir or ["XX.XX"]
+         lookup = TemplateLookup(lookup_dirs)
+         try:
+             template = Template(
+</pre><h3>Mutant 527</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -60,7 +60,7 @@
+     output_file = options.output_file
+ 
+     if options.input == "-":
+-        lookup_dirs = options.template_dir or ["."]
++        lookup_dirs = options.template_dir and ["."]
+         lookup = TemplateLookup(lookup_dirs)
+         try:
+             template = Template(
+</pre><h3>Mutant 528</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -60,7 +60,7 @@
+     output_file = options.output_file
+ 
+     if options.input == "-":
+-        lookup_dirs = options.template_dir or ["."]
++        lookup_dirs = None
+         lookup = TemplateLookup(lookup_dirs)
+         try:
+             template = Template(
+</pre><h3>Mutant 529</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -61,7 +61,7 @@
+ 
+     if options.input == "-":
+         lookup_dirs = options.template_dir or ["."]
+-        lookup = TemplateLookup(lookup_dirs)
++        lookup = None
+         try:
+             template = Template(
+                 sys.stdin.read(),
+</pre><h3>Mutant 533</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -73,7 +73,7 @@
+     else:
+         filename = options.input
+         if not isfile(filename):
+-            raise SystemExit("error: can't find %s" % filename)
++            raise SystemExit("XXerror: can't find %sXX" % filename)
+         lookup_dirs = options.template_dir or [dirname(filename)]
+         lookup = TemplateLookup(lookup_dirs)
+         try:
+</pre><h3>Mutant 535</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -74,7 +74,7 @@
+         filename = options.input
+         if not isfile(filename):
+             raise SystemExit("error: can't find %s" % filename)
+-        lookup_dirs = options.template_dir or [dirname(filename)]
++        lookup_dirs = options.template_dir and [dirname(filename)]
+         lookup = TemplateLookup(lookup_dirs)
+         try:
+             template = Template(
+</pre><h3>Mutant 536</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -74,7 +74,7 @@
+         filename = options.input
+         if not isfile(filename):
+             raise SystemExit("error: can't find %s" % filename)
+-        lookup_dirs = options.template_dir or [dirname(filename)]
++        lookup_dirs = None
+         lookup = TemplateLookup(lookup_dirs)
+         try:
+             template = Template(
+</pre><h3>Mutant 537</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -75,7 +75,7 @@
+         if not isfile(filename):
+             raise SystemExit("error: can't find %s" % filename)
+         lookup_dirs = options.template_dir or [dirname(filename)]
+-        lookup = TemplateLookup(lookup_dirs)
++        lookup = None
+         try:
+             template = Template(
+                 filename=filename,
+</pre><h3>Mutant 541</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -92,7 +92,7 @@
+         _exit()
+     else:
+         if output_file:
+-            io.open(output_file, "wt", encoding=output_encoding).write(
++            io.open(output_file, "XXwtXX", encoding=output_encoding).write(
+                 rendered
+             )
+         else:
+</pre><h3>Mutant 543</h3><pre>--- mako/cmd.py
++++ mako/cmd.py
+@@ -99,6 +99,6 @@
+             sys.stdout.write(rendered)
+ 
+ 
+-if __name__ == "__main__":
++if __name__ == "XX__main__XX":
+     cmdline()
+ 
+</pre></body></html>

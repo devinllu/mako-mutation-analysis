@@ -1,0 +1,437 @@
+<html><body><h1>mako/ext/linguaplugin.py</h1>Killed 0 out of 39 mutants<h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 3380</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -18,7 +18,7 @@
+ 
+     """Mako templates"""
+ 
+-    extensions = [".mako"]
++    extensions = ["XX.makoXX"]
+     default_config = {"encoding": "utf-8", "comment-tags": ""}
+ 
+     def __call__(self, filename, options, fileobj=None):
+</pre><h3>Mutant 3381</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -18,7 +18,7 @@
+ 
+     """Mako templates"""
+ 
+-    extensions = [".mako"]
++    extensions = None
+     default_config = {"encoding": "utf-8", "comment-tags": ""}
+ 
+     def __call__(self, filename, options, fileobj=None):
+</pre><h3>Mutant 3382</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -19,7 +19,7 @@
+     """Mako templates"""
+ 
+     extensions = [".mako"]
+-    default_config = {"encoding": "utf-8", "comment-tags": ""}
++    default_config = {"XXencodingXX": "utf-8", "comment-tags": ""}
+ 
+     def __call__(self, filename, options, fileobj=None):
+         self.options = options
+</pre><h3>Mutant 3383</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -19,7 +19,7 @@
+     """Mako templates"""
+ 
+     extensions = [".mako"]
+-    default_config = {"encoding": "utf-8", "comment-tags": ""}
++    default_config = {"encoding": "XXutf-8XX", "comment-tags": ""}
+ 
+     def __call__(self, filename, options, fileobj=None):
+         self.options = options
+</pre><h3>Mutant 3384</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -19,7 +19,7 @@
+     """Mako templates"""
+ 
+     extensions = [".mako"]
+-    default_config = {"encoding": "utf-8", "comment-tags": ""}
++    default_config = {"encoding": "utf-8", "XXcomment-tagsXX": ""}
+ 
+     def __call__(self, filename, options, fileobj=None):
+         self.options = options
+</pre><h3>Mutant 3385</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -19,7 +19,7 @@
+     """Mako templates"""
+ 
+     extensions = [".mako"]
+-    default_config = {"encoding": "utf-8", "comment-tags": ""}
++    default_config = {"encoding": "utf-8", "comment-tags": "XXXX"}
+ 
+     def __call__(self, filename, options, fileobj=None):
+         self.options = options
+</pre><h3>Mutant 3386</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -19,7 +19,7 @@
+     """Mako templates"""
+ 
+     extensions = [".mako"]
+-    default_config = {"encoding": "utf-8", "comment-tags": ""}
++    default_config = None
+ 
+     def __call__(self, filename, options, fileobj=None):
+         self.options = options
+</pre><h3>Mutant 3387</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -22,7 +22,7 @@
+     default_config = {"encoding": "utf-8", "comment-tags": ""}
+ 
+     def __call__(self, filename, options, fileobj=None):
+-        self.options = options
++        self.options = None
+         self.filename = filename
+         self.python_extractor = get_extractor("x.py")
+         if fileobj is None:
+</pre><h3>Mutant 3388</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -23,7 +23,7 @@
+ 
+     def __call__(self, filename, options, fileobj=None):
+         self.options = options
+-        self.filename = filename
++        self.filename = None
+         self.python_extractor = get_extractor("x.py")
+         if fileobj is None:
+             fileobj = open(filename, "rb")
+</pre><h3>Mutant 3389</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -24,7 +24,7 @@
+     def __call__(self, filename, options, fileobj=None):
+         self.options = options
+         self.filename = filename
+-        self.python_extractor = get_extractor("x.py")
++        self.python_extractor = get_extractor("XXx.pyXX")
+         if fileobj is None:
+             fileobj = open(filename, "rb")
+             must_close = True
+</pre><h3>Mutant 3390</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -24,7 +24,7 @@
+     def __call__(self, filename, options, fileobj=None):
+         self.options = options
+         self.filename = filename
+-        self.python_extractor = get_extractor("x.py")
++        self.python_extractor = None
+         if fileobj is None:
+             fileobj = open(filename, "rb")
+             must_close = True
+</pre><h3>Mutant 3391</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -25,7 +25,7 @@
+         self.options = options
+         self.filename = filename
+         self.python_extractor = get_extractor("x.py")
+-        if fileobj is None:
++        if fileobj is not None:
+             fileobj = open(filename, "rb")
+             must_close = True
+         else:
+</pre><h3>Mutant 3392</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -26,7 +26,7 @@
+         self.filename = filename
+         self.python_extractor = get_extractor("x.py")
+         if fileobj is None:
+-            fileobj = open(filename, "rb")
++            fileobj = open(filename, "XXrbXX")
+             must_close = True
+         else:
+             must_close = False
+</pre><h3>Mutant 3393</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -26,7 +26,7 @@
+         self.filename = filename
+         self.python_extractor = get_extractor("x.py")
+         if fileobj is None:
+-            fileobj = open(filename, "rb")
++            fileobj = None
+             must_close = True
+         else:
+             must_close = False
+</pre><h3>Mutant 3394</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -27,7 +27,7 @@
+         self.python_extractor = get_extractor("x.py")
+         if fileobj is None:
+             fileobj = open(filename, "rb")
+-            must_close = True
++            must_close = False
+         else:
+             must_close = False
+         try:
+</pre><h3>Mutant 3395</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -27,7 +27,7 @@
+         self.python_extractor = get_extractor("x.py")
+         if fileobj is None:
+             fileobj = open(filename, "rb")
+-            must_close = True
++            must_close = None
+         else:
+             must_close = False
+         try:
+</pre><h3>Mutant 3396</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -29,7 +29,7 @@
+             fileobj = open(filename, "rb")
+             must_close = True
+         else:
+-            must_close = False
++            must_close = True
+         try:
+             for message in self.process_file(fileobj):
+                 yield message
+</pre><h3>Mutant 3397</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -29,7 +29,7 @@
+             fileobj = open(filename, "rb")
+             must_close = True
+         else:
+-            must_close = False
++            must_close = None
+         try:
+             for message in self.process_file(fileobj):
+                 yield message
+</pre><h3>Mutant 3398</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -38,7 +38,7 @@
+                 fileobj.close()
+ 
+     def process_python(self, code, code_lineno, translator_strings):
+-        source = code.getvalue().strip()
++        source = None
+         if source.endswith(compat.b(":")):
+             if source in (
+                 compat.b("try:"),
+</pre><h3>Mutant 3399</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -39,7 +39,7 @@
+ 
+     def process_python(self, code, code_lineno, translator_strings):
+         source = code.getvalue().strip()
+-        if source.endswith(compat.b(":")):
++        if source.endswith(compat.b("XX:XX")):
+             if source in (
+                 compat.b("try:"),
+                 compat.b("else:"),
+</pre><h3>Mutant 3400</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -40,7 +40,7 @@
+     def process_python(self, code, code_lineno, translator_strings):
+         source = code.getvalue().strip()
+         if source.endswith(compat.b(":")):
+-            if source in (
++            if source not in (
+                 compat.b("try:"),
+                 compat.b("else:"),
+             ) or source.startswith(compat.b("except")):
+</pre><h3>Mutant 3401</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -41,7 +41,7 @@
+         source = code.getvalue().strip()
+         if source.endswith(compat.b(":")):
+             if source in (
+-                compat.b("try:"),
++                compat.b("XXtry:XX"),
+                 compat.b("else:"),
+             ) or source.startswith(compat.b("except")):
+                 source = compat.b("")  # Ignore try/except and else
+</pre><h3>Mutant 3402</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -42,7 +42,7 @@
+         if source.endswith(compat.b(":")):
+             if source in (
+                 compat.b("try:"),
+-                compat.b("else:"),
++                compat.b("XXelse:XX"),
+             ) or source.startswith(compat.b("except")):
+                 source = compat.b("")  # Ignore try/except and else
+             elif source.startswith(compat.b("elif")):
+</pre><h3>Mutant 3403</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -43,7 +43,7 @@
+             if source in (
+                 compat.b("try:"),
+                 compat.b("else:"),
+-            ) or source.startswith(compat.b("except")):
++            ) or source.startswith(compat.b("XXexceptXX")):
+                 source = compat.b("")  # Ignore try/except and else
+             elif source.startswith(compat.b("elif")):
+                 source = source[2:]  # Replace "elif" with "if"
+</pre><h3>Mutant 3404</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -43,7 +43,7 @@
+             if source in (
+                 compat.b("try:"),
+                 compat.b("else:"),
+-            ) or source.startswith(compat.b("except")):
++            ) and source.startswith(compat.b("except")):
+                 source = compat.b("")  # Ignore try/except and else
+             elif source.startswith(compat.b("elif")):
+                 source = source[2:]  # Replace "elif" with "if"
+</pre><h3>Mutant 3405</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -44,7 +44,7 @@
+                 compat.b("try:"),
+                 compat.b("else:"),
+             ) or source.startswith(compat.b("except")):
+-                source = compat.b("")  # Ignore try/except and else
++                source = compat.b("XXXX")  # Ignore try/except and else
+             elif source.startswith(compat.b("elif")):
+                 source = source[2:]  # Replace "elif" with "if"
+             source += compat.b("pass")
+</pre><h3>Mutant 3406</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -44,7 +44,7 @@
+                 compat.b("try:"),
+                 compat.b("else:"),
+             ) or source.startswith(compat.b("except")):
+-                source = compat.b("")  # Ignore try/except and else
++                source = None  # Ignore try/except and else
+             elif source.startswith(compat.b("elif")):
+                 source = source[2:]  # Replace "elif" with "if"
+             source += compat.b("pass")
+</pre><h3>Mutant 3407</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -45,7 +45,7 @@
+                 compat.b("else:"),
+             ) or source.startswith(compat.b("except")):
+                 source = compat.b("")  # Ignore try/except and else
+-            elif source.startswith(compat.b("elif")):
++            elif source.startswith(compat.b("XXelifXX")):
+                 source = source[2:]  # Replace "elif" with "if"
+             source += compat.b("pass")
+         code = io.BytesIO(source)
+</pre><h3>Mutant 3408</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -46,7 +46,7 @@
+             ) or source.startswith(compat.b("except")):
+                 source = compat.b("")  # Ignore try/except and else
+             elif source.startswith(compat.b("elif")):
+-                source = source[2:]  # Replace "elif" with "if"
++                source = source[3:]  # Replace "elif" with "if"
+             source += compat.b("pass")
+         code = io.BytesIO(source)
+         for msg in self.python_extractor(
+</pre><h3>Mutant 3409</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -46,7 +46,7 @@
+             ) or source.startswith(compat.b("except")):
+                 source = compat.b("")  # Ignore try/except and else
+             elif source.startswith(compat.b("elif")):
+-                source = source[2:]  # Replace "elif" with "if"
++                source = None  # Replace "elif" with "if"
+             source += compat.b("pass")
+         code = io.BytesIO(source)
+         for msg in self.python_extractor(
+</pre><h3>Mutant 3410</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -47,7 +47,7 @@
+                 source = compat.b("")  # Ignore try/except and else
+             elif source.startswith(compat.b("elif")):
+                 source = source[2:]  # Replace "elif" with "if"
+-            source += compat.b("pass")
++            source = compat.b("pass")
+         code = io.BytesIO(source)
+         for msg in self.python_extractor(
+             self.filename, self.options, code, code_lineno - 1
+</pre><h3>Mutant 3411</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -47,7 +47,7 @@
+                 source = compat.b("")  # Ignore try/except and else
+             elif source.startswith(compat.b("elif")):
+                 source = source[2:]  # Replace "elif" with "if"
+-            source += compat.b("pass")
++            source -= compat.b("pass")
+         code = io.BytesIO(source)
+         for msg in self.python_extractor(
+             self.filename, self.options, code, code_lineno - 1
+</pre><h3>Mutant 3412</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -47,7 +47,7 @@
+                 source = compat.b("")  # Ignore try/except and else
+             elif source.startswith(compat.b("elif")):
+                 source = source[2:]  # Replace "elif" with "if"
+-            source += compat.b("pass")
++            source += compat.b("XXpassXX")
+         code = io.BytesIO(source)
+         for msg in self.python_extractor(
+             self.filename, self.options, code, code_lineno - 1
+</pre><h3>Mutant 3413</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -48,7 +48,7 @@
+             elif source.startswith(compat.b("elif")):
+                 source = source[2:]  # Replace "elif" with "if"
+             source += compat.b("pass")
+-        code = io.BytesIO(source)
++        code = None
+         for msg in self.python_extractor(
+             self.filename, self.options, code, code_lineno - 1
+         ):
+</pre><h3>Mutant 3414</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -50,7 +50,7 @@
+             source += compat.b("pass")
+         code = io.BytesIO(source)
+         for msg in self.python_extractor(
+-            self.filename, self.options, code, code_lineno - 1
++            self.filename, self.options, code, code_lineno + 1
+         ):
+             if translator_strings:
+                 msg = Message(
+</pre><h3>Mutant 3415</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -50,7 +50,7 @@
+             source += compat.b("pass")
+         code = io.BytesIO(source)
+         for msg in self.python_extractor(
+-            self.filename, self.options, code, code_lineno - 1
++            self.filename, self.options, code, code_lineno - 2
+         ):
+             if translator_strings:
+                 msg = Message(
+</pre><h3>Mutant 3416</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -58,7 +58,7 @@
+                     msg.msgid,
+                     msg.msgid_plural,
+                     msg.flags,
+-                    compat.u(" ").join(translator_strings + [msg.comment]),
++                    compat.u("XX XX").join(translator_strings + [msg.comment]),
+                     msg.tcomment,
+                     msg.location,
+                 )
+</pre><h3>Mutant 3417</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -58,7 +58,7 @@
+                     msg.msgid,
+                     msg.msgid_plural,
+                     msg.flags,
+-                    compat.u(" ").join(translator_strings + [msg.comment]),
++                    compat.u(" ").join(translator_strings - [msg.comment]),
+                     msg.tcomment,
+                     msg.location,
+                 )
+</pre><h3>Mutant 3418</h3><pre>--- mako/ext/linguaplugin.py
++++ mako/ext/linguaplugin.py
+@@ -53,14 +53,6 @@
+             self.filename, self.options, code, code_lineno - 1
+         ):
+             if translator_strings:
+-                msg = Message(
+-                    msg.msgctxt,
+-                    msg.msgid,
+-                    msg.msgid_plural,
+-                    msg.flags,
+-                    compat.u(" ").join(translator_strings + [msg.comment]),
+-                    msg.tcomment,
+-                    msg.location,
+-                )
++                msg = None
+             yield msg
+ 
+</pre></body></html>

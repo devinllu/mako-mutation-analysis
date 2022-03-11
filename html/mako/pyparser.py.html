@@ -1,0 +1,366 @@
+<html><body><h1>mako/pyparser.py</h1>Killed 49 out of 82 mutants<h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 3079</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -23,7 +23,7 @@
+ if compat.py3k:
+     # words that cannot be assigned to (notably
+     # smaller than the total keys in __builtins__)
+-    reserved = set(["True", "False", "None", "print"])
++    reserved = set(["XXTrueXX", "False", "None", "print"])
+ 
+     # the "id" attribute on a function node
+     arg_id = operator.attrgetter("arg")
+</pre><h3>Mutant 3080</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -23,7 +23,7 @@
+ if compat.py3k:
+     # words that cannot be assigned to (notably
+     # smaller than the total keys in __builtins__)
+-    reserved = set(["True", "False", "None", "print"])
++    reserved = set(["True", "XXFalseXX", "None", "print"])
+ 
+     # the "id" attribute on a function node
+     arg_id = operator.attrgetter("arg")
+</pre><h3>Mutant 3081</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -23,7 +23,7 @@
+ if compat.py3k:
+     # words that cannot be assigned to (notably
+     # smaller than the total keys in __builtins__)
+-    reserved = set(["True", "False", "None", "print"])
++    reserved = set(["True", "False", "XXNoneXX", "print"])
+ 
+     # the "id" attribute on a function node
+     arg_id = operator.attrgetter("arg")
+</pre><h3>Mutant 3086</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -30,7 +30,7 @@
+ else:
+     # words that cannot be assigned to (notably
+     # smaller than the total keys in __builtins__)
+-    reserved = set(["True", "False", "None"])
++    reserved = set(["XXTrueXX", "False", "None"])
+ 
+     # the "id" attribute on a function node
+     arg_id = operator.attrgetter("id")
+</pre><h3>Mutant 3087</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -30,7 +30,7 @@
+ else:
+     # words that cannot be assigned to (notably
+     # smaller than the total keys in __builtins__)
+-    reserved = set(["True", "False", "None"])
++    reserved = set(["True", "XXFalseXX", "None"])
+ 
+     # the "id" attribute on a function node
+     arg_id = operator.attrgetter("id")
+</pre><h3>Mutant 3088</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -30,7 +30,7 @@
+ else:
+     # words that cannot be assigned to (notably
+     # smaller than the total keys in __builtins__)
+-    reserved = set(["True", "False", "None"])
++    reserved = set(["True", "False", "XXNoneXX"])
+ 
+     # the "id" attribute on a function node
+     arg_id = operator.attrgetter("id")
+</pre><h3>Mutant 3089</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -30,7 +30,7 @@
+ else:
+     # words that cannot be assigned to (notably
+     # smaller than the total keys in __builtins__)
+-    reserved = set(["True", "False", "None"])
++    reserved = None
+ 
+     # the "id" attribute on a function node
+     arg_id = operator.attrgetter("id")
+</pre><h3>Mutant 3090</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -33,7 +33,7 @@
+     reserved = set(["True", "False", "None"])
+ 
+     # the "id" attribute on a function node
+-    arg_id = operator.attrgetter("id")
++    arg_id = operator.attrgetter("XXidXX")
+ 
+ util.restore__ast(_ast)
+ 
+</pre><h3>Mutant 3091</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -33,7 +33,7 @@
+     reserved = set(["True", "False", "None"])
+ 
+     # the "id" attribute on a function node
+-    arg_id = operator.attrgetter("id")
++    arg_id = None
+ 
+ util.restore__ast(_ast)
+ 
+</pre><h3>Mutant 3093</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -42,7 +42,7 @@
+     """Parse an expression into AST"""
+ 
+     try:
+-        return _ast_util.parse(code, "<unknown>", mode)
++        return _ast_util.parse(code, "XX<unknown>XX", mode)
+     except Exception:
+         raise exceptions.SyntaxException(
+             "(%s) %s (%r)"
+</pre><h3>Mutant 3094</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -45,7 +45,7 @@
+         return _ast_util.parse(code, "<unknown>", mode)
+     except Exception:
+         raise exceptions.SyntaxException(
+-            "(%s) %s (%r)"
++            "XX(%s) %s (%r)XX"
+             % (
+                 compat.exception_as().__class__.__name__,
+                 compat.exception_as(),
+</pre><h3>Mutant 3095</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -46,7 +46,7 @@
+     except Exception:
+         raise exceptions.SyntaxException(
+             "(%s) %s (%r)"
+-            % (
++            / (
+                 compat.exception_as().__class__.__name__,
+                 compat.exception_as(),
+                 code[0:50],
+</pre><h3>Mutant 3096</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -49,7 +49,7 @@
+             % (
+                 compat.exception_as().__class__.__name__,
+                 compat.exception_as(),
+-                code[0:50],
++                code[1:50],
+             ),
+             **exception_kwargs
+         )
+</pre><h3>Mutant 3097</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -49,7 +49,7 @@
+             % (
+                 compat.exception_as().__class__.__name__,
+                 compat.exception_as(),
+-                code[0:50],
++                code[0:51],
+             ),
+             **exception_kwargs
+         )
+</pre><h3>Mutant 3099</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -57,7 +57,7 @@
+ 
+ class FindIdentifiers(_ast_util.NodeVisitor):
+     def __init__(self, listener, **exception_kwargs):
+-        self.in_function = False
++        self.in_function = None
+         self.in_assign_targets = False
+         self.local_ident_stack = set()
+         self.listener = listener
+</pre><h3>Mutant 3100</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -58,7 +58,7 @@
+ class FindIdentifiers(_ast_util.NodeVisitor):
+     def __init__(self, listener, **exception_kwargs):
+         self.in_function = False
+-        self.in_assign_targets = False
++        self.in_assign_targets = True
+         self.local_ident_stack = set()
+         self.listener = listener
+         self.exception_kwargs = exception_kwargs
+</pre><h3>Mutant 3101</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -58,7 +58,7 @@
+ class FindIdentifiers(_ast_util.NodeVisitor):
+     def __init__(self, listener, **exception_kwargs):
+         self.in_function = False
+-        self.in_assign_targets = False
++        self.in_assign_targets = None
+         self.local_ident_stack = set()
+         self.listener = listener
+         self.exception_kwargs = exception_kwargs
+</pre><h3>Mutant 3106</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -79,7 +79,7 @@
+         # is undeclared)
+ 
+         self.visit(node.value)
+-        in_a = self.in_assign_targets
++        in_a = None
+         self.in_assign_targets = True
+         for n in node.targets:
+             self.visit(n)
+</pre><h3>Mutant 3107</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -80,7 +80,7 @@
+ 
+         self.visit(node.value)
+         in_a = self.in_assign_targets
+-        self.in_assign_targets = True
++        self.in_assign_targets = False
+         for n in node.targets:
+             self.visit(n)
+         self.in_assign_targets = in_a
+</pre><h3>Mutant 3108</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -80,7 +80,7 @@
+ 
+         self.visit(node.value)
+         in_a = self.in_assign_targets
+-        self.in_assign_targets = True
++        self.in_assign_targets = None
+         for n in node.targets:
+             self.visit(n)
+         self.in_assign_targets = in_a
+</pre><h3>Mutant 3109</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -83,7 +83,7 @@
+         self.in_assign_targets = True
+         for n in node.targets:
+             self.visit(n)
+-        self.in_assign_targets = in_a
++        self.in_assign_targets = None
+ 
+     if compat.py3k:
+ 
+</pre><h3>Mutant 3114</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -121,7 +121,7 @@
+         # argument names in each function header so they arent
+         # counted as "undeclared"
+ 
+-        inf = self.in_function
++        inf = None
+         self.in_function = True
+ 
+         local_ident_stack = self.local_ident_stack
+</pre><h3>Mutant 3119</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -133,7 +133,7 @@
+         else:
+             for n in node.body:
+                 self.visit(n)
+-        self.in_function = inf
++        self.in_function = None
+         self.local_ident_stack = local_ident_stack
+ 
+     def visit_For(self, node):
+</pre><h3>Mutant 3131</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -173,7 +173,7 @@
+             else:
+                 if name.name == "*":
+                     raise exceptions.CompileException(
+-                        "'import *' is not supported, since all identifier "
++                        "XX'import *' is not supported, since all identifier XX"
+                         "names must be explicitly declared.  Please use the "
+                         "form 'from <modulename> import <name1>, <name2>, "
+                         "...' instead.",
+</pre><h3>Mutant 3132</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -174,7 +174,7 @@
+                 if name.name == "*":
+                     raise exceptions.CompileException(
+                         "'import *' is not supported, since all identifier "
+-                        "names must be explicitly declared.  Please use the "
++                        "XXnames must be explicitly declared.  Please use the XX"
+                         "form 'from <modulename> import <name1>, <name2>, "
+                         "...' instead.",
+                         **self.exception_kwargs
+</pre><h3>Mutant 3133</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -175,7 +175,7 @@
+                     raise exceptions.CompileException(
+                         "'import *' is not supported, since all identifier "
+                         "names must be explicitly declared.  Please use the "
+-                        "form 'from <modulename> import <name1>, <name2>, "
++                        "XXform 'from <modulename> import <name1>, <name2>, XX"
+                         "...' instead.",
+                         **self.exception_kwargs
+                     )
+</pre><h3>Mutant 3134</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -176,7 +176,7 @@
+                         "'import *' is not supported, since all identifier "
+                         "names must be explicitly declared.  Please use the "
+                         "form 'from <modulename> import <name1>, <name2>, "
+-                        "...' instead.",
++                        "XX...' instead.XX",
+                         **self.exception_kwargs
+                     )
+                 self._add_declared(name.name)
+</pre><h3>Mutant 3140</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -194,9 +194,7 @@
+             self.listener.codeargs.append(p)
+             self.listener.args.append(ExpressionGenerator(n).value())
+             ldi = self.listener.declared_identifiers
+-            self.listener.declared_identifiers = ldi.union(
+-                p.declared_identifiers
+-            )
++            self.listener.declared_identifiers = None
+             lui = self.listener.undeclared_identifiers
+             self.listener.undeclared_identifiers = lui.union(
+                 p.undeclared_identifiers
+</pre><h3>Mutant 3144</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -206,7 +206,7 @@
+ class ParseFunc(_ast_util.NodeVisitor):
+     def __init__(self, listener, **exception_kwargs):
+         self.listener = listener
+-        self.exception_kwargs = exception_kwargs
++        self.exception_kwargs = None
+ 
+     def visit_FunctionDef(self, node):
+         self.listener.funcname = node.name
+</pre><h3>Mutant 3147</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -217,7 +217,7 @@
+ 
+         if compat.py2k:
+             # kw-only args don't exist in Python 2
+-            kwargnames = []
++            kwargnames = None
+         else:
+             kwargnames = [arg_id(arg) for arg in node.args.kwonlyargs]
+         if node.args.kwarg:
+</pre><h3>Mutant 3152</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -226,7 +226,7 @@
+         self.listener.defaults = node.args.defaults  # ast
+         self.listener.kwargnames = kwargnames
+         if compat.py2k:
+-            self.listener.kwdefaults = []
++            self.listener.kwdefaults = None
+         else:
+             self.listener.kwdefaults = node.args.kw_defaults
+         self.listener.varargs = node.args.vararg
+</pre><h3>Mutant 3156</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -235,7 +235,7 @@
+ 
+ class ExpressionGenerator(object):
+     def __init__(self, astnode):
+-        self.generator = _ast_util.SourceGenerator(" " * 4)
++        self.generator = _ast_util.SourceGenerator("XX XX" * 4)
+         self.generator.visit(astnode)
+ 
+     def value(self):
+</pre><h3>Mutant 3158</h3><pre>--- mako/pyparser.py
++++ mako/pyparser.py
+@@ -235,7 +235,7 @@
+ 
+ class ExpressionGenerator(object):
+     def __init__(self, astnode):
+-        self.generator = _ast_util.SourceGenerator(" " * 4)
++        self.generator = _ast_util.SourceGenerator(" " * 5)
+         self.generator.visit(astnode)
+ 
+     def value(self):
+</pre></body></html>

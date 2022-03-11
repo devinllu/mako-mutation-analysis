@@ -1,0 +1,1561 @@
+<html><body><h1>mako/util.py</h1>Killed 72 out of 212 mutants<h2>Timeouts</h2>Mutants that made the test suite take a lot longer so the tests were killed.<h3>Mutant 340</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -181,7 +181,7 @@
+ 
+     class _Item(object):
+         def __init__(self, key, value):
+-            self.key = key
++            self.key = None
+             self.value = value
+             self.timestamp = timeit.default_timer()
+ 
+</pre><h3>Mutant 355</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -217,7 +217,7 @@
+         self._manage_size()
+ 
+     def _manage_size(self):
+-        while len(self) > self.capacity + self.capacity * self.threshold:
++        while len(self) > self.capacity - self.capacity * self.threshold:
+             bytime = sorted(
+                 dict.values(self),
+                 key=operator.attrgetter("timestamp"),
+</pre><h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 285</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -17,7 +17,7 @@
+ 
+ 
+ def update_wrapper(decorated, fn):
+-    decorated.__wrapped__ = fn
++    decorated.__wrapped__ = None
+     decorated.__name__ = fn.__name__
+     return decorated
+ 
+</pre><h3>Mutant 290</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -34,7 +34,7 @@
+             import pkg_resources
+ 
+             for impl in pkg_resources.iter_entry_points(self.group, name):
+-                self.impls[name] = impl.load
++                self.impls[name] = None
+                 return impl.load()
+             else:
+                 from mako import exceptions
+</pre><h3>Mutant 291</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -40,7 +40,7 @@
+                 from mako import exceptions
+ 
+                 raise exceptions.RuntimeException(
+-                    "Can't load plugin %s %s" % (self.group, name)
++                    "XXCan't load plugin %s %sXX" % (self.group, name)
+                 )
+ 
+     def register(self, name, modulepath, objname):
+</pre><h3>Mutant 298</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -56,7 +56,7 @@
+ def verify_directory(dir_):
+     """create and/or verify a filesystem directory."""
+ 
+-    tries = 0
++    tries = 1
+ 
+     while not os.path.exists(dir_):
+         try:
+</pre><h3>Mutant 301</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -60,7 +60,7 @@
+ 
+     while not os.path.exists(dir_):
+         try:
+-            tries += 1
++            tries = 1
+             os.makedirs(dir_, compat.octal("0775"))
+         except:
+             if tries > 5:
+</pre><h3>Mutant 302</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -60,7 +60,7 @@
+ 
+     while not os.path.exists(dir_):
+         try:
+-            tries += 1
++            tries -= 1
+             os.makedirs(dir_, compat.octal("0775"))
+         except:
+             if tries > 5:
+</pre><h3>Mutant 303</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -60,7 +60,7 @@
+ 
+     while not os.path.exists(dir_):
+         try:
+-            tries += 1
++            tries += 2
+             os.makedirs(dir_, compat.octal("0775"))
+         except:
+             if tries > 5:
+</pre><h3>Mutant 305</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -63,7 +63,7 @@
+             tries += 1
+             os.makedirs(dir_, compat.octal("0775"))
+         except:
+-            if tries > 5:
++            if tries >= 5:
+                 raise
+ 
+ 
+</pre><h3>Mutant 306</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -63,7 +63,7 @@
+             tries += 1
+             os.makedirs(dir_, compat.octal("0775"))
+         except:
+-            if tries > 5:
++            if tries > 6:
+                 raise
+ 
+ 
+</pre><h3>Mutant 310</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -82,7 +82,7 @@
+ 
+     def __init__(self, fget, doc=None):
+         self.fget = fget
+-        self.__doc__ = doc or fget.__doc__
++        self.__doc__ = doc and fget.__doc__
+         self.__name__ = fget.__name__
+ 
+     def __get__(self, obj, cls):
+</pre><h3>Mutant 311</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -82,7 +82,7 @@
+ 
+     def __init__(self, fget, doc=None):
+         self.fget = fget
+-        self.__doc__ = doc or fget.__doc__
++        self.__doc__ = None
+         self.__name__ = fget.__name__
+ 
+     def __get__(self, obj, cls):
+</pre><h3>Mutant 316</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -104,7 +104,7 @@
+ 
+     def __init__(self, fget, doc=None):
+         self.fget = fget
+-        self.__doc__ = doc or fget.__doc__
++        self.__doc__ = doc and fget.__doc__
+         self.__name__ = fget.__name__
+ 
+     def __get__(self, obj, cls):
+</pre><h3>Mutant 317</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -104,7 +104,7 @@
+ 
+     def __init__(self, fget, doc=None):
+         self.fget = fget
+-        self.__doc__ = doc or fget.__doc__
++        self.__doc__ = None
+         self.__name__ = fget.__name__
+ 
+     def __get__(self, obj, cls):
+</pre><h3>Mutant 322</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -118,7 +118,7 @@
+                 return result
+ 
+             memo.__name__ = self.__name__
+-            memo.__doc__ = self.__doc__
++            memo.__doc__ = None
+             obj.__dict__[self.__name__] = memo
+             return result
+ 
+</pre><h3>Mutant 323</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -119,7 +119,7 @@
+ 
+             memo.__name__ = self.__name__
+             memo.__doc__ = self.__doc__
+-            obj.__dict__[self.__name__] = memo
++            obj.__dict__[self.__name__] = None
+             return result
+ 
+         oneshot.__name__ = self.__name__
+</pre><h3>Mutant 325</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -123,7 +123,7 @@
+             return result
+ 
+         oneshot.__name__ = self.__name__
+-        oneshot.__doc__ = self.__doc__
++        oneshot.__doc__ = None
+         return oneshot
+ 
+ 
+</pre><h3>Mutant 327</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -145,7 +145,7 @@
+     """a very rudimentary buffer that is faster than StringIO,
+     but doesn't crash on unicode data like cStringIO."""
+ 
+-    def __init__(self, encoding=None, errors="strict", as_unicode=False):
++    def __init__(self, encoding=None, errors="XXstrictXX", as_unicode=False):
+         self.data = collections.deque()
+         self.encoding = encoding
+         if as_unicode:
+</pre><h3>Mutant 328</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -145,7 +145,7 @@
+     """a very rudimentary buffer that is faster than StringIO,
+     but doesn't crash on unicode data like cStringIO."""
+ 
+-    def __init__(self, encoding=None, errors="strict", as_unicode=False):
++    def __init__(self, encoding=None, errors="strict", as_unicode=True):
+         self.data = collections.deque()
+         self.encoding = encoding
+         if as_unicode:
+</pre><h3>Mutant 335</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -152,7 +152,7 @@
+             self.delim = compat.u("")
+         else:
+             self.delim = ""
+-        self.as_unicode = as_unicode
++        self.as_unicode = None
+         self.errors = errors
+         self.write = self.data.append
+ 
+</pre><h3>Mutant 341</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -182,7 +182,7 @@
+     class _Item(object):
+         def __init__(self, key, value):
+             self.key = key
+-            self.value = value
++            self.value = None
+             self.timestamp = timeit.default_timer()
+ 
+         def __repr__(self):
+</pre><h3>Mutant 343</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -188,7 +188,7 @@
+         def __repr__(self):
+             return repr(self.value)
+ 
+-    def __init__(self, capacity, threshold=0.5):
++    def __init__(self, capacity, threshold=1.5):
+         self.capacity = capacity
+         self.threshold = threshold
+ 
+</pre><h3>Mutant 348</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -201,7 +201,7 @@
+         return [i.value for i in dict.values(self)]
+ 
+     def setdefault(self, key, value):
+-        if key in self:
++        if key not in self:
+             return self[key]
+         else:
+             self[key] = value
+</pre><h3>Mutant 349</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -204,7 +204,7 @@
+         if key in self:
+             return self[key]
+         else:
+-            self[key] = value
++            self[key] = None
+             return value
+ 
+     def __setitem__(self, key, value):
+</pre><h3>Mutant 350</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -208,7 +208,7 @@
+             return value
+ 
+     def __setitem__(self, key, value):
+-        item = dict.get(self, key)
++        item = None
+         if item is None:
+             item = self._Item(key, value)
+             dict.__setitem__(self, key, item)
+</pre><h3>Mutant 353</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -213,7 +213,7 @@
+             item = self._Item(key, value)
+             dict.__setitem__(self, key, item)
+         else:
+-            item.value = value
++            item.value = None
+         self._manage_size()
+ 
+     def _manage_size(self):
+</pre><h3>Mutant 360</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -229,7 +229,7 @@
+                 except KeyError:
+                     # if we couldn't find a key, most likely some other thread
+                     # broke in on us. loop around and try again
+-                    break
++                    continue
+ 
+ 
+ # Regexp to match python magic encoding line
+</pre><h3>Mutant 366</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -252,7 +252,7 @@
+     fp.seek(0)
+     try:
+         line1 = fp.readline()
+-        has_bom = line1.startswith(codecs.BOM_UTF8)
++        has_bom = None
+         if has_bom:
+             line1 = line1[len(codecs.BOM_UTF8) :]
+ 
+</pre><h3>Mutant 367</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -254,7 +254,7 @@
+         line1 = fp.readline()
+         has_bom = line1.startswith(codecs.BOM_UTF8)
+         if has_bom:
+-            line1 = line1[len(codecs.BOM_UTF8) :]
++            line1 = None
+ 
+         m = _PYTHON_MAGIC_COMMENT_re.match(line1.decode("ascii", "ignore"))
+         if not m:
+</pre><h3>Mutant 369</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -256,7 +256,7 @@
+         if has_bom:
+             line1 = line1[len(codecs.BOM_UTF8) :]
+ 
+-        m = _PYTHON_MAGIC_COMMENT_re.match(line1.decode("ascii", "ignore"))
++        m = _PYTHON_MAGIC_COMMENT_re.match(line1.decode("ascii", "XXignoreXX"))
+         if not m:
+             try:
+                 parse(line1.decode("ascii", "ignore"))
+</pre><h3>Mutant 373</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -259,7 +259,7 @@
+         m = _PYTHON_MAGIC_COMMENT_re.match(line1.decode("ascii", "ignore"))
+         if not m:
+             try:
+-                parse(line1.decode("ascii", "ignore"))
++                parse(line1.decode("ascii", "XXignoreXX"))
+             except (ImportError, SyntaxError):
+                 # Either it's a real syntax error, in which case the source
+                 # is not valid python source, or line2 is a continuation of
+</pre><h3>Mutant 376</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -269,7 +269,7 @@
+             else:
+                 line2 = fp.readline()
+                 m = _PYTHON_MAGIC_COMMENT_re.match(
+-                    line2.decode("ascii", "ignore")
++                    line2.decode("ascii", "XXignoreXX")
+                 )
+ 
+         if has_bom:
+</pre><h3>Mutant 377</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -268,9 +268,7 @@
+                 pass
+             else:
+                 line2 = fp.readline()
+-                m = _PYTHON_MAGIC_COMMENT_re.match(
+-                    line2.decode("ascii", "ignore")
+-                )
++                m = None
+ 
+         if has_bom:
+             if m:
+</pre><h3>Mutant 378</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -275,7 +275,7 @@
+         if has_bom:
+             if m:
+                 raise SyntaxError(
+-                    "python refuses to compile code with both a UTF8"
++                    "XXpython refuses to compile code with both a UTF8XX"
+                     " byte-order-mark and a magic encoding comment"
+                 )
+             return "utf_8"
+</pre><h3>Mutant 379</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -276,7 +276,7 @@
+             if m:
+                 raise SyntaxError(
+                     "python refuses to compile code with both a UTF8"
+-                    " byte-order-mark and a magic encoding comment"
++                    "XX byte-order-mark and a magic encoding commentXX"
+                 )
+             return "utf_8"
+         elif m:
+</pre><h3>Mutant 380</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -278,7 +278,7 @@
+                     "python refuses to compile code with both a UTF8"
+                     " byte-order-mark and a magic encoding comment"
+                 )
+-            return "utf_8"
++            return "XXutf_8XX"
+         elif m:
+             return m.group(1)
+         else:
+</pre><h3>Mutant 383</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -295,7 +295,7 @@
+     """
+     keys = list(d.keys())
+     keys.sort()
+-    return "{" + ", ".join(["%r: %r" % (k, d[k]) for k in keys]) + "}"
++    return "XX{XX" + ", ".join(["%r: %r" % (k, d[k]) for k in keys]) + "}"
+ 
+ 
+ def restore__ast(_ast):
+</pre><h3>Mutant 385</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -295,7 +295,7 @@
+     """
+     keys = list(d.keys())
+     keys.sort()
+-    return "{" + ", ".join(["%r: %r" % (k, d[k]) for k in keys]) + "}"
++    return "{" + "XX, XX".join(["%r: %r" % (k, d[k]) for k in keys]) + "}"
+ 
+ 
+ def restore__ast(_ast):
+</pre><h3>Mutant 386</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -295,7 +295,7 @@
+     """
+     keys = list(d.keys())
+     keys.sort()
+-    return "{" + ", ".join(["%r: %r" % (k, d[k]) for k in keys]) + "}"
++    return "{" + ", ".join(["XX%r: %rXX" % (k, d[k]) for k in keys]) + "}"
+ 
+ 
+ def restore__ast(_ast):
+</pre><h3>Mutant 389</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -295,7 +295,7 @@
+     """
+     keys = list(d.keys())
+     keys.sort()
+-    return "{" + ", ".join(["%r: %r" % (k, d[k]) for k in keys]) + "}"
++    return "{" + ", ".join(["%r: %r" % (k, d[k]) for k in keys]) + "XX}XX"
+ 
+ 
+ def restore__ast(_ast):
+</pre><h3>Mutant 390</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -302,7 +302,7 @@
+     """Attempt to restore the required classes to the _ast module if it
+     appears to be missing them
+     """
+-    if hasattr(_ast, "AST"):
++    if hasattr(_ast, "XXASTXX"):
+         return
+     _ast.PyCF_ONLY_AST = 2 << 9
+     m = compile(
+</pre><h3>Mutant 391</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -304,7 +304,7 @@
+     """
+     if hasattr(_ast, "AST"):
+         return
+-    _ast.PyCF_ONLY_AST = 2 << 9
++    _ast.PyCF_ONLY_AST = 3 << 9
+     m = compile(
+         """\
+ def foo(): pass
+</pre><h3>Mutant 392</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -304,7 +304,7 @@
+     """
+     if hasattr(_ast, "AST"):
+         return
+-    _ast.PyCF_ONLY_AST = 2 << 9
++    _ast.PyCF_ONLY_AST = 2 >> 9
+     m = compile(
+         """\
+ def foo(): pass
+</pre><h3>Mutant 393</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -304,7 +304,7 @@
+     """
+     if hasattr(_ast, "AST"):
+         return
+-    _ast.PyCF_ONLY_AST = 2 << 9
++    _ast.PyCF_ONLY_AST = 2 << 10
+     m = compile(
+         """\
+ def foo(): pass
+</pre><h3>Mutant 394</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -304,7 +304,7 @@
+     """
+     if hasattr(_ast, "AST"):
+         return
+-    _ast.PyCF_ONLY_AST = 2 << 9
++    _ast.PyCF_ONLY_AST = None
+     m = compile(
+         """\
+ def foo(): pass
+</pre><h3>Mutant 395</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -320,7 +320,7 @@
+ (mako is baz == baz) is not baz != mako
+ mako > baz < mako >= baz <= mako
+ mako in baz not in mako""",
+-        "<unknown>",
++        "XX<unknown>XX",
+         "exec",
+         _ast.PyCF_ONLY_AST,
+     )
+</pre><h3>Mutant 396</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -321,7 +321,7 @@
+ mako > baz < mako >= baz <= mako
+ mako in baz not in mako""",
+         "<unknown>",
+-        "exec",
++        "XXexecXX",
+         _ast.PyCF_ONLY_AST,
+     )
+     _ast.Module = type(m)
+</pre><h3>Mutant 397</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -305,25 +305,7 @@
+     if hasattr(_ast, "AST"):
+         return
+     _ast.PyCF_ONLY_AST = 2 << 9
+-    m = compile(
+-        """\
+-def foo(): pass
+-class Bar(object): pass
+-if False: pass
+-baz = 'mako'
+-1 + 2 - 3 * 4 / 5
+-6 // 7 % 8 << 9 >> 10
+-11 & 12 ^ 13 | 14
+-15 and 16 or 17
+--baz + (not +18) - ~17
+-baz and 'foo' or 'bar'
+-(mako is baz == baz) is not baz != mako
+-mako > baz < mako >= baz <= mako
+-mako in baz not in mako""",
+-        "<unknown>",
+-        "exec",
+-        _ast.PyCF_ONLY_AST,
+-    )
++    m = None
+     _ast.Module = type(m)
+ 
+     for cls in _ast.Module.__mro__:
+</pre><h3>Mutant 398</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -324,7 +324,7 @@
+         "exec",
+         _ast.PyCF_ONLY_AST,
+     )
+-    _ast.Module = type(m)
++    _ast.Module = None
+ 
+     for cls in _ast.Module.__mro__:
+         if cls.__name__ == "mod":
+</pre><h3>Mutant 399</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -327,7 +327,7 @@
+     _ast.Module = type(m)
+ 
+     for cls in _ast.Module.__mro__:
+-        if cls.__name__ == "mod":
++        if cls.__name__ != "mod":
+             _ast.mod = cls
+         elif cls.__name__ == "AST":
+             _ast.AST = cls
+</pre><h3>Mutant 400</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -327,7 +327,7 @@
+     _ast.Module = type(m)
+ 
+     for cls in _ast.Module.__mro__:
+-        if cls.__name__ == "mod":
++        if cls.__name__ == "XXmodXX":
+             _ast.mod = cls
+         elif cls.__name__ == "AST":
+             _ast.AST = cls
+</pre><h3>Mutant 401</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -328,7 +328,7 @@
+ 
+     for cls in _ast.Module.__mro__:
+         if cls.__name__ == "mod":
+-            _ast.mod = cls
++            _ast.mod = None
+         elif cls.__name__ == "AST":
+             _ast.AST = cls
+ 
+</pre><h3>Mutant 402</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -329,7 +329,7 @@
+     for cls in _ast.Module.__mro__:
+         if cls.__name__ == "mod":
+             _ast.mod = cls
+-        elif cls.__name__ == "AST":
++        elif cls.__name__ != "AST":
+             _ast.AST = cls
+ 
+     _ast.FunctionDef = type(m.body[0])
+</pre><h3>Mutant 403</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -329,7 +329,7 @@
+     for cls in _ast.Module.__mro__:
+         if cls.__name__ == "mod":
+             _ast.mod = cls
+-        elif cls.__name__ == "AST":
++        elif cls.__name__ == "XXASTXX":
+             _ast.AST = cls
+ 
+     _ast.FunctionDef = type(m.body[0])
+</pre><h3>Mutant 404</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -330,7 +330,7 @@
+         if cls.__name__ == "mod":
+             _ast.mod = cls
+         elif cls.__name__ == "AST":
+-            _ast.AST = cls
++            _ast.AST = None
+ 
+     _ast.FunctionDef = type(m.body[0])
+     _ast.ClassDef = type(m.body[1])
+</pre><h3>Mutant 405</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -332,7 +332,7 @@
+         elif cls.__name__ == "AST":
+             _ast.AST = cls
+ 
+-    _ast.FunctionDef = type(m.body[0])
++    _ast.FunctionDef = type(m.body[1])
+     _ast.ClassDef = type(m.body[1])
+     _ast.If = type(m.body[2])
+ 
+</pre><h3>Mutant 406</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -332,7 +332,7 @@
+         elif cls.__name__ == "AST":
+             _ast.AST = cls
+ 
+-    _ast.FunctionDef = type(m.body[0])
++    _ast.FunctionDef = None
+     _ast.ClassDef = type(m.body[1])
+     _ast.If = type(m.body[2])
+ 
+</pre><h3>Mutant 407</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -333,7 +333,7 @@
+             _ast.AST = cls
+ 
+     _ast.FunctionDef = type(m.body[0])
+-    _ast.ClassDef = type(m.body[1])
++    _ast.ClassDef = type(m.body[2])
+     _ast.If = type(m.body[2])
+ 
+     _ast.Name = type(m.body[3].targets[0])
+</pre><h3>Mutant 408</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -333,7 +333,7 @@
+             _ast.AST = cls
+ 
+     _ast.FunctionDef = type(m.body[0])
+-    _ast.ClassDef = type(m.body[1])
++    _ast.ClassDef = None
+     _ast.If = type(m.body[2])
+ 
+     _ast.Name = type(m.body[3].targets[0])
+</pre><h3>Mutant 409</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -334,7 +334,7 @@
+ 
+     _ast.FunctionDef = type(m.body[0])
+     _ast.ClassDef = type(m.body[1])
+-    _ast.If = type(m.body[2])
++    _ast.If = type(m.body[3])
+ 
+     _ast.Name = type(m.body[3].targets[0])
+     _ast.Store = type(m.body[3].targets[0].ctx)
+</pre><h3>Mutant 410</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -334,7 +334,7 @@
+ 
+     _ast.FunctionDef = type(m.body[0])
+     _ast.ClassDef = type(m.body[1])
+-    _ast.If = type(m.body[2])
++    _ast.If = None
+ 
+     _ast.Name = type(m.body[3].targets[0])
+     _ast.Store = type(m.body[3].targets[0].ctx)
+</pre><h3>Mutant 411</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -336,7 +336,7 @@
+     _ast.ClassDef = type(m.body[1])
+     _ast.If = type(m.body[2])
+ 
+-    _ast.Name = type(m.body[3].targets[0])
++    _ast.Name = type(m.body[4].targets[0])
+     _ast.Store = type(m.body[3].targets[0].ctx)
+     _ast.Str = type(m.body[3].value)
+ 
+</pre><h3>Mutant 412</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -336,7 +336,7 @@
+     _ast.ClassDef = type(m.body[1])
+     _ast.If = type(m.body[2])
+ 
+-    _ast.Name = type(m.body[3].targets[0])
++    _ast.Name = type(m.body[3].targets[1])
+     _ast.Store = type(m.body[3].targets[0].ctx)
+     _ast.Str = type(m.body[3].value)
+ 
+</pre><h3>Mutant 413</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -336,7 +336,7 @@
+     _ast.ClassDef = type(m.body[1])
+     _ast.If = type(m.body[2])
+ 
+-    _ast.Name = type(m.body[3].targets[0])
++    _ast.Name = None
+     _ast.Store = type(m.body[3].targets[0].ctx)
+     _ast.Str = type(m.body[3].value)
+ 
+</pre><h3>Mutant 414</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -337,7 +337,7 @@
+     _ast.If = type(m.body[2])
+ 
+     _ast.Name = type(m.body[3].targets[0])
+-    _ast.Store = type(m.body[3].targets[0].ctx)
++    _ast.Store = type(m.body[4].targets[0].ctx)
+     _ast.Str = type(m.body[3].value)
+ 
+     _ast.Sub = type(m.body[4].value.op)
+</pre><h3>Mutant 415</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -337,7 +337,7 @@
+     _ast.If = type(m.body[2])
+ 
+     _ast.Name = type(m.body[3].targets[0])
+-    _ast.Store = type(m.body[3].targets[0].ctx)
++    _ast.Store = type(m.body[3].targets[1].ctx)
+     _ast.Str = type(m.body[3].value)
+ 
+     _ast.Sub = type(m.body[4].value.op)
+</pre><h3>Mutant 416</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -337,7 +337,7 @@
+     _ast.If = type(m.body[2])
+ 
+     _ast.Name = type(m.body[3].targets[0])
+-    _ast.Store = type(m.body[3].targets[0].ctx)
++    _ast.Store = None
+     _ast.Str = type(m.body[3].value)
+ 
+     _ast.Sub = type(m.body[4].value.op)
+</pre><h3>Mutant 417</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -338,7 +338,7 @@
+ 
+     _ast.Name = type(m.body[3].targets[0])
+     _ast.Store = type(m.body[3].targets[0].ctx)
+-    _ast.Str = type(m.body[3].value)
++    _ast.Str = type(m.body[4].value)
+ 
+     _ast.Sub = type(m.body[4].value.op)
+     _ast.Add = type(m.body[4].value.left.op)
+</pre><h3>Mutant 418</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -338,7 +338,7 @@
+ 
+     _ast.Name = type(m.body[3].targets[0])
+     _ast.Store = type(m.body[3].targets[0].ctx)
+-    _ast.Str = type(m.body[3].value)
++    _ast.Str = None
+ 
+     _ast.Sub = type(m.body[4].value.op)
+     _ast.Add = type(m.body[4].value.left.op)
+</pre><h3>Mutant 419</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -340,7 +340,7 @@
+     _ast.Store = type(m.body[3].targets[0].ctx)
+     _ast.Str = type(m.body[3].value)
+ 
+-    _ast.Sub = type(m.body[4].value.op)
++    _ast.Sub = type(m.body[5].value.op)
+     _ast.Add = type(m.body[4].value.left.op)
+     _ast.Div = type(m.body[4].value.right.op)
+     _ast.Mult = type(m.body[4].value.right.left.op)
+</pre><h3>Mutant 420</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -340,7 +340,7 @@
+     _ast.Store = type(m.body[3].targets[0].ctx)
+     _ast.Str = type(m.body[3].value)
+ 
+-    _ast.Sub = type(m.body[4].value.op)
++    _ast.Sub = None
+     _ast.Add = type(m.body[4].value.left.op)
+     _ast.Div = type(m.body[4].value.right.op)
+     _ast.Mult = type(m.body[4].value.right.left.op)
+</pre><h3>Mutant 421</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -341,7 +341,7 @@
+     _ast.Str = type(m.body[3].value)
+ 
+     _ast.Sub = type(m.body[4].value.op)
+-    _ast.Add = type(m.body[4].value.left.op)
++    _ast.Add = type(m.body[5].value.left.op)
+     _ast.Div = type(m.body[4].value.right.op)
+     _ast.Mult = type(m.body[4].value.right.left.op)
+ 
+</pre><h3>Mutant 422</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -341,7 +341,7 @@
+     _ast.Str = type(m.body[3].value)
+ 
+     _ast.Sub = type(m.body[4].value.op)
+-    _ast.Add = type(m.body[4].value.left.op)
++    _ast.Add = None
+     _ast.Div = type(m.body[4].value.right.op)
+     _ast.Mult = type(m.body[4].value.right.left.op)
+ 
+</pre><h3>Mutant 423</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -342,7 +342,7 @@
+ 
+     _ast.Sub = type(m.body[4].value.op)
+     _ast.Add = type(m.body[4].value.left.op)
+-    _ast.Div = type(m.body[4].value.right.op)
++    _ast.Div = type(m.body[5].value.right.op)
+     _ast.Mult = type(m.body[4].value.right.left.op)
+ 
+     _ast.RShift = type(m.body[5].value.op)
+</pre><h3>Mutant 424</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -342,7 +342,7 @@
+ 
+     _ast.Sub = type(m.body[4].value.op)
+     _ast.Add = type(m.body[4].value.left.op)
+-    _ast.Div = type(m.body[4].value.right.op)
++    _ast.Div = None
+     _ast.Mult = type(m.body[4].value.right.left.op)
+ 
+     _ast.RShift = type(m.body[5].value.op)
+</pre><h3>Mutant 425</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -343,7 +343,7 @@
+     _ast.Sub = type(m.body[4].value.op)
+     _ast.Add = type(m.body[4].value.left.op)
+     _ast.Div = type(m.body[4].value.right.op)
+-    _ast.Mult = type(m.body[4].value.right.left.op)
++    _ast.Mult = type(m.body[5].value.right.left.op)
+ 
+     _ast.RShift = type(m.body[5].value.op)
+     _ast.LShift = type(m.body[5].value.left.op)
+</pre><h3>Mutant 426</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -343,7 +343,7 @@
+     _ast.Sub = type(m.body[4].value.op)
+     _ast.Add = type(m.body[4].value.left.op)
+     _ast.Div = type(m.body[4].value.right.op)
+-    _ast.Mult = type(m.body[4].value.right.left.op)
++    _ast.Mult = None
+ 
+     _ast.RShift = type(m.body[5].value.op)
+     _ast.LShift = type(m.body[5].value.left.op)
+</pre><h3>Mutant 427</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -345,7 +345,7 @@
+     _ast.Div = type(m.body[4].value.right.op)
+     _ast.Mult = type(m.body[4].value.right.left.op)
+ 
+-    _ast.RShift = type(m.body[5].value.op)
++    _ast.RShift = type(m.body[6].value.op)
+     _ast.LShift = type(m.body[5].value.left.op)
+     _ast.Mod = type(m.body[5].value.left.left.op)
+     _ast.FloorDiv = type(m.body[5].value.left.left.left.op)
+</pre><h3>Mutant 428</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -345,7 +345,7 @@
+     _ast.Div = type(m.body[4].value.right.op)
+     _ast.Mult = type(m.body[4].value.right.left.op)
+ 
+-    _ast.RShift = type(m.body[5].value.op)
++    _ast.RShift = None
+     _ast.LShift = type(m.body[5].value.left.op)
+     _ast.Mod = type(m.body[5].value.left.left.op)
+     _ast.FloorDiv = type(m.body[5].value.left.left.left.op)
+</pre><h3>Mutant 429</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -346,7 +346,7 @@
+     _ast.Mult = type(m.body[4].value.right.left.op)
+ 
+     _ast.RShift = type(m.body[5].value.op)
+-    _ast.LShift = type(m.body[5].value.left.op)
++    _ast.LShift = type(m.body[6].value.left.op)
+     _ast.Mod = type(m.body[5].value.left.left.op)
+     _ast.FloorDiv = type(m.body[5].value.left.left.left.op)
+ 
+</pre><h3>Mutant 430</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -346,7 +346,7 @@
+     _ast.Mult = type(m.body[4].value.right.left.op)
+ 
+     _ast.RShift = type(m.body[5].value.op)
+-    _ast.LShift = type(m.body[5].value.left.op)
++    _ast.LShift = None
+     _ast.Mod = type(m.body[5].value.left.left.op)
+     _ast.FloorDiv = type(m.body[5].value.left.left.left.op)
+ 
+</pre><h3>Mutant 431</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -347,7 +347,7 @@
+ 
+     _ast.RShift = type(m.body[5].value.op)
+     _ast.LShift = type(m.body[5].value.left.op)
+-    _ast.Mod = type(m.body[5].value.left.left.op)
++    _ast.Mod = type(m.body[6].value.left.left.op)
+     _ast.FloorDiv = type(m.body[5].value.left.left.left.op)
+ 
+     _ast.BitOr = type(m.body[6].value.op)
+</pre><h3>Mutant 432</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -347,7 +347,7 @@
+ 
+     _ast.RShift = type(m.body[5].value.op)
+     _ast.LShift = type(m.body[5].value.left.op)
+-    _ast.Mod = type(m.body[5].value.left.left.op)
++    _ast.Mod = None
+     _ast.FloorDiv = type(m.body[5].value.left.left.left.op)
+ 
+     _ast.BitOr = type(m.body[6].value.op)
+</pre><h3>Mutant 433</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -348,7 +348,7 @@
+     _ast.RShift = type(m.body[5].value.op)
+     _ast.LShift = type(m.body[5].value.left.op)
+     _ast.Mod = type(m.body[5].value.left.left.op)
+-    _ast.FloorDiv = type(m.body[5].value.left.left.left.op)
++    _ast.FloorDiv = type(m.body[6].value.left.left.left.op)
+ 
+     _ast.BitOr = type(m.body[6].value.op)
+     _ast.BitXor = type(m.body[6].value.left.op)
+</pre><h3>Mutant 434</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -348,7 +348,7 @@
+     _ast.RShift = type(m.body[5].value.op)
+     _ast.LShift = type(m.body[5].value.left.op)
+     _ast.Mod = type(m.body[5].value.left.left.op)
+-    _ast.FloorDiv = type(m.body[5].value.left.left.left.op)
++    _ast.FloorDiv = None
+ 
+     _ast.BitOr = type(m.body[6].value.op)
+     _ast.BitXor = type(m.body[6].value.left.op)
+</pre><h3>Mutant 435</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -350,7 +350,7 @@
+     _ast.Mod = type(m.body[5].value.left.left.op)
+     _ast.FloorDiv = type(m.body[5].value.left.left.left.op)
+ 
+-    _ast.BitOr = type(m.body[6].value.op)
++    _ast.BitOr = type(m.body[7].value.op)
+     _ast.BitXor = type(m.body[6].value.left.op)
+     _ast.BitAnd = type(m.body[6].value.left.left.op)
+ 
+</pre><h3>Mutant 436</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -350,7 +350,7 @@
+     _ast.Mod = type(m.body[5].value.left.left.op)
+     _ast.FloorDiv = type(m.body[5].value.left.left.left.op)
+ 
+-    _ast.BitOr = type(m.body[6].value.op)
++    _ast.BitOr = None
+     _ast.BitXor = type(m.body[6].value.left.op)
+     _ast.BitAnd = type(m.body[6].value.left.left.op)
+ 
+</pre><h3>Mutant 437</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -351,7 +351,7 @@
+     _ast.FloorDiv = type(m.body[5].value.left.left.left.op)
+ 
+     _ast.BitOr = type(m.body[6].value.op)
+-    _ast.BitXor = type(m.body[6].value.left.op)
++    _ast.BitXor = type(m.body[7].value.left.op)
+     _ast.BitAnd = type(m.body[6].value.left.left.op)
+ 
+     _ast.Or = type(m.body[7].value.op)
+</pre><h3>Mutant 438</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -351,7 +351,7 @@
+     _ast.FloorDiv = type(m.body[5].value.left.left.left.op)
+ 
+     _ast.BitOr = type(m.body[6].value.op)
+-    _ast.BitXor = type(m.body[6].value.left.op)
++    _ast.BitXor = None
+     _ast.BitAnd = type(m.body[6].value.left.left.op)
+ 
+     _ast.Or = type(m.body[7].value.op)
+</pre><h3>Mutant 439</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -352,7 +352,7 @@
+ 
+     _ast.BitOr = type(m.body[6].value.op)
+     _ast.BitXor = type(m.body[6].value.left.op)
+-    _ast.BitAnd = type(m.body[6].value.left.left.op)
++    _ast.BitAnd = type(m.body[7].value.left.left.op)
+ 
+     _ast.Or = type(m.body[7].value.op)
+     _ast.And = type(m.body[7].value.values[0].op)
+</pre><h3>Mutant 440</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -352,7 +352,7 @@
+ 
+     _ast.BitOr = type(m.body[6].value.op)
+     _ast.BitXor = type(m.body[6].value.left.op)
+-    _ast.BitAnd = type(m.body[6].value.left.left.op)
++    _ast.BitAnd = None
+ 
+     _ast.Or = type(m.body[7].value.op)
+     _ast.And = type(m.body[7].value.values[0].op)
+</pre><h3>Mutant 441</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -354,7 +354,7 @@
+     _ast.BitXor = type(m.body[6].value.left.op)
+     _ast.BitAnd = type(m.body[6].value.left.left.op)
+ 
+-    _ast.Or = type(m.body[7].value.op)
++    _ast.Or = type(m.body[8].value.op)
+     _ast.And = type(m.body[7].value.values[0].op)
+ 
+     _ast.Invert = type(m.body[8].value.right.op)
+</pre><h3>Mutant 442</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -354,7 +354,7 @@
+     _ast.BitXor = type(m.body[6].value.left.op)
+     _ast.BitAnd = type(m.body[6].value.left.left.op)
+ 
+-    _ast.Or = type(m.body[7].value.op)
++    _ast.Or = None
+     _ast.And = type(m.body[7].value.values[0].op)
+ 
+     _ast.Invert = type(m.body[8].value.right.op)
+</pre><h3>Mutant 443</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -355,7 +355,7 @@
+     _ast.BitAnd = type(m.body[6].value.left.left.op)
+ 
+     _ast.Or = type(m.body[7].value.op)
+-    _ast.And = type(m.body[7].value.values[0].op)
++    _ast.And = type(m.body[8].value.values[0].op)
+ 
+     _ast.Invert = type(m.body[8].value.right.op)
+     _ast.Not = type(m.body[8].value.left.right.op)
+</pre><h3>Mutant 444</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -355,7 +355,7 @@
+     _ast.BitAnd = type(m.body[6].value.left.left.op)
+ 
+     _ast.Or = type(m.body[7].value.op)
+-    _ast.And = type(m.body[7].value.values[0].op)
++    _ast.And = type(m.body[7].value.values[1].op)
+ 
+     _ast.Invert = type(m.body[8].value.right.op)
+     _ast.Not = type(m.body[8].value.left.right.op)
+</pre><h3>Mutant 445</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -355,7 +355,7 @@
+     _ast.BitAnd = type(m.body[6].value.left.left.op)
+ 
+     _ast.Or = type(m.body[7].value.op)
+-    _ast.And = type(m.body[7].value.values[0].op)
++    _ast.And = None
+ 
+     _ast.Invert = type(m.body[8].value.right.op)
+     _ast.Not = type(m.body[8].value.left.right.op)
+</pre><h3>Mutant 446</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -357,7 +357,7 @@
+     _ast.Or = type(m.body[7].value.op)
+     _ast.And = type(m.body[7].value.values[0].op)
+ 
+-    _ast.Invert = type(m.body[8].value.right.op)
++    _ast.Invert = type(m.body[9].value.right.op)
+     _ast.Not = type(m.body[8].value.left.right.op)
+     _ast.UAdd = type(m.body[8].value.left.right.operand.op)
+     _ast.USub = type(m.body[8].value.left.left.op)
+</pre><h3>Mutant 447</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -357,7 +357,7 @@
+     _ast.Or = type(m.body[7].value.op)
+     _ast.And = type(m.body[7].value.values[0].op)
+ 
+-    _ast.Invert = type(m.body[8].value.right.op)
++    _ast.Invert = None
+     _ast.Not = type(m.body[8].value.left.right.op)
+     _ast.UAdd = type(m.body[8].value.left.right.operand.op)
+     _ast.USub = type(m.body[8].value.left.left.op)
+</pre><h3>Mutant 448</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -358,7 +358,7 @@
+     _ast.And = type(m.body[7].value.values[0].op)
+ 
+     _ast.Invert = type(m.body[8].value.right.op)
+-    _ast.Not = type(m.body[8].value.left.right.op)
++    _ast.Not = type(m.body[9].value.left.right.op)
+     _ast.UAdd = type(m.body[8].value.left.right.operand.op)
+     _ast.USub = type(m.body[8].value.left.left.op)
+ 
+</pre><h3>Mutant 449</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -358,7 +358,7 @@
+     _ast.And = type(m.body[7].value.values[0].op)
+ 
+     _ast.Invert = type(m.body[8].value.right.op)
+-    _ast.Not = type(m.body[8].value.left.right.op)
++    _ast.Not = None
+     _ast.UAdd = type(m.body[8].value.left.right.operand.op)
+     _ast.USub = type(m.body[8].value.left.left.op)
+ 
+</pre><h3>Mutant 450</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -359,7 +359,7 @@
+ 
+     _ast.Invert = type(m.body[8].value.right.op)
+     _ast.Not = type(m.body[8].value.left.right.op)
+-    _ast.UAdd = type(m.body[8].value.left.right.operand.op)
++    _ast.UAdd = type(m.body[9].value.left.right.operand.op)
+     _ast.USub = type(m.body[8].value.left.left.op)
+ 
+     _ast.Or = type(m.body[9].value.op)
+</pre><h3>Mutant 451</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -359,7 +359,7 @@
+ 
+     _ast.Invert = type(m.body[8].value.right.op)
+     _ast.Not = type(m.body[8].value.left.right.op)
+-    _ast.UAdd = type(m.body[8].value.left.right.operand.op)
++    _ast.UAdd = None
+     _ast.USub = type(m.body[8].value.left.left.op)
+ 
+     _ast.Or = type(m.body[9].value.op)
+</pre><h3>Mutant 452</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -360,7 +360,7 @@
+     _ast.Invert = type(m.body[8].value.right.op)
+     _ast.Not = type(m.body[8].value.left.right.op)
+     _ast.UAdd = type(m.body[8].value.left.right.operand.op)
+-    _ast.USub = type(m.body[8].value.left.left.op)
++    _ast.USub = type(m.body[9].value.left.left.op)
+ 
+     _ast.Or = type(m.body[9].value.op)
+     _ast.And = type(m.body[9].value.values[0].op)
+</pre><h3>Mutant 453</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -360,7 +360,7 @@
+     _ast.Invert = type(m.body[8].value.right.op)
+     _ast.Not = type(m.body[8].value.left.right.op)
+     _ast.UAdd = type(m.body[8].value.left.right.operand.op)
+-    _ast.USub = type(m.body[8].value.left.left.op)
++    _ast.USub = None
+ 
+     _ast.Or = type(m.body[9].value.op)
+     _ast.And = type(m.body[9].value.values[0].op)
+</pre><h3>Mutant 454</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -362,7 +362,7 @@
+     _ast.UAdd = type(m.body[8].value.left.right.operand.op)
+     _ast.USub = type(m.body[8].value.left.left.op)
+ 
+-    _ast.Or = type(m.body[9].value.op)
++    _ast.Or = type(m.body[10].value.op)
+     _ast.And = type(m.body[9].value.values[0].op)
+ 
+     _ast.IsNot = type(m.body[10].value.ops[0])
+</pre><h3>Mutant 455</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -362,7 +362,7 @@
+     _ast.UAdd = type(m.body[8].value.left.right.operand.op)
+     _ast.USub = type(m.body[8].value.left.left.op)
+ 
+-    _ast.Or = type(m.body[9].value.op)
++    _ast.Or = None
+     _ast.And = type(m.body[9].value.values[0].op)
+ 
+     _ast.IsNot = type(m.body[10].value.ops[0])
+</pre><h3>Mutant 456</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -363,7 +363,7 @@
+     _ast.USub = type(m.body[8].value.left.left.op)
+ 
+     _ast.Or = type(m.body[9].value.op)
+-    _ast.And = type(m.body[9].value.values[0].op)
++    _ast.And = type(m.body[10].value.values[0].op)
+ 
+     _ast.IsNot = type(m.body[10].value.ops[0])
+     _ast.NotEq = type(m.body[10].value.ops[1])
+</pre><h3>Mutant 457</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -363,7 +363,7 @@
+     _ast.USub = type(m.body[8].value.left.left.op)
+ 
+     _ast.Or = type(m.body[9].value.op)
+-    _ast.And = type(m.body[9].value.values[0].op)
++    _ast.And = type(m.body[9].value.values[1].op)
+ 
+     _ast.IsNot = type(m.body[10].value.ops[0])
+     _ast.NotEq = type(m.body[10].value.ops[1])
+</pre><h3>Mutant 458</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -363,7 +363,7 @@
+     _ast.USub = type(m.body[8].value.left.left.op)
+ 
+     _ast.Or = type(m.body[9].value.op)
+-    _ast.And = type(m.body[9].value.values[0].op)
++    _ast.And = None
+ 
+     _ast.IsNot = type(m.body[10].value.ops[0])
+     _ast.NotEq = type(m.body[10].value.ops[1])
+</pre><h3>Mutant 459</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -365,7 +365,7 @@
+     _ast.Or = type(m.body[9].value.op)
+     _ast.And = type(m.body[9].value.values[0].op)
+ 
+-    _ast.IsNot = type(m.body[10].value.ops[0])
++    _ast.IsNot = type(m.body[11].value.ops[0])
+     _ast.NotEq = type(m.body[10].value.ops[1])
+     _ast.Is = type(m.body[10].value.left.ops[0])
+     _ast.Eq = type(m.body[10].value.left.ops[1])
+</pre><h3>Mutant 460</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -365,7 +365,7 @@
+     _ast.Or = type(m.body[9].value.op)
+     _ast.And = type(m.body[9].value.values[0].op)
+ 
+-    _ast.IsNot = type(m.body[10].value.ops[0])
++    _ast.IsNot = type(m.body[10].value.ops[1])
+     _ast.NotEq = type(m.body[10].value.ops[1])
+     _ast.Is = type(m.body[10].value.left.ops[0])
+     _ast.Eq = type(m.body[10].value.left.ops[1])
+</pre><h3>Mutant 461</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -365,7 +365,7 @@
+     _ast.Or = type(m.body[9].value.op)
+     _ast.And = type(m.body[9].value.values[0].op)
+ 
+-    _ast.IsNot = type(m.body[10].value.ops[0])
++    _ast.IsNot = None
+     _ast.NotEq = type(m.body[10].value.ops[1])
+     _ast.Is = type(m.body[10].value.left.ops[0])
+     _ast.Eq = type(m.body[10].value.left.ops[1])
+</pre><h3>Mutant 462</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -366,7 +366,7 @@
+     _ast.And = type(m.body[9].value.values[0].op)
+ 
+     _ast.IsNot = type(m.body[10].value.ops[0])
+-    _ast.NotEq = type(m.body[10].value.ops[1])
++    _ast.NotEq = type(m.body[11].value.ops[1])
+     _ast.Is = type(m.body[10].value.left.ops[0])
+     _ast.Eq = type(m.body[10].value.left.ops[1])
+ 
+</pre><h3>Mutant 463</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -366,7 +366,7 @@
+     _ast.And = type(m.body[9].value.values[0].op)
+ 
+     _ast.IsNot = type(m.body[10].value.ops[0])
+-    _ast.NotEq = type(m.body[10].value.ops[1])
++    _ast.NotEq = type(m.body[10].value.ops[2])
+     _ast.Is = type(m.body[10].value.left.ops[0])
+     _ast.Eq = type(m.body[10].value.left.ops[1])
+ 
+</pre><h3>Mutant 464</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -366,7 +366,7 @@
+     _ast.And = type(m.body[9].value.values[0].op)
+ 
+     _ast.IsNot = type(m.body[10].value.ops[0])
+-    _ast.NotEq = type(m.body[10].value.ops[1])
++    _ast.NotEq = None
+     _ast.Is = type(m.body[10].value.left.ops[0])
+     _ast.Eq = type(m.body[10].value.left.ops[1])
+ 
+</pre><h3>Mutant 465</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -367,7 +367,7 @@
+ 
+     _ast.IsNot = type(m.body[10].value.ops[0])
+     _ast.NotEq = type(m.body[10].value.ops[1])
+-    _ast.Is = type(m.body[10].value.left.ops[0])
++    _ast.Is = type(m.body[11].value.left.ops[0])
+     _ast.Eq = type(m.body[10].value.left.ops[1])
+ 
+     _ast.Gt = type(m.body[11].value.ops[0])
+</pre><h3>Mutant 466</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -367,7 +367,7 @@
+ 
+     _ast.IsNot = type(m.body[10].value.ops[0])
+     _ast.NotEq = type(m.body[10].value.ops[1])
+-    _ast.Is = type(m.body[10].value.left.ops[0])
++    _ast.Is = type(m.body[10].value.left.ops[1])
+     _ast.Eq = type(m.body[10].value.left.ops[1])
+ 
+     _ast.Gt = type(m.body[11].value.ops[0])
+</pre><h3>Mutant 467</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -367,7 +367,7 @@
+ 
+     _ast.IsNot = type(m.body[10].value.ops[0])
+     _ast.NotEq = type(m.body[10].value.ops[1])
+-    _ast.Is = type(m.body[10].value.left.ops[0])
++    _ast.Is = None
+     _ast.Eq = type(m.body[10].value.left.ops[1])
+ 
+     _ast.Gt = type(m.body[11].value.ops[0])
+</pre><h3>Mutant 468</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -368,7 +368,7 @@
+     _ast.IsNot = type(m.body[10].value.ops[0])
+     _ast.NotEq = type(m.body[10].value.ops[1])
+     _ast.Is = type(m.body[10].value.left.ops[0])
+-    _ast.Eq = type(m.body[10].value.left.ops[1])
++    _ast.Eq = type(m.body[11].value.left.ops[1])
+ 
+     _ast.Gt = type(m.body[11].value.ops[0])
+     _ast.Lt = type(m.body[11].value.ops[1])
+</pre><h3>Mutant 469</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -368,7 +368,7 @@
+     _ast.IsNot = type(m.body[10].value.ops[0])
+     _ast.NotEq = type(m.body[10].value.ops[1])
+     _ast.Is = type(m.body[10].value.left.ops[0])
+-    _ast.Eq = type(m.body[10].value.left.ops[1])
++    _ast.Eq = type(m.body[10].value.left.ops[2])
+ 
+     _ast.Gt = type(m.body[11].value.ops[0])
+     _ast.Lt = type(m.body[11].value.ops[1])
+</pre><h3>Mutant 470</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -368,7 +368,7 @@
+     _ast.IsNot = type(m.body[10].value.ops[0])
+     _ast.NotEq = type(m.body[10].value.ops[1])
+     _ast.Is = type(m.body[10].value.left.ops[0])
+-    _ast.Eq = type(m.body[10].value.left.ops[1])
++    _ast.Eq = None
+ 
+     _ast.Gt = type(m.body[11].value.ops[0])
+     _ast.Lt = type(m.body[11].value.ops[1])
+</pre><h3>Mutant 471</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -370,7 +370,7 @@
+     _ast.Is = type(m.body[10].value.left.ops[0])
+     _ast.Eq = type(m.body[10].value.left.ops[1])
+ 
+-    _ast.Gt = type(m.body[11].value.ops[0])
++    _ast.Gt = type(m.body[12].value.ops[0])
+     _ast.Lt = type(m.body[11].value.ops[1])
+     _ast.GtE = type(m.body[11].value.ops[2])
+     _ast.LtE = type(m.body[11].value.ops[3])
+</pre><h3>Mutant 472</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -370,7 +370,7 @@
+     _ast.Is = type(m.body[10].value.left.ops[0])
+     _ast.Eq = type(m.body[10].value.left.ops[1])
+ 
+-    _ast.Gt = type(m.body[11].value.ops[0])
++    _ast.Gt = type(m.body[11].value.ops[1])
+     _ast.Lt = type(m.body[11].value.ops[1])
+     _ast.GtE = type(m.body[11].value.ops[2])
+     _ast.LtE = type(m.body[11].value.ops[3])
+</pre><h3>Mutant 473</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -370,7 +370,7 @@
+     _ast.Is = type(m.body[10].value.left.ops[0])
+     _ast.Eq = type(m.body[10].value.left.ops[1])
+ 
+-    _ast.Gt = type(m.body[11].value.ops[0])
++    _ast.Gt = None
+     _ast.Lt = type(m.body[11].value.ops[1])
+     _ast.GtE = type(m.body[11].value.ops[2])
+     _ast.LtE = type(m.body[11].value.ops[3])
+</pre><h3>Mutant 474</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -371,7 +371,7 @@
+     _ast.Eq = type(m.body[10].value.left.ops[1])
+ 
+     _ast.Gt = type(m.body[11].value.ops[0])
+-    _ast.Lt = type(m.body[11].value.ops[1])
++    _ast.Lt = type(m.body[12].value.ops[1])
+     _ast.GtE = type(m.body[11].value.ops[2])
+     _ast.LtE = type(m.body[11].value.ops[3])
+ 
+</pre><h3>Mutant 475</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -371,7 +371,7 @@
+     _ast.Eq = type(m.body[10].value.left.ops[1])
+ 
+     _ast.Gt = type(m.body[11].value.ops[0])
+-    _ast.Lt = type(m.body[11].value.ops[1])
++    _ast.Lt = type(m.body[11].value.ops[2])
+     _ast.GtE = type(m.body[11].value.ops[2])
+     _ast.LtE = type(m.body[11].value.ops[3])
+ 
+</pre><h3>Mutant 476</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -371,7 +371,7 @@
+     _ast.Eq = type(m.body[10].value.left.ops[1])
+ 
+     _ast.Gt = type(m.body[11].value.ops[0])
+-    _ast.Lt = type(m.body[11].value.ops[1])
++    _ast.Lt = None
+     _ast.GtE = type(m.body[11].value.ops[2])
+     _ast.LtE = type(m.body[11].value.ops[3])
+ 
+</pre><h3>Mutant 477</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -372,7 +372,7 @@
+ 
+     _ast.Gt = type(m.body[11].value.ops[0])
+     _ast.Lt = type(m.body[11].value.ops[1])
+-    _ast.GtE = type(m.body[11].value.ops[2])
++    _ast.GtE = type(m.body[12].value.ops[2])
+     _ast.LtE = type(m.body[11].value.ops[3])
+ 
+     _ast.In = type(m.body[12].value.ops[0])
+</pre><h3>Mutant 478</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -372,7 +372,7 @@
+ 
+     _ast.Gt = type(m.body[11].value.ops[0])
+     _ast.Lt = type(m.body[11].value.ops[1])
+-    _ast.GtE = type(m.body[11].value.ops[2])
++    _ast.GtE = type(m.body[11].value.ops[3])
+     _ast.LtE = type(m.body[11].value.ops[3])
+ 
+     _ast.In = type(m.body[12].value.ops[0])
+</pre><h3>Mutant 479</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -372,7 +372,7 @@
+ 
+     _ast.Gt = type(m.body[11].value.ops[0])
+     _ast.Lt = type(m.body[11].value.ops[1])
+-    _ast.GtE = type(m.body[11].value.ops[2])
++    _ast.GtE = None
+     _ast.LtE = type(m.body[11].value.ops[3])
+ 
+     _ast.In = type(m.body[12].value.ops[0])
+</pre><h3>Mutant 480</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -373,7 +373,7 @@
+     _ast.Gt = type(m.body[11].value.ops[0])
+     _ast.Lt = type(m.body[11].value.ops[1])
+     _ast.GtE = type(m.body[11].value.ops[2])
+-    _ast.LtE = type(m.body[11].value.ops[3])
++    _ast.LtE = type(m.body[12].value.ops[3])
+ 
+     _ast.In = type(m.body[12].value.ops[0])
+     _ast.NotIn = type(m.body[12].value.ops[1])
+</pre><h3>Mutant 481</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -373,7 +373,7 @@
+     _ast.Gt = type(m.body[11].value.ops[0])
+     _ast.Lt = type(m.body[11].value.ops[1])
+     _ast.GtE = type(m.body[11].value.ops[2])
+-    _ast.LtE = type(m.body[11].value.ops[3])
++    _ast.LtE = type(m.body[11].value.ops[4])
+ 
+     _ast.In = type(m.body[12].value.ops[0])
+     _ast.NotIn = type(m.body[12].value.ops[1])
+</pre><h3>Mutant 482</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -373,7 +373,7 @@
+     _ast.Gt = type(m.body[11].value.ops[0])
+     _ast.Lt = type(m.body[11].value.ops[1])
+     _ast.GtE = type(m.body[11].value.ops[2])
+-    _ast.LtE = type(m.body[11].value.ops[3])
++    _ast.LtE = None
+ 
+     _ast.In = type(m.body[12].value.ops[0])
+     _ast.NotIn = type(m.body[12].value.ops[1])
+</pre><h3>Mutant 483</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -375,7 +375,7 @@
+     _ast.GtE = type(m.body[11].value.ops[2])
+     _ast.LtE = type(m.body[11].value.ops[3])
+ 
+-    _ast.In = type(m.body[12].value.ops[0])
++    _ast.In = type(m.body[13].value.ops[0])
+     _ast.NotIn = type(m.body[12].value.ops[1])
+ 
+ 
+</pre><h3>Mutant 484</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -375,7 +375,7 @@
+     _ast.GtE = type(m.body[11].value.ops[2])
+     _ast.LtE = type(m.body[11].value.ops[3])
+ 
+-    _ast.In = type(m.body[12].value.ops[0])
++    _ast.In = type(m.body[12].value.ops[1])
+     _ast.NotIn = type(m.body[12].value.ops[1])
+ 
+ 
+</pre><h3>Mutant 485</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -375,7 +375,7 @@
+     _ast.GtE = type(m.body[11].value.ops[2])
+     _ast.LtE = type(m.body[11].value.ops[3])
+ 
+-    _ast.In = type(m.body[12].value.ops[0])
++    _ast.In = None
+     _ast.NotIn = type(m.body[12].value.ops[1])
+ 
+ 
+</pre><h3>Mutant 486</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -376,7 +376,7 @@
+     _ast.LtE = type(m.body[11].value.ops[3])
+ 
+     _ast.In = type(m.body[12].value.ops[0])
+-    _ast.NotIn = type(m.body[12].value.ops[1])
++    _ast.NotIn = type(m.body[13].value.ops[1])
+ 
+ 
+ def read_file(path, mode="rb"):
+</pre><h3>Mutant 487</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -376,7 +376,7 @@
+     _ast.LtE = type(m.body[11].value.ops[3])
+ 
+     _ast.In = type(m.body[12].value.ops[0])
+-    _ast.NotIn = type(m.body[12].value.ops[1])
++    _ast.NotIn = type(m.body[12].value.ops[2])
+ 
+ 
+ def read_file(path, mode="rb"):
+</pre><h3>Mutant 488</h3><pre>--- mako/util.py
++++ mako/util.py
+@@ -376,7 +376,7 @@
+     _ast.LtE = type(m.body[11].value.ops[3])
+ 
+     _ast.In = type(m.body[12].value.ops[0])
+-    _ast.NotIn = type(m.body[12].value.ops[1])
++    _ast.NotIn = None
+ 
+ 
+ def read_file(path, mode="rb"):
+</pre></body></html>

@@ -1,0 +1,551 @@
+<html><body><h1>mako/compat.py</h1>Killed 25 out of 75 mutants<h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 2644</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -8,7 +8,7 @@
+ import inspect
+ import sys
+ 
+-py3k = sys.version_info >= (3, 0)
++py3k = sys.version_info > (3, 0)
+ py2k = sys.version_info < (3,)
+ py27 = sys.version_info >= (2, 7)
+ jython = sys.platform.startswith("java")
+</pre><h3>Mutant 2646</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -8,7 +8,7 @@
+ import inspect
+ import sys
+ 
+-py3k = sys.version_info >= (3, 0)
++py3k = sys.version_info >= (3, 1)
+ py2k = sys.version_info < (3,)
+ py27 = sys.version_info >= (2, 7)
+ jython = sys.platform.startswith("java")
+</pre><h3>Mutant 2648</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -9,7 +9,7 @@
+ import sys
+ 
+ py3k = sys.version_info >= (3, 0)
+-py2k = sys.version_info < (3,)
++py2k = sys.version_info <= (3,)
+ py27 = sys.version_info >= (2, 7)
+ jython = sys.platform.startswith("java")
+ win32 = sys.platform.startswith("win")
+</pre><h3>Mutant 2650</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -9,7 +9,7 @@
+ import sys
+ 
+ py3k = sys.version_info >= (3, 0)
+-py2k = sys.version_info < (3,)
++py2k = None
+ py27 = sys.version_info >= (2, 7)
+ jython = sys.platform.startswith("java")
+ win32 = sys.platform.startswith("win")
+</pre><h3>Mutant 2651</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -10,7 +10,7 @@
+ 
+ py3k = sys.version_info >= (3, 0)
+ py2k = sys.version_info < (3,)
+-py27 = sys.version_info >= (2, 7)
++py27 = sys.version_info > (2, 7)
+ jython = sys.platform.startswith("java")
+ win32 = sys.platform.startswith("win")
+ pypy = hasattr(sys, "pypy_version_info")
+</pre><h3>Mutant 2652</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -10,7 +10,7 @@
+ 
+ py3k = sys.version_info >= (3, 0)
+ py2k = sys.version_info < (3,)
+-py27 = sys.version_info >= (2, 7)
++py27 = sys.version_info >= (3, 7)
+ jython = sys.platform.startswith("java")
+ win32 = sys.platform.startswith("win")
+ pypy = hasattr(sys, "pypy_version_info")
+</pre><h3>Mutant 2653</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -10,7 +10,7 @@
+ 
+ py3k = sys.version_info >= (3, 0)
+ py2k = sys.version_info < (3,)
+-py27 = sys.version_info >= (2, 7)
++py27 = sys.version_info >= (2, 8)
+ jython = sys.platform.startswith("java")
+ win32 = sys.platform.startswith("win")
+ pypy = hasattr(sys, "pypy_version_info")
+</pre><h3>Mutant 2654</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -10,7 +10,7 @@
+ 
+ py3k = sys.version_info >= (3, 0)
+ py2k = sys.version_info < (3,)
+-py27 = sys.version_info >= (2, 7)
++py27 = None
+ jython = sys.platform.startswith("java")
+ win32 = sys.platform.startswith("win")
+ pypy = hasattr(sys, "pypy_version_info")
+</pre><h3>Mutant 2655</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -11,7 +11,7 @@
+ py3k = sys.version_info >= (3, 0)
+ py2k = sys.version_info < (3,)
+ py27 = sys.version_info >= (2, 7)
+-jython = sys.platform.startswith("java")
++jython = sys.platform.startswith("XXjavaXX")
+ win32 = sys.platform.startswith("win")
+ pypy = hasattr(sys, "pypy_version_info")
+ 
+</pre><h3>Mutant 2656</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -11,7 +11,7 @@
+ py3k = sys.version_info >= (3, 0)
+ py2k = sys.version_info < (3,)
+ py27 = sys.version_info >= (2, 7)
+-jython = sys.platform.startswith("java")
++jython = None
+ win32 = sys.platform.startswith("win")
+ pypy = hasattr(sys, "pypy_version_info")
+ 
+</pre><h3>Mutant 2657</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -12,7 +12,7 @@
+ py2k = sys.version_info < (3,)
+ py27 = sys.version_info >= (2, 7)
+ jython = sys.platform.startswith("java")
+-win32 = sys.platform.startswith("win")
++win32 = sys.platform.startswith("XXwinXX")
+ pypy = hasattr(sys, "pypy_version_info")
+ 
+ ArgSpec = collections.namedtuple(
+</pre><h3>Mutant 2658</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -12,7 +12,7 @@
+ py2k = sys.version_info < (3,)
+ py27 = sys.version_info >= (2, 7)
+ jython = sys.platform.startswith("java")
+-win32 = sys.platform.startswith("win")
++win32 = None
+ pypy = hasattr(sys, "pypy_version_info")
+ 
+ ArgSpec = collections.namedtuple(
+</pre><h3>Mutant 2659</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -13,7 +13,7 @@
+ py27 = sys.version_info >= (2, 7)
+ jython = sys.platform.startswith("java")
+ win32 = sys.platform.startswith("win")
+-pypy = hasattr(sys, "pypy_version_info")
++pypy = hasattr(sys, "XXpypy_version_infoXX")
+ 
+ ArgSpec = collections.namedtuple(
+     "ArgSpec", ["args", "varargs", "keywords", "defaults"]
+</pre><h3>Mutant 2660</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -13,7 +13,7 @@
+ py27 = sys.version_info >= (2, 7)
+ jython = sys.platform.startswith("java")
+ win32 = sys.platform.startswith("win")
+-pypy = hasattr(sys, "pypy_version_info")
++pypy = None
+ 
+ ArgSpec = collections.namedtuple(
+     "ArgSpec", ["args", "varargs", "keywords", "defaults"]
+</pre><h3>Mutant 2661</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -16,7 +16,7 @@
+ pypy = hasattr(sys, "pypy_version_info")
+ 
+ ArgSpec = collections.namedtuple(
+-    "ArgSpec", ["args", "varargs", "keywords", "defaults"]
++    "XXArgSpecXX", ["args", "varargs", "keywords", "defaults"]
+ )
+ 
+ 
+</pre><h3>Mutant 2662</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -16,7 +16,7 @@
+ pypy = hasattr(sys, "pypy_version_info")
+ 
+ ArgSpec = collections.namedtuple(
+-    "ArgSpec", ["args", "varargs", "keywords", "defaults"]
++    "ArgSpec", ["XXargsXX", "varargs", "keywords", "defaults"]
+ )
+ 
+ 
+</pre><h3>Mutant 2663</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -16,7 +16,7 @@
+ pypy = hasattr(sys, "pypy_version_info")
+ 
+ ArgSpec = collections.namedtuple(
+-    "ArgSpec", ["args", "varargs", "keywords", "defaults"]
++    "ArgSpec", ["args", "XXvarargsXX", "keywords", "defaults"]
+ )
+ 
+ 
+</pre><h3>Mutant 2664</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -16,7 +16,7 @@
+ pypy = hasattr(sys, "pypy_version_info")
+ 
+ ArgSpec = collections.namedtuple(
+-    "ArgSpec", ["args", "varargs", "keywords", "defaults"]
++    "ArgSpec", ["args", "varargs", "XXkeywordsXX", "defaults"]
+ )
+ 
+ 
+</pre><h3>Mutant 2665</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -16,7 +16,7 @@
+ pypy = hasattr(sys, "pypy_version_info")
+ 
+ ArgSpec = collections.namedtuple(
+-    "ArgSpec", ["args", "varargs", "keywords", "defaults"]
++    "ArgSpec", ["args", "varargs", "keywords", "XXdefaultsXX"]
+ )
+ 
+ 
+</pre><h3>Mutant 2667</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -24,7 +24,7 @@
+     """getargspec based on fully vendored getfullargspec from Python 3.3."""
+ 
+     if inspect.ismethod(func):
+-        func = func.__func__
++        func = None
+     if not inspect.isfunction(func):
+         raise TypeError("{!r} is not a Python function".format(func))
+ 
+</pre><h3>Mutant 2669</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -26,7 +26,7 @@
+     if inspect.ismethod(func):
+         func = func.__func__
+     if not inspect.isfunction(func):
+-        raise TypeError("{!r} is not a Python function".format(func))
++        raise TypeError("XX{!r} is not a Python functionXX".format(func))
+ 
+     co = func.__code__
+     if not inspect.iscode(co):
+</pre><h3>Mutant 2672</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -30,7 +30,7 @@
+ 
+     co = func.__code__
+     if not inspect.iscode(co):
+-        raise TypeError("{!r} is not a code object".format(co))
++        raise TypeError("XX{!r} is not a code objectXX".format(co))
+ 
+     nargs = co.co_argcount
+     names = co.co_varnames
+</pre><h3>Mutant 2675</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -34,7 +34,7 @@
+ 
+     nargs = co.co_argcount
+     names = co.co_varnames
+-    nkwargs = co.co_kwonlyargcount if py3k else 0
++    nkwargs = co.co_kwonlyargcount if py3k else 1
+     args = list(names[:nargs])
+ 
+     nargs += nkwargs
+</pre><h3>Mutant 2678</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -37,7 +37,7 @@
+     nkwargs = co.co_kwonlyargcount if py3k else 0
+     args = list(names[:nargs])
+ 
+-    nargs += nkwargs
++    nargs = nkwargs
+     varargs = None
+     if co.co_flags & inspect.CO_VARARGS:
+         varargs = co.co_varnames[nargs]
+</pre><h3>Mutant 2679</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -37,7 +37,7 @@
+     nkwargs = co.co_kwonlyargcount if py3k else 0
+     args = list(names[:nargs])
+ 
+-    nargs += nkwargs
++    nargs -= nkwargs
+     varargs = None
+     if co.co_flags & inspect.CO_VARARGS:
+         varargs = co.co_varnames[nargs]
+</pre><h3>Mutant 2680</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -38,7 +38,7 @@
+     args = list(names[:nargs])
+ 
+     nargs += nkwargs
+-    varargs = None
++    varargs = ""
+     if co.co_flags & inspect.CO_VARARGS:
+         varargs = co.co_varnames[nargs]
+         nargs = nargs + 1
+</pre><h3>Mutant 2681</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -39,7 +39,7 @@
+ 
+     nargs += nkwargs
+     varargs = None
+-    if co.co_flags & inspect.CO_VARARGS:
++    if co.co_flags | inspect.CO_VARARGS:
+         varargs = co.co_varnames[nargs]
+         nargs = nargs + 1
+     varkw = None
+</pre><h3>Mutant 2682</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -40,7 +40,7 @@
+     nargs += nkwargs
+     varargs = None
+     if co.co_flags & inspect.CO_VARARGS:
+-        varargs = co.co_varnames[nargs]
++        varargs = None
+         nargs = nargs + 1
+     varkw = None
+     if co.co_flags & inspect.CO_VARKEYWORDS:
+</pre><h3>Mutant 2683</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -41,7 +41,7 @@
+     varargs = None
+     if co.co_flags & inspect.CO_VARARGS:
+         varargs = co.co_varnames[nargs]
+-        nargs = nargs + 1
++        nargs = nargs - 1
+     varkw = None
+     if co.co_flags & inspect.CO_VARKEYWORDS:
+         varkw = co.co_varnames[nargs]
+</pre><h3>Mutant 2684</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -41,7 +41,7 @@
+     varargs = None
+     if co.co_flags & inspect.CO_VARARGS:
+         varargs = co.co_varnames[nargs]
+-        nargs = nargs + 1
++        nargs = nargs + 2
+     varkw = None
+     if co.co_flags & inspect.CO_VARKEYWORDS:
+         varkw = co.co_varnames[nargs]
+</pre><h3>Mutant 2686</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -42,7 +42,7 @@
+     if co.co_flags & inspect.CO_VARARGS:
+         varargs = co.co_varnames[nargs]
+         nargs = nargs + 1
+-    varkw = None
++    varkw = ""
+     if co.co_flags & inspect.CO_VARKEYWORDS:
+         varkw = co.co_varnames[nargs]
+ 
+</pre><h3>Mutant 2692</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -65,7 +65,7 @@
+         return s
+ 
+     def b(s):
+-        return s.encode("latin-1")
++        return s.encode("XXlatin-1XX")
+ 
+     def octal(lit):
+         return eval("0o" + lit)
+</pre><h3>Mutant 2695</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -79,7 +79,7 @@
+     except:
+         from StringIO import StringIO
+ 
+-    byte_buffer = StringIO
++    byte_buffer = None
+ 
+     from urllib import quote_plus, unquote_plus  # noqa
+     from htmlentitydefs import codepoint2name, name2codepoint  # noqa
+</pre><h3>Mutant 2696</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -84,7 +84,7 @@
+     from urllib import quote_plus, unquote_plus  # noqa
+     from htmlentitydefs import codepoint2name, name2codepoint  # noqa
+ 
+-    string_types = (basestring,)  # noqa
++    string_types = None  # noqa
+     binary_type = str
+     text_type = unicode  # noqa
+ 
+</pre><h3>Mutant 2697</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -85,7 +85,7 @@
+     from htmlentitydefs import codepoint2name, name2codepoint  # noqa
+ 
+     string_types = (basestring,)  # noqa
+-    binary_type = str
++    binary_type = None
+     text_type = unicode  # noqa
+ 
+     def u(s):
+</pre><h3>Mutant 2698</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -86,7 +86,7 @@
+ 
+     string_types = (basestring,)  # noqa
+     binary_type = str
+-    text_type = unicode  # noqa
++    text_type = None  # noqa
+ 
+     def u(s):
+         return unicode(s, "utf-8")  # noqa
+</pre><h3>Mutant 2699</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -89,7 +89,7 @@
+     text_type = unicode  # noqa
+ 
+     def u(s):
+-        return unicode(s, "utf-8")  # noqa
++        return unicode(s, "XXutf-8XX")  # noqa
+ 
+     def b(s):
+         return s
+</pre><h3>Mutant 2700</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -95,7 +95,7 @@
+         return s
+ 
+     def octal(lit):
+-        return eval("0" + lit)
++        return eval("XX0XX" + lit)
+ 
+ 
+ if py3k:
+</pre><h3>Mutant 2701</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -95,7 +95,7 @@
+         return s
+ 
+     def octal(lit):
+-        return eval("0" + lit)
++        return eval("0" - lit)
+ 
+ 
+ if py3k:
+</pre><h3>Mutant 2702</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -101,7 +101,7 @@
+ if py3k:
+     from importlib import machinery, util
+ 
+-    if hasattr(util, 'module_from_spec'):
++    if hasattr(util, 'XXmodule_from_specXX'):
+         # Python 3.5+
+         def load_module(module_id, path):
+             spec = util.spec_from_file_location(module_id, path)
+</pre><h3>Mutant 2705</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -110,7 +110,7 @@
+             return module
+     else:
+         def load_module(module_id, path):
+-            module = machinery.SourceFileLoader(module_id, path).load_module()
++            module = None
+             del sys.modules[module_id]
+             return module
+ 
+</pre><h3>Mutant 2706</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -118,7 +118,7 @@
+     import imp
+ 
+     def load_module(module_id, path):
+-        fp = open(path, "rb")
++        fp = open(path, "XXrbXX")
+         try:
+             module = imp.load_source(module_id, path, fp)
+             del sys.modules[module_id]
+</pre><h3>Mutant 2707</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -118,7 +118,7 @@
+     import imp
+ 
+     def load_module(module_id, path):
+-        fp = open(path, "rb")
++        fp = None
+         try:
+             module = imp.load_source(module_id, path, fp)
+             del sys.modules[module_id]
+</pre><h3>Mutant 2708</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -120,7 +120,7 @@
+     def load_module(module_id, path):
+         fp = open(path, "rb")
+         try:
+-            module = imp.load_source(module_id, path, fp)
++            module = None
+             del sys.modules[module_id]
+             return module
+         finally:
+</pre><h3>Mutant 2709</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -130,7 +130,7 @@
+ if py3k:
+ 
+     def reraise(tp, value, tb=None, cause=None):
+-        if cause is not None:
++        if cause is  None:
+             value.__cause__ = cause
+         if value.__traceback__ is not tb:
+             raise value.with_traceback(tb)
+</pre><h3>Mutant 2710</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -131,7 +131,7 @@
+ 
+     def reraise(tp, value, tb=None, cause=None):
+         if cause is not None:
+-            value.__cause__ = cause
++            value.__cause__ = None
+         if value.__traceback__ is not tb:
+             raise value.with_traceback(tb)
+         raise value
+</pre><h3>Mutant 2711</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -132,7 +132,7 @@
+     def reraise(tp, value, tb=None, cause=None):
+         if cause is not None:
+             value.__cause__ = cause
+-        if value.__traceback__ is not tb:
++        if value.__traceback__ is  tb:
+             raise value.with_traceback(tb)
+         raise value
+ 
+</pre><h3>Mutant 2712</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -139,7 +139,7 @@
+ 
+ else:
+     exec(
+-        "def reraise(tp, value, tb=None, cause=None):\n"
++        "XXdef reraise(tp, value, tb=None, cause=None):\nXX"
+         "    raise tp, value, tb\n"
+     )
+ 
+</pre><h3>Mutant 2713</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -140,7 +140,7 @@
+ else:
+     exec(
+         "def reraise(tp, value, tb=None, cause=None):\n"
+-        "    raise tp, value, tb\n"
++        "XX    raise tp, value, tb\nXX"
+     )
+ 
+ 
+</pre><h3>Mutant 2716</h3><pre>--- mako/compat.py
++++ mako/compat.py
+@@ -160,7 +160,7 @@
+ # Copyright (c) 2010-2012 Benjamin Peterson
+ def with_metaclass(meta, base=object):
+     """Create a base class with a metaclass."""
+-    return meta("%sBase" % meta.__name__, (base,), {})
++    return meta("XX%sBaseXX" % meta.__name__, (base,), {})
+ 
+ 
+ ################################################
+</pre></body></html>

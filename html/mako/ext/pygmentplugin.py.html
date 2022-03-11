@@ -1,0 +1,787 @@
+<html><body><h1>mako/ext/pygmentplugin.py</h1>Killed 0 out of 65 mutants<h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 3270</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -29,7 +29,7 @@
+ 
+ 
+ class MakoLexer(RegexLexer):
+-    name = "Mako"
++    name = "XXMakoXX"
+     aliases = ["mako"]
+     filenames = ["*.mao"]
+ 
+</pre><h3>Mutant 3271</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -29,7 +29,7 @@
+ 
+ 
+ class MakoLexer(RegexLexer):
+-    name = "Mako"
++    name = None
+     aliases = ["mako"]
+     filenames = ["*.mao"]
+ 
+</pre><h3>Mutant 3272</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -30,7 +30,7 @@
+ 
+ class MakoLexer(RegexLexer):
+     name = "Mako"
+-    aliases = ["mako"]
++    aliases = ["XXmakoXX"]
+     filenames = ["*.mao"]
+ 
+     tokens = {
+</pre><h3>Mutant 3273</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -30,7 +30,7 @@
+ 
+ class MakoLexer(RegexLexer):
+     name = "Mako"
+-    aliases = ["mako"]
++    aliases = None
+     filenames = ["*.mao"]
+ 
+     tokens = {
+</pre><h3>Mutant 3274</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -31,7 +31,7 @@
+ class MakoLexer(RegexLexer):
+     name = "Mako"
+     aliases = ["mako"]
+-    filenames = ["*.mao"]
++    filenames = ["XX*.maoXX"]
+ 
+     tokens = {
+         "root": [
+</pre><h3>Mutant 3275</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -31,7 +31,7 @@
+ class MakoLexer(RegexLexer):
+     name = "Mako"
+     aliases = ["mako"]
+-    filenames = ["*.mao"]
++    filenames = None
+ 
+     tokens = {
+         "root": [
+</pre><h3>Mutant 3276</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -34,7 +34,7 @@
+     filenames = ["*.mao"]
+ 
+     tokens = {
+-        "root": [
++        "XXrootXX": [
+             (
+                 r"(\s*)(\%)(\s*end(?:\w+))(\n|\Z)",
+                 bygroups(Text, Comment.Preproc, Keyword, Other),
+</pre><h3>Mutant 3277</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -36,7 +36,7 @@
+     tokens = {
+         "root": [
+             (
+-                r"(\s*)(\%)(\s*end(?:\w+))(\n|\Z)",
++                r"XX(\s*)(\%)(\s*end(?:\w+))(\n|\Z)XX",
+                 bygroups(Text, Comment.Preproc, Keyword, Other),
+             ),
+             (
+</pre><h3>Mutant 3278</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -40,7 +40,7 @@
+                 bygroups(Text, Comment.Preproc, Keyword, Other),
+             ),
+             (
+-                r"(\s*)(\%(?!%))([^\n]*)(\n|\Z)",
++                r"XX(\s*)(\%(?!%))([^\n]*)(\n|\Z)XX",
+                 bygroups(Text, Comment.Preproc, using(PythonLexer), Other),
+             ),
+             (
+</pre><h3>Mutant 3279</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -44,7 +44,7 @@
+                 bygroups(Text, Comment.Preproc, using(PythonLexer), Other),
+             ),
+             (
+-                r"(\s*)(##[^\n]*)(\n|\Z)",
++                r"XX(\s*)(##[^\n]*)(\n|\Z)XX",
+                 bygroups(Text, Comment.Preproc, Other),
+             ),
+             (r"""(?s)<%doc>.*?</%doc>""", Comment.Preproc),
+</pre><h3>Mutant 3280</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -49,7 +49,7 @@
+             ),
+             (r"""(?s)<%doc>.*?</%doc>""", Comment.Preproc),
+             (
+-                r"(<%)([\w\.\:]+)",
++                r"XX(<%)([\w\.\:]+)XX",
+                 bygroups(Comment.Preproc, Name.Builtin),
+                 "tag",
+             ),
+</pre><h3>Mutant 3281</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -51,7 +51,7 @@
+             (
+                 r"(<%)([\w\.\:]+)",
+                 bygroups(Comment.Preproc, Name.Builtin),
+-                "tag",
++                "XXtagXX",
+             ),
+             (
+                 r"(</%)([\w\.\:]+)(>)",
+</pre><h3>Mutant 3282</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -54,7 +54,7 @@
+                 "tag",
+             ),
+             (
+-                r"(</%)([\w\.\:]+)(>)",
++                r"XX(</%)([\w\.\:]+)(>)XX",
+                 bygroups(Comment.Preproc, Name.Builtin, Comment.Preproc),
+             ),
+             (r"<%(?=([\w\.\:]+))", Comment.Preproc, "ondeftags"),
+</pre><h3>Mutant 3283</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -57,7 +57,7 @@
+                 r"(</%)([\w\.\:]+)(>)",
+                 bygroups(Comment.Preproc, Name.Builtin, Comment.Preproc),
+             ),
+-            (r"<%(?=([\w\.\:]+))", Comment.Preproc, "ondeftags"),
++            (r"XX<%(?=([\w\.\:]+))XX", Comment.Preproc, "ondeftags"),
+             (
+                 r"(?s)(<%(?:!?))(.*?)(%>)",
+                 bygroups(Comment.Preproc, using(PythonLexer), Comment.Preproc),
+</pre><h3>Mutant 3284</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -57,7 +57,7 @@
+                 r"(</%)([\w\.\:]+)(>)",
+                 bygroups(Comment.Preproc, Name.Builtin, Comment.Preproc),
+             ),
+-            (r"<%(?=([\w\.\:]+))", Comment.Preproc, "ondeftags"),
++            (r"<%(?=([\w\.\:]+))", Comment.Preproc, "XXondeftagsXX"),
+             (
+                 r"(?s)(<%(?:!?))(.*?)(%>)",
+                 bygroups(Comment.Preproc, using(PythonLexer), Comment.Preproc),
+</pre><h3>Mutant 3285</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -59,7 +59,7 @@
+             ),
+             (r"<%(?=([\w\.\:]+))", Comment.Preproc, "ondeftags"),
+             (
+-                r"(?s)(<%(?:!?))(.*?)(%>)",
++                r"XX(?s)(<%(?:!?))(.*?)(%>)XX",
+                 bygroups(Comment.Preproc, using(PythonLexer), Comment.Preproc),
+             ),
+             (
+</pre><h3>Mutant 3286</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -63,7 +63,7 @@
+                 bygroups(Comment.Preproc, using(PythonLexer), Comment.Preproc),
+             ),
+             (
+-                r"(\$\{)(.*?)(\})",
++                r"XX(\$\{)(.*?)(\})XX",
+                 bygroups(Comment.Preproc, using(PythonLexer), Comment.Preproc),
+             ),
+             (
+</pre><h3>Mutant 3287</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -83,7 +83,7 @@
+             """,
+                 bygroups(Other, Operator),
+             ),
+-            (r"\s+", Text),
++            (r"XX\s+XX", Text),
+         ],
+         "ondeftags": [
+             (r"<%", Comment.Preproc),
+</pre><h3>Mutant 3288</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -85,7 +85,7 @@
+             ),
+             (r"\s+", Text),
+         ],
+-        "ondeftags": [
++        "XXondeftagsXX": [
+             (r"<%", Comment.Preproc),
+             (r"(?<=<%)(include|inherit|namespace|page)", Name.Builtin),
+             include("tag"),
+</pre><h3>Mutant 3289</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -86,7 +86,7 @@
+             (r"\s+", Text),
+         ],
+         "ondeftags": [
+-            (r"<%", Comment.Preproc),
++            (r"XX<%XX", Comment.Preproc),
+             (r"(?<=<%)(include|inherit|namespace|page)", Name.Builtin),
+             include("tag"),
+         ],
+</pre><h3>Mutant 3290</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -87,7 +87,7 @@
+         ],
+         "ondeftags": [
+             (r"<%", Comment.Preproc),
+-            (r"(?<=<%)(include|inherit|namespace|page)", Name.Builtin),
++            (r"XX(?<=<%)(include|inherit|namespace|page)XX", Name.Builtin),
+             include("tag"),
+         ],
+         "tag": [
+</pre><h3>Mutant 3291</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -88,7 +88,7 @@
+         "ondeftags": [
+             (r"<%", Comment.Preproc),
+             (r"(?<=<%)(include|inherit|namespace|page)", Name.Builtin),
+-            include("tag"),
++            include("XXtagXX"),
+         ],
+         "tag": [
+             (r'((?:\w+)\s*=)\s*(".*?")', bygroups(Name.Attribute, String)),
+</pre><h3>Mutant 3292</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -90,7 +90,7 @@
+             (r"(?<=<%)(include|inherit|namespace|page)", Name.Builtin),
+             include("tag"),
+         ],
+-        "tag": [
++        "XXtagXX": [
+             (r'((?:\w+)\s*=)\s*(".*?")', bygroups(Name.Attribute, String)),
+             (r"/?\s*>", Comment.Preproc, "#pop"),
+             (r"\s+", Text),
+</pre><h3>Mutant 3293</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -91,7 +91,7 @@
+             include("tag"),
+         ],
+         "tag": [
+-            (r'((?:\w+)\s*=)\s*(".*?")', bygroups(Name.Attribute, String)),
++            (r'XX((?:\w+)\s*=)\s*(".*?")XX', bygroups(Name.Attribute, String)),
+             (r"/?\s*>", Comment.Preproc, "#pop"),
+             (r"\s+", Text),
+         ],
+</pre><h3>Mutant 3294</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -92,7 +92,7 @@
+         ],
+         "tag": [
+             (r'((?:\w+)\s*=)\s*(".*?")', bygroups(Name.Attribute, String)),
+-            (r"/?\s*>", Comment.Preproc, "#pop"),
++            (r"XX/?\s*>XX", Comment.Preproc, "#pop"),
+             (r"\s+", Text),
+         ],
+         "attr": [
+</pre><h3>Mutant 3295</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -92,7 +92,7 @@
+         ],
+         "tag": [
+             (r'((?:\w+)\s*=)\s*(".*?")', bygroups(Name.Attribute, String)),
+-            (r"/?\s*>", Comment.Preproc, "#pop"),
++            (r"/?\s*>", Comment.Preproc, "XX#popXX"),
+             (r"\s+", Text),
+         ],
+         "attr": [
+</pre><h3>Mutant 3296</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -93,7 +93,7 @@
+         "tag": [
+             (r'((?:\w+)\s*=)\s*(".*?")', bygroups(Name.Attribute, String)),
+             (r"/?\s*>", Comment.Preproc, "#pop"),
+-            (r"\s+", Text),
++            (r"XX\s+XX", Text),
+         ],
+         "attr": [
+             ('".*?"', String, "#pop"),
+</pre><h3>Mutant 3297</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -95,7 +95,7 @@
+             (r"/?\s*>", Comment.Preproc, "#pop"),
+             (r"\s+", Text),
+         ],
+-        "attr": [
++        "XXattrXX": [
+             ('".*?"', String, "#pop"),
+             ("'.*?'", String, "#pop"),
+             (r"[^\s>]+", String, "#pop"),
+</pre><h3>Mutant 3298</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -96,7 +96,7 @@
+             (r"\s+", Text),
+         ],
+         "attr": [
+-            ('".*?"', String, "#pop"),
++            ('XX".*?"XX', String, "#pop"),
+             ("'.*?'", String, "#pop"),
+             (r"[^\s>]+", String, "#pop"),
+         ],
+</pre><h3>Mutant 3299</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -96,7 +96,7 @@
+             (r"\s+", Text),
+         ],
+         "attr": [
+-            ('".*?"', String, "#pop"),
++            ('".*?"', String, "XX#popXX"),
+             ("'.*?'", String, "#pop"),
+             (r"[^\s>]+", String, "#pop"),
+         ],
+</pre><h3>Mutant 3300</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -97,7 +97,7 @@
+         ],
+         "attr": [
+             ('".*?"', String, "#pop"),
+-            ("'.*?'", String, "#pop"),
++            ("XX'.*?'XX", String, "#pop"),
+             (r"[^\s>]+", String, "#pop"),
+         ],
+     }
+</pre><h3>Mutant 3301</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -97,7 +97,7 @@
+         ],
+         "attr": [
+             ('".*?"', String, "#pop"),
+-            ("'.*?'", String, "#pop"),
++            ("'.*?'", String, "XX#popXX"),
+             (r"[^\s>]+", String, "#pop"),
+         ],
+     }
+</pre><h3>Mutant 3302</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -98,7 +98,7 @@
+         "attr": [
+             ('".*?"', String, "#pop"),
+             ("'.*?'", String, "#pop"),
+-            (r"[^\s>]+", String, "#pop"),
++            (r"XX[^\s>]+XX", String, "#pop"),
+         ],
+     }
+ 
+</pre><h3>Mutant 3303</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -98,7 +98,7 @@
+         "attr": [
+             ('".*?"', String, "#pop"),
+             ("'.*?'", String, "#pop"),
+-            (r"[^\s>]+", String, "#pop"),
++            (r"[^\s>]+", String, "XX#popXX"),
+         ],
+     }
+ 
+</pre><h3>Mutant 3304</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -33,74 +33,7 @@
+     aliases = ["mako"]
+     filenames = ["*.mao"]
+ 
+-    tokens = {
+-        "root": [
+-            (
+-                r"(\s*)(\%)(\s*end(?:\w+))(\n|\Z)",
+-                bygroups(Text, Comment.Preproc, Keyword, Other),
+-            ),
+-            (
+-                r"(\s*)(\%(?!%))([^\n]*)(\n|\Z)",
+-                bygroups(Text, Comment.Preproc, using(PythonLexer), Other),
+-            ),
+-            (
+-                r"(\s*)(##[^\n]*)(\n|\Z)",
+-                bygroups(Text, Comment.Preproc, Other),
+-            ),
+-            (r"""(?s)<%doc>.*?</%doc>""", Comment.Preproc),
+-            (
+-                r"(<%)([\w\.\:]+)",
+-                bygroups(Comment.Preproc, Name.Builtin),
+-                "tag",
+-            ),
+-            (
+-                r"(</%)([\w\.\:]+)(>)",
+-                bygroups(Comment.Preproc, Name.Builtin, Comment.Preproc),
+-            ),
+-            (r"<%(?=([\w\.\:]+))", Comment.Preproc, "ondeftags"),
+-            (
+-                r"(?s)(<%(?:!?))(.*?)(%>)",
+-                bygroups(Comment.Preproc, using(PythonLexer), Comment.Preproc),
+-            ),
+-            (
+-                r"(\$\{)(.*?)(\})",
+-                bygroups(Comment.Preproc, using(PythonLexer), Comment.Preproc),
+-            ),
+-            (
+-                r"""(?sx)
+-                (.+?)               # anything, followed by:
+-                (?:
+-                 (?<=\n)(?=%(?!%)|\#\#) |  # an eval or comment line
+-                 (?=\#\*) |          # multiline comment
+-                 (?=</?%) |         # a python block
+-                                    # call start or end
+-                 (?=\$\{) |         # a substitution
+-                 (?<=\n)(?=\s*%) |
+-                                    # - don't consume
+-                 (\\\n) |           # an escaped newline
+-                 \Z                 # end of string
+-                )
+-            """,
+-                bygroups(Other, Operator),
+-            ),
+-            (r"\s+", Text),
+-        ],
+-        "ondeftags": [
+-            (r"<%", Comment.Preproc),
+-            (r"(?<=<%)(include|inherit|namespace|page)", Name.Builtin),
+-            include("tag"),
+-        ],
+-        "tag": [
+-            (r'((?:\w+)\s*=)\s*(".*?")', bygroups(Name.Attribute, String)),
+-            (r"/?\s*>", Comment.Preproc, "#pop"),
+-            (r"\s+", Text),
+-        ],
+-        "attr": [
+-            ('".*?"', String, "#pop"),
+-            ("'.*?'", String, "#pop"),
+-            (r"[^\s>]+", String, "#pop"),
+-        ],
+-    }
++    tokens = None
+ 
+ 
+ class MakoHtmlLexer(DelegatingLexer):
+</pre><h3>Mutant 3305</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -104,7 +104,7 @@
+ 
+ 
+ class MakoHtmlLexer(DelegatingLexer):
+-    name = "HTML+Mako"
++    name = "XXHTML+MakoXX"
+     aliases = ["html+mako"]
+ 
+     def __init__(self, **options):
+</pre><h3>Mutant 3306</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -104,7 +104,7 @@
+ 
+ 
+ class MakoHtmlLexer(DelegatingLexer):
+-    name = "HTML+Mako"
++    name = None
+     aliases = ["html+mako"]
+ 
+     def __init__(self, **options):
+</pre><h3>Mutant 3307</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -105,7 +105,7 @@
+ 
+ class MakoHtmlLexer(DelegatingLexer):
+     name = "HTML+Mako"
+-    aliases = ["html+mako"]
++    aliases = ["XXhtml+makoXX"]
+ 
+     def __init__(self, **options):
+         super(MakoHtmlLexer, self).__init__(HtmlLexer, MakoLexer, **options)
+</pre><h3>Mutant 3308</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -105,7 +105,7 @@
+ 
+ class MakoHtmlLexer(DelegatingLexer):
+     name = "HTML+Mako"
+-    aliases = ["html+mako"]
++    aliases = None
+ 
+     def __init__(self, **options):
+         super(MakoHtmlLexer, self).__init__(HtmlLexer, MakoLexer, **options)
+</pre><h3>Mutant 3309</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -112,7 +112,7 @@
+ 
+ 
+ class MakoXmlLexer(DelegatingLexer):
+-    name = "XML+Mako"
++    name = "XXXML+MakoXX"
+     aliases = ["xml+mako"]
+ 
+     def __init__(self, **options):
+</pre><h3>Mutant 3310</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -112,7 +112,7 @@
+ 
+ 
+ class MakoXmlLexer(DelegatingLexer):
+-    name = "XML+Mako"
++    name = None
+     aliases = ["xml+mako"]
+ 
+     def __init__(self, **options):
+</pre><h3>Mutant 3311</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -113,7 +113,7 @@
+ 
+ class MakoXmlLexer(DelegatingLexer):
+     name = "XML+Mako"
+-    aliases = ["xml+mako"]
++    aliases = ["XXxml+makoXX"]
+ 
+     def __init__(self, **options):
+         super(MakoXmlLexer, self).__init__(XmlLexer, MakoLexer, **options)
+</pre><h3>Mutant 3312</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -113,7 +113,7 @@
+ 
+ class MakoXmlLexer(DelegatingLexer):
+     name = "XML+Mako"
+-    aliases = ["xml+mako"]
++    aliases = None
+ 
+     def __init__(self, **options):
+         super(MakoXmlLexer, self).__init__(XmlLexer, MakoLexer, **options)
+</pre><h3>Mutant 3313</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -120,7 +120,7 @@
+ 
+ 
+ class MakoJavascriptLexer(DelegatingLexer):
+-    name = "JavaScript+Mako"
++    name = "XXJavaScript+MakoXX"
+     aliases = ["js+mako", "javascript+mako"]
+ 
+     def __init__(self, **options):
+</pre><h3>Mutant 3314</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -120,7 +120,7 @@
+ 
+ 
+ class MakoJavascriptLexer(DelegatingLexer):
+-    name = "JavaScript+Mako"
++    name = None
+     aliases = ["js+mako", "javascript+mako"]
+ 
+     def __init__(self, **options):
+</pre><h3>Mutant 3315</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -121,7 +121,7 @@
+ 
+ class MakoJavascriptLexer(DelegatingLexer):
+     name = "JavaScript+Mako"
+-    aliases = ["js+mako", "javascript+mako"]
++    aliases = ["XXjs+makoXX", "javascript+mako"]
+ 
+     def __init__(self, **options):
+         super(MakoJavascriptLexer, self).__init__(
+</pre><h3>Mutant 3316</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -121,7 +121,7 @@
+ 
+ class MakoJavascriptLexer(DelegatingLexer):
+     name = "JavaScript+Mako"
+-    aliases = ["js+mako", "javascript+mako"]
++    aliases = ["js+mako", "XXjavascript+makoXX"]
+ 
+     def __init__(self, **options):
+         super(MakoJavascriptLexer, self).__init__(
+</pre><h3>Mutant 3317</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -121,7 +121,7 @@
+ 
+ class MakoJavascriptLexer(DelegatingLexer):
+     name = "JavaScript+Mako"
+-    aliases = ["js+mako", "javascript+mako"]
++    aliases = None
+ 
+     def __init__(self, **options):
+         super(MakoJavascriptLexer, self).__init__(
+</pre><h3>Mutant 3318</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -130,7 +130,7 @@
+ 
+ 
+ class MakoCssLexer(DelegatingLexer):
+-    name = "CSS+Mako"
++    name = "XXCSS+MakoXX"
+     aliases = ["css+mako"]
+ 
+     def __init__(self, **options):
+</pre><h3>Mutant 3319</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -130,7 +130,7 @@
+ 
+ 
+ class MakoCssLexer(DelegatingLexer):
+-    name = "CSS+Mako"
++    name = None
+     aliases = ["css+mako"]
+ 
+     def __init__(self, **options):
+</pre><h3>Mutant 3320</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -131,7 +131,7 @@
+ 
+ class MakoCssLexer(DelegatingLexer):
+     name = "CSS+Mako"
+-    aliases = ["css+mako"]
++    aliases = ["XXcss+makoXX"]
+ 
+     def __init__(self, **options):
+         super(MakoCssLexer, self).__init__(CssLexer, MakoLexer, **options)
+</pre><h3>Mutant 3321</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -131,7 +131,7 @@
+ 
+ class MakoCssLexer(DelegatingLexer):
+     name = "CSS+Mako"
+-    aliases = ["css+mako"]
++    aliases = None
+ 
+     def __init__(self, **options):
+         super(MakoCssLexer, self).__init__(CssLexer, MakoLexer, **options)
+</pre><h3>Mutant 3322</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -138,7 +138,7 @@
+ 
+ 
+ pygments_html_formatter = HtmlFormatter(
+-    cssclass="syntax-highlighted", linenos=True
++    cssclass="XXsyntax-highlightedXX", linenos=True
+ )
+ 
+ 
+</pre><h3>Mutant 3323</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -138,7 +138,7 @@
+ 
+ 
+ pygments_html_formatter = HtmlFormatter(
+-    cssclass="syntax-highlighted", linenos=True
++    cssclass="syntax-highlighted", linenos=False
+ )
+ 
+ 
+</pre><h3>Mutant 3324</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -137,9 +137,7 @@
+         super(MakoCssLexer, self).__init__(CssLexer, MakoLexer, **options)
+ 
+ 
+-pygments_html_formatter = HtmlFormatter(
+-    cssclass="syntax-highlighted", linenos=True
+-)
++pygments_html_formatter = None
+ 
+ 
+ def syntax_highlight(filename="", language=None):
+</pre><h3>Mutant 3325</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -142,7 +142,7 @@
+ )
+ 
+ 
+-def syntax_highlight(filename="", language=None):
++def syntax_highlight(filename="XXXX", language=None):
+     mako_lexer = MakoLexer()
+     if compat.py3k:
+         python_lexer = Python3Lexer()
+</pre><h3>Mutant 3326</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -143,7 +143,7 @@
+ 
+ 
+ def syntax_highlight(filename="", language=None):
+-    mako_lexer = MakoLexer()
++    mako_lexer = None
+     if compat.py3k:
+         python_lexer = Python3Lexer()
+     else:
+</pre><h3>Mutant 3327</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -145,7 +145,7 @@
+ def syntax_highlight(filename="", language=None):
+     mako_lexer = MakoLexer()
+     if compat.py3k:
+-        python_lexer = Python3Lexer()
++        python_lexer = None
+     else:
+         python_lexer = PythonLexer()
+     if filename.startswith("memory:") or language == "mako":
+</pre><h3>Mutant 3328</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -147,7 +147,7 @@
+     if compat.py3k:
+         python_lexer = Python3Lexer()
+     else:
+-        python_lexer = PythonLexer()
++        python_lexer = None
+     if filename.startswith("memory:") or language == "mako":
+         return lambda string: highlight(
+             string, mako_lexer, pygments_html_formatter
+</pre><h3>Mutant 3329</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -148,7 +148,7 @@
+         python_lexer = Python3Lexer()
+     else:
+         python_lexer = PythonLexer()
+-    if filename.startswith("memory:") or language == "mako":
++    if filename.startswith("XXmemory:XX") or language == "mako":
+         return lambda string: highlight(
+             string, mako_lexer, pygments_html_formatter
+         )
+</pre><h3>Mutant 3330</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -148,7 +148,7 @@
+         python_lexer = Python3Lexer()
+     else:
+         python_lexer = PythonLexer()
+-    if filename.startswith("memory:") or language == "mako":
++    if filename.startswith("memory:") or language != "mako":
+         return lambda string: highlight(
+             string, mako_lexer, pygments_html_formatter
+         )
+</pre><h3>Mutant 3331</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -148,7 +148,7 @@
+         python_lexer = Python3Lexer()
+     else:
+         python_lexer = PythonLexer()
+-    if filename.startswith("memory:") or language == "mako":
++    if filename.startswith("memory:") or language == "XXmakoXX":
+         return lambda string: highlight(
+             string, mako_lexer, pygments_html_formatter
+         )
+</pre><h3>Mutant 3332</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -148,7 +148,7 @@
+         python_lexer = Python3Lexer()
+     else:
+         python_lexer = PythonLexer()
+-    if filename.startswith("memory:") or language == "mako":
++    if filename.startswith("memory:") and language == "mako":
+         return lambda string: highlight(
+             string, mako_lexer, pygments_html_formatter
+         )
+</pre><h3>Mutant 3333</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -149,9 +149,7 @@
+     else:
+         python_lexer = PythonLexer()
+     if filename.startswith("memory:") or language == "mako":
+-        return lambda string: highlight(
+-            string, mako_lexer, pygments_html_formatter
+-        )
++        return lambda string: None
+     return lambda string: highlight(
+         string, python_lexer, pygments_html_formatter
+     )
+</pre><h3>Mutant 3334</h3><pre>--- mako/ext/pygmentplugin.py
++++ mako/ext/pygmentplugin.py
+@@ -152,7 +152,5 @@
+         return lambda string: highlight(
+             string, mako_lexer, pygments_html_formatter
+         )
+-    return lambda string: highlight(
+-        string, python_lexer, pygments_html_formatter
+-    )
++    return lambda string: None
+ 
+</pre></body></html>

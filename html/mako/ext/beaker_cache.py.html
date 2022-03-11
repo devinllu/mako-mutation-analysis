@@ -1,0 +1,484 @@
+<html><body><h1>mako/ext/beaker_cache.py</h1>Killed 1 out of 45 mutants<h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 3336</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -12,7 +12,7 @@
+ try:
+     from beaker import cache as beaker_cache
+ except:
+-    has_beaker = False
++    has_beaker = None
+ else:
+     has_beaker = True
+ 
+</pre><h3>Mutant 3337</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -14,7 +14,7 @@
+ except:
+     has_beaker = False
+ else:
+-    has_beaker = True
++    has_beaker = False
+ 
+ _beaker_cache = None
+ 
+</pre><h3>Mutant 3338</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -14,7 +14,7 @@
+ except:
+     has_beaker = False
+ else:
+-    has_beaker = True
++    has_beaker = None
+ 
+ _beaker_cache = None
+ 
+</pre><h3>Mutant 3339</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -16,7 +16,7 @@
+ else:
+     has_beaker = True
+ 
+-_beaker_cache = None
++_beaker_cache = ""
+ 
+ 
+ class BeakerCacheImpl(CacheImpl):
+</pre><h3>Mutant 3340</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -30,7 +30,7 @@
+     """
+ 
+     def __init__(self, cache):
+-        if not has_beaker:
++        if  has_beaker:
+             raise exceptions.RuntimeException(
+                 "Can't initialize Beaker plugin; Beaker is not installed."
+             )
+</pre><h3>Mutant 3341</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -32,7 +32,7 @@
+     def __init__(self, cache):
+         if not has_beaker:
+             raise exceptions.RuntimeException(
+-                "Can't initialize Beaker plugin; Beaker is not installed."
++                "XXCan't initialize Beaker plugin; Beaker is not installed.XX"
+             )
+         global _beaker_cache
+         if _beaker_cache is None:
+</pre><h3>Mutant 3342</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -35,7 +35,7 @@
+                 "Can't initialize Beaker plugin; Beaker is not installed."
+             )
+         global _beaker_cache
+-        if _beaker_cache is None:
++        if _beaker_cache is not None:
+             if "manager" in cache.template.cache_args:
+                 _beaker_cache = cache.template.cache_args["manager"]
+             else:
+</pre><h3>Mutant 3343</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -36,7 +36,7 @@
+             )
+         global _beaker_cache
+         if _beaker_cache is None:
+-            if "manager" in cache.template.cache_args:
++            if "XXmanagerXX" in cache.template.cache_args:
+                 _beaker_cache = cache.template.cache_args["manager"]
+             else:
+                 _beaker_cache = beaker_cache.CacheManager()
+</pre><h3>Mutant 3344</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -36,7 +36,7 @@
+             )
+         global _beaker_cache
+         if _beaker_cache is None:
+-            if "manager" in cache.template.cache_args:
++            if "manager" not in cache.template.cache_args:
+                 _beaker_cache = cache.template.cache_args["manager"]
+             else:
+                 _beaker_cache = beaker_cache.CacheManager()
+</pre><h3>Mutant 3345</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -37,7 +37,7 @@
+         global _beaker_cache
+         if _beaker_cache is None:
+             if "manager" in cache.template.cache_args:
+-                _beaker_cache = cache.template.cache_args["manager"]
++                _beaker_cache = cache.template.cache_args["XXmanagerXX"]
+             else:
+                 _beaker_cache = beaker_cache.CacheManager()
+         super(BeakerCacheImpl, self).__init__(cache)
+</pre><h3>Mutant 3346</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -37,7 +37,7 @@
+         global _beaker_cache
+         if _beaker_cache is None:
+             if "manager" in cache.template.cache_args:
+-                _beaker_cache = cache.template.cache_args["manager"]
++                _beaker_cache = None
+             else:
+                 _beaker_cache = beaker_cache.CacheManager()
+         super(BeakerCacheImpl, self).__init__(cache)
+</pre><h3>Mutant 3347</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -39,7 +39,7 @@
+             if "manager" in cache.template.cache_args:
+                 _beaker_cache = cache.template.cache_args["manager"]
+             else:
+-                _beaker_cache = beaker_cache.CacheManager()
++                _beaker_cache = None
+         super(BeakerCacheImpl, self).__init__(cache)
+ 
+     def _get_cache(self, **kw):
+</pre><h3>Mutant 3348</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -43,7 +43,7 @@
+         super(BeakerCacheImpl, self).__init__(cache)
+ 
+     def _get_cache(self, **kw):
+-        expiretime = kw.pop("timeout", None)
++        expiretime = kw.pop("XXtimeoutXX", None)
+         if "dir" in kw:
+             kw["data_dir"] = kw.pop("dir")
+         elif self.cache.template.module_directory:
+</pre><h3>Mutant 3349</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -43,7 +43,7 @@
+         super(BeakerCacheImpl, self).__init__(cache)
+ 
+     def _get_cache(self, **kw):
+-        expiretime = kw.pop("timeout", None)
++        expiretime = None
+         if "dir" in kw:
+             kw["data_dir"] = kw.pop("dir")
+         elif self.cache.template.module_directory:
+</pre><h3>Mutant 3350</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -44,7 +44,7 @@
+ 
+     def _get_cache(self, **kw):
+         expiretime = kw.pop("timeout", None)
+-        if "dir" in kw:
++        if "XXdirXX" in kw:
+             kw["data_dir"] = kw.pop("dir")
+         elif self.cache.template.module_directory:
+             kw["data_dir"] = self.cache.template.module_directory
+</pre><h3>Mutant 3351</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -44,7 +44,7 @@
+ 
+     def _get_cache(self, **kw):
+         expiretime = kw.pop("timeout", None)
+-        if "dir" in kw:
++        if "dir" not in kw:
+             kw["data_dir"] = kw.pop("dir")
+         elif self.cache.template.module_directory:
+             kw["data_dir"] = self.cache.template.module_directory
+</pre><h3>Mutant 3352</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -45,7 +45,7 @@
+     def _get_cache(self, **kw):
+         expiretime = kw.pop("timeout", None)
+         if "dir" in kw:
+-            kw["data_dir"] = kw.pop("dir")
++            kw["XXdata_dirXX"] = kw.pop("dir")
+         elif self.cache.template.module_directory:
+             kw["data_dir"] = self.cache.template.module_directory
+ 
+</pre><h3>Mutant 3353</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -45,7 +45,7 @@
+     def _get_cache(self, **kw):
+         expiretime = kw.pop("timeout", None)
+         if "dir" in kw:
+-            kw["data_dir"] = kw.pop("dir")
++            kw["data_dir"] = kw.pop("XXdirXX")
+         elif self.cache.template.module_directory:
+             kw["data_dir"] = self.cache.template.module_directory
+ 
+</pre><h3>Mutant 3354</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -45,7 +45,7 @@
+     def _get_cache(self, **kw):
+         expiretime = kw.pop("timeout", None)
+         if "dir" in kw:
+-            kw["data_dir"] = kw.pop("dir")
++            kw["data_dir"] = None
+         elif self.cache.template.module_directory:
+             kw["data_dir"] = self.cache.template.module_directory
+ 
+</pre><h3>Mutant 3355</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -47,7 +47,7 @@
+         if "dir" in kw:
+             kw["data_dir"] = kw.pop("dir")
+         elif self.cache.template.module_directory:
+-            kw["data_dir"] = self.cache.template.module_directory
++            kw["XXdata_dirXX"] = self.cache.template.module_directory
+ 
+         if "manager" in kw:
+             kw.pop("manager")
+</pre><h3>Mutant 3356</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -47,7 +47,7 @@
+         if "dir" in kw:
+             kw["data_dir"] = kw.pop("dir")
+         elif self.cache.template.module_directory:
+-            kw["data_dir"] = self.cache.template.module_directory
++            kw["data_dir"] = None
+ 
+         if "manager" in kw:
+             kw.pop("manager")
+</pre><h3>Mutant 3357</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -49,7 +49,7 @@
+         elif self.cache.template.module_directory:
+             kw["data_dir"] = self.cache.template.module_directory
+ 
+-        if "manager" in kw:
++        if "XXmanagerXX" in kw:
+             kw.pop("manager")
+ 
+         if kw.get("type") == "memcached":
+</pre><h3>Mutant 3358</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -49,7 +49,7 @@
+         elif self.cache.template.module_directory:
+             kw["data_dir"] = self.cache.template.module_directory
+ 
+-        if "manager" in kw:
++        if "manager" not in kw:
+             kw.pop("manager")
+ 
+         if kw.get("type") == "memcached":
+</pre><h3>Mutant 3359</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -50,7 +50,7 @@
+             kw["data_dir"] = self.cache.template.module_directory
+ 
+         if "manager" in kw:
+-            kw.pop("manager")
++            kw.pop("XXmanagerXX")
+ 
+         if kw.get("type") == "memcached":
+             kw["type"] = "ext:memcached"
+</pre><h3>Mutant 3360</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -52,7 +52,7 @@
+         if "manager" in kw:
+             kw.pop("manager")
+ 
+-        if kw.get("type") == "memcached":
++        if kw.get("XXtypeXX") == "memcached":
+             kw["type"] = "ext:memcached"
+ 
+         if "region" in kw:
+</pre><h3>Mutant 3361</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -52,7 +52,7 @@
+         if "manager" in kw:
+             kw.pop("manager")
+ 
+-        if kw.get("type") == "memcached":
++        if kw.get("type") != "memcached":
+             kw["type"] = "ext:memcached"
+ 
+         if "region" in kw:
+</pre><h3>Mutant 3362</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -52,7 +52,7 @@
+         if "manager" in kw:
+             kw.pop("manager")
+ 
+-        if kw.get("type") == "memcached":
++        if kw.get("type") == "XXmemcachedXX":
+             kw["type"] = "ext:memcached"
+ 
+         if "region" in kw:
+</pre><h3>Mutant 3363</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -53,7 +53,7 @@
+             kw.pop("manager")
+ 
+         if kw.get("type") == "memcached":
+-            kw["type"] = "ext:memcached"
++            kw["XXtypeXX"] = "ext:memcached"
+ 
+         if "region" in kw:
+             region = kw.pop("region")
+</pre><h3>Mutant 3364</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -53,7 +53,7 @@
+             kw.pop("manager")
+ 
+         if kw.get("type") == "memcached":
+-            kw["type"] = "ext:memcached"
++            kw["type"] = "XXext:memcachedXX"
+ 
+         if "region" in kw:
+             region = kw.pop("region")
+</pre><h3>Mutant 3365</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -53,7 +53,7 @@
+             kw.pop("manager")
+ 
+         if kw.get("type") == "memcached":
+-            kw["type"] = "ext:memcached"
++            kw["type"] = None
+ 
+         if "region" in kw:
+             region = kw.pop("region")
+</pre><h3>Mutant 3366</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -55,7 +55,7 @@
+         if kw.get("type") == "memcached":
+             kw["type"] = "ext:memcached"
+ 
+-        if "region" in kw:
++        if "XXregionXX" in kw:
+             region = kw.pop("region")
+             cache = _beaker_cache.get_cache_region(self.cache.id, region, **kw)
+         else:
+</pre><h3>Mutant 3367</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -55,7 +55,7 @@
+         if kw.get("type") == "memcached":
+             kw["type"] = "ext:memcached"
+ 
+-        if "region" in kw:
++        if "region" not in kw:
+             region = kw.pop("region")
+             cache = _beaker_cache.get_cache_region(self.cache.id, region, **kw)
+         else:
+</pre><h3>Mutant 3368</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -56,7 +56,7 @@
+             kw["type"] = "ext:memcached"
+ 
+         if "region" in kw:
+-            region = kw.pop("region")
++            region = kw.pop("XXregionXX")
+             cache = _beaker_cache.get_cache_region(self.cache.id, region, **kw)
+         else:
+             cache = _beaker_cache.get_cache(self.cache.id, **kw)
+</pre><h3>Mutant 3369</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -56,7 +56,7 @@
+             kw["type"] = "ext:memcached"
+ 
+         if "region" in kw:
+-            region = kw.pop("region")
++            region = None
+             cache = _beaker_cache.get_cache_region(self.cache.id, region, **kw)
+         else:
+             cache = _beaker_cache.get_cache(self.cache.id, **kw)
+</pre><h3>Mutant 3370</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -57,7 +57,7 @@
+ 
+         if "region" in kw:
+             region = kw.pop("region")
+-            cache = _beaker_cache.get_cache_region(self.cache.id, region, **kw)
++            cache = None
+         else:
+             cache = _beaker_cache.get_cache(self.cache.id, **kw)
+         cache_args = {"starttime": self.cache.starttime}
+</pre><h3>Mutant 3371</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -59,7 +59,7 @@
+             region = kw.pop("region")
+             cache = _beaker_cache.get_cache_region(self.cache.id, region, **kw)
+         else:
+-            cache = _beaker_cache.get_cache(self.cache.id, **kw)
++            cache = None
+         cache_args = {"starttime": self.cache.starttime}
+         if expiretime:
+             cache_args["expiretime"] = expiretime
+</pre><h3>Mutant 3372</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -60,7 +60,7 @@
+             cache = _beaker_cache.get_cache_region(self.cache.id, region, **kw)
+         else:
+             cache = _beaker_cache.get_cache(self.cache.id, **kw)
+-        cache_args = {"starttime": self.cache.starttime}
++        cache_args = {"XXstarttimeXX": self.cache.starttime}
+         if expiretime:
+             cache_args["expiretime"] = expiretime
+         return cache, cache_args
+</pre><h3>Mutant 3373</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -60,7 +60,7 @@
+             cache = _beaker_cache.get_cache_region(self.cache.id, region, **kw)
+         else:
+             cache = _beaker_cache.get_cache(self.cache.id, **kw)
+-        cache_args = {"starttime": self.cache.starttime}
++        cache_args = None
+         if expiretime:
+             cache_args["expiretime"] = expiretime
+         return cache, cache_args
+</pre><h3>Mutant 3374</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -62,7 +62,7 @@
+             cache = _beaker_cache.get_cache(self.cache.id, **kw)
+         cache_args = {"starttime": self.cache.starttime}
+         if expiretime:
+-            cache_args["expiretime"] = expiretime
++            cache_args["XXexpiretimeXX"] = expiretime
+         return cache, cache_args
+ 
+     def get_or_create(self, key, creation_function, **kw):
+</pre><h3>Mutant 3375</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -62,7 +62,7 @@
+             cache = _beaker_cache.get_cache(self.cache.id, **kw)
+         cache_args = {"starttime": self.cache.starttime}
+         if expiretime:
+-            cache_args["expiretime"] = expiretime
++            cache_args["expiretime"] = None
+         return cache, cache_args
+ 
+     def get_or_create(self, key, creation_function, **kw):
+</pre><h3>Mutant 3376</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -66,7 +66,7 @@
+         return cache, cache_args
+ 
+     def get_or_create(self, key, creation_function, **kw):
+-        cache, kw = self._get_cache(**kw)
++        cache, kw = None
+         return cache.get(key, createfunc=creation_function, **kw)
+ 
+     def put(self, key, value, **kw):
+</pre><h3>Mutant 3377</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -70,7 +70,7 @@
+         return cache.get(key, createfunc=creation_function, **kw)
+ 
+     def put(self, key, value, **kw):
+-        cache, kw = self._get_cache(**kw)
++        cache, kw = None
+         cache.put(key, value, **kw)
+ 
+     def get(self, key, **kw):
+</pre><h3>Mutant 3378</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -74,7 +74,7 @@
+         cache.put(key, value, **kw)
+ 
+     def get(self, key, **kw):
+-        cache, kw = self._get_cache(**kw)
++        cache, kw = None
+         return cache.get(key, **kw)
+ 
+     def invalidate(self, key, **kw):
+</pre><h3>Mutant 3379</h3><pre>--- mako/ext/beaker_cache.py
++++ mako/ext/beaker_cache.py
+@@ -78,6 +78,6 @@
+         return cache.get(key, **kw)
+ 
+     def invalidate(self, key, **kw):
+-        cache, kw = self._get_cache(**kw)
++        cache, kw = None
+         cache.remove_value(key, **kw)
+ 
+</pre></body></html>

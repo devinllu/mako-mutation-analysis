@@ -1,0 +1,865 @@
+<html><body><h1>mako/template.py</h1>Killed 149 out of 228 mutants<h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 2816</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -245,7 +245,7 @@
+         error_handler=None,
+         lookup=None,
+         output_encoding=None,
+-        encoding_errors="strict",
++        encoding_errors="XXstrictXX",
+         module_directory=None,
+         cache_args=None,
+         cache_impl="beaker",
+</pre><h3>Mutant 2817</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -248,7 +248,7 @@
+         encoding_errors="strict",
+         module_directory=None,
+         cache_args=None,
+-        cache_impl="beaker",
++        cache_impl="XXbeakerXX",
+         cache_enabled=True,
+         cache_type=None,
+         cache_dir=None,
+</pre><h3>Mutant 2827</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -272,7 +272,7 @@
+             self.module_id = re.sub(r"\W", "_", uri)
+             self.uri = uri
+         elif filename:
+-            self.module_id = re.sub(r"\W", "_", filename)
++            self.module_id = re.sub(r"XX\WXX", "_", filename)
+             drive, path = os.path.splitdrive(filename)
+             path = os.path.normpath(path).replace(os.path.sep, "/")
+             self.uri = path
+</pre><h3>Mutant 2828</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -272,7 +272,7 @@
+             self.module_id = re.sub(r"\W", "_", uri)
+             self.uri = uri
+         elif filename:
+-            self.module_id = re.sub(r"\W", "_", filename)
++            self.module_id = re.sub(r"\W", "XX_XX", filename)
+             drive, path = os.path.splitdrive(filename)
+             path = os.path.normpath(path).replace(os.path.sep, "/")
+             self.uri = path
+</pre><h3>Mutant 2848</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -291,7 +291,7 @@
+                 "of the root path." % self.uri
+             )
+ 
+-        self.input_encoding = input_encoding
++        self.input_encoding = None
+         self.output_encoding = output_encoding
+         self.encoding_errors = encoding_errors
+         self.disable_unicode = disable_unicode
+</pre><h3>Mutant 2851</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -294,7 +294,7 @@
+         self.input_encoding = input_encoding
+         self.output_encoding = output_encoding
+         self.encoding_errors = encoding_errors
+-        self.disable_unicode = disable_unicode
++        self.disable_unicode = None
+         self.bytestring_passthrough = bytestring_passthrough or disable_unicode
+         self.enable_loop = enable_loop
+         self.strict_undefined = strict_undefined
+</pre><h3>Mutant 2852</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -295,7 +295,7 @@
+         self.output_encoding = output_encoding
+         self.encoding_errors = encoding_errors
+         self.disable_unicode = disable_unicode
+-        self.bytestring_passthrough = bytestring_passthrough or disable_unicode
++        self.bytestring_passthrough = bytestring_passthrough and disable_unicode
+         self.enable_loop = enable_loop
+         self.strict_undefined = strict_undefined
+         self.module_writer = module_writer
+</pre><h3>Mutant 2853</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -295,7 +295,7 @@
+         self.output_encoding = output_encoding
+         self.encoding_errors = encoding_errors
+         self.disable_unicode = disable_unicode
+-        self.bytestring_passthrough = bytestring_passthrough or disable_unicode
++        self.bytestring_passthrough = None
+         self.enable_loop = enable_loop
+         self.strict_undefined = strict_undefined
+         self.module_writer = module_writer
+</pre><h3>Mutant 2858</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -302,7 +302,7 @@
+ 
+         if compat.py3k and disable_unicode:
+             raise exceptions.UnsupportedError(
+-                "Mako for Python 3 does not " "support disabling Unicode"
++                "XXMako for Python 3 does not XX" "support disabling Unicode"
+             )
+         elif output_encoding and disable_unicode:
+             raise exceptions.UnsupportedError(
+</pre><h3>Mutant 2859</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -302,7 +302,7 @@
+ 
+         if compat.py3k and disable_unicode:
+             raise exceptions.UnsupportedError(
+-                "Mako for Python 3 does not " "support disabling Unicode"
++                "Mako for Python 3 does not " "XXsupport disabling UnicodeXX"
+             )
+         elif output_encoding and disable_unicode:
+             raise exceptions.UnsupportedError(
+</pre><h3>Mutant 2861</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -306,7 +306,7 @@
+             )
+         elif output_encoding and disable_unicode:
+             raise exceptions.UnsupportedError(
+-                "output_encoding must be set to "
++                "XXoutput_encoding must be set to XX"
+                 "None when disable_unicode is used."
+             )
+         if default_filters is None:
+</pre><h3>Mutant 2862</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -307,7 +307,7 @@
+         elif output_encoding and disable_unicode:
+             raise exceptions.UnsupportedError(
+                 "output_encoding must be set to "
+-                "None when disable_unicode is used."
++                "XXNone when disable_unicode is used.XX"
+             )
+         if default_filters is None:
+             if compat.py3k or self.disable_unicode:
+</pre><h3>Mutant 2864</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -310,7 +310,7 @@
+                 "None when disable_unicode is used."
+             )
+         if default_filters is None:
+-            if compat.py3k or self.disable_unicode:
++            if compat.py3k and self.disable_unicode:
+                 self.default_filters = ["str"]
+             else:
+                 self.default_filters = ["unicode"]
+</pre><h3>Mutant 2867</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -313,7 +313,7 @@
+             if compat.py3k or self.disable_unicode:
+                 self.default_filters = ["str"]
+             else:
+-                self.default_filters = ["unicode"]
++                self.default_filters = ["XXunicodeXX"]
+         else:
+             self.default_filters = default_filters
+         self.buffer_filters = buffer_filters
+</pre><h3>Mutant 2868</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -313,7 +313,7 @@
+             if compat.py3k or self.disable_unicode:
+                 self.default_filters = ["str"]
+             else:
+-                self.default_filters = ["unicode"]
++                self.default_filters = None
+         else:
+             self.default_filters = default_filters
+         self.buffer_filters = buffer_filters
+</pre><h3>Mutant 2872</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -319,7 +319,7 @@
+         self.buffer_filters = buffer_filters
+ 
+         self.imports = imports
+-        self.future_imports = future_imports
++        self.future_imports = None
+         self.preprocessor = preprocessor
+ 
+         if lexer_cls is not None:
+</pre><h3>Mutant 2878</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -328,7 +328,7 @@
+         # if plain text, compile code in memory only
+         if text is not None:
+             (code, module) = _compile_text(self, text, filename)
+-            self._code = code
++            self._code = None
+             self._source = text
+             ModuleInfo(module, None, self, filename, code, text, uri)
+         elif filename is not None:
+</pre><h3>Mutant 2879</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -329,7 +329,7 @@
+         if text is not None:
+             (code, module) = _compile_text(self, text, filename)
+             self._code = code
+-            self._source = text
++            self._source = None
+             ModuleInfo(module, None, self, filename, code, text, uri)
+         elif filename is not None:
+             # if template filename and a module directory, load
+</pre><h3>Mutant 2889</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -347,7 +347,7 @@
+             module = self._compile_from_file(path, filename)
+         else:
+             raise exceptions.RuntimeException(
+-                "Template requires text or filename"
++                "XXTemplate requires text or filenameXX"
+             )
+ 
+         self.module = module
+</pre><h3>Mutant 2891</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -351,7 +351,7 @@
+             )
+ 
+         self.module = module
+-        self.filename = filename
++        self.filename = None
+         self.callable_ = self.module.render_body
+         self.format_exceptions = format_exceptions
+         self.error_handler = error_handler
+</pre><h3>Mutant 2897</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -358,7 +358,7 @@
+         self.include_error_handler = include_error_handler
+         self.lookup = lookup
+ 
+-        self.module_directory = module_directory
++        self.module_directory = None
+ 
+         self._setup_cache_args(
+             cache_impl,
+</pre><h3>Mutant 2904</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -394,7 +394,7 @@
+ 
+         # transfer deprecated cache_* args
+         if cache_type:
+-            self.cache_args["type"] = cache_type
++            self.cache_args["XXtypeXX"] = cache_type
+         if cache_dir:
+             self.cache_args["dir"] = cache_dir
+         if cache_url:
+</pre><h3>Mutant 2905</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -394,7 +394,7 @@
+ 
+         # transfer deprecated cache_* args
+         if cache_type:
+-            self.cache_args["type"] = cache_type
++            self.cache_args["type"] = None
+         if cache_dir:
+             self.cache_args["dir"] = cache_dir
+         if cache_url:
+</pre><h3>Mutant 2906</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -396,7 +396,7 @@
+         if cache_type:
+             self.cache_args["type"] = cache_type
+         if cache_dir:
+-            self.cache_args["dir"] = cache_dir
++            self.cache_args["XXdirXX"] = cache_dir
+         if cache_url:
+             self.cache_args["url"] = cache_url
+ 
+</pre><h3>Mutant 2907</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -396,7 +396,7 @@
+         if cache_type:
+             self.cache_args["type"] = cache_type
+         if cache_dir:
+-            self.cache_args["dir"] = cache_dir
++            self.cache_args["dir"] = None
+         if cache_url:
+             self.cache_args["url"] = cache_url
+ 
+</pre><h3>Mutant 2908</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -398,7 +398,7 @@
+         if cache_dir:
+             self.cache_args["dir"] = cache_dir
+         if cache_url:
+-            self.cache_args["url"] = cache_url
++            self.cache_args["XXurlXX"] = cache_url
+ 
+     def _compile_from_file(self, path, filename):
+         if path is not None:
+</pre><h3>Mutant 2909</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -398,7 +398,7 @@
+         if cache_dir:
+             self.cache_args["dir"] = cache_dir
+         if cache_url:
+-            self.cache_args["url"] = cache_url
++            self.cache_args["url"] = None
+ 
+     def _compile_from_file(self, path, filename):
+         if path is not None:
+</pre><h3>Mutant 2913</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -406,7 +406,7 @@
+             filemtime = os.stat(filename)[stat.ST_MTIME]
+             if (
+                 not os.path.exists(path)
+-                or os.stat(path)[stat.ST_MTIME] < filemtime
++                or os.stat(path)[stat.ST_MTIME] <= filemtime
+             ):
+                 data = util.read_file(filename)
+                 _compile_module_file(
+</pre><h3>Mutant 2918</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -414,7 +414,7 @@
+                 )
+             module = compat.load_module(self.module_id, path)
+             if module._magic_number != codegen.MAGIC_NUMBER:
+-                data = util.read_file(filename)
++                data = None
+                 _compile_module_file(
+                     self, data, filename, path, self.module_writer
+                 )
+</pre><h3>Mutant 2919</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -418,7 +418,7 @@
+                 _compile_module_file(
+                     self, data, filename, path, self.module_writer
+                 )
+-                module = compat.load_module(self.module_id, path)
++                module = None
+             ModuleInfo(module, path, self, filename, None, None, None)
+         else:
+             # template filename and no module directory, compile code
+</pre><h3>Mutant 2922</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -425,7 +425,7 @@
+             # in memory
+             data = util.read_file(filename)
+             code, module = _compile_text(self, data, filename)
+-            self._source = None
++            self._source = ""
+             self._code = code
+             ModuleInfo(module, None, self, filename, code, None, None)
+         return module
+</pre><h3>Mutant 2923</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -426,7 +426,7 @@
+             data = util.read_file(filename)
+             code, module = _compile_text(self, data, filename)
+             self._source = None
+-            self._code = code
++            self._code = None
+             ModuleInfo(module, None, self, filename, code, None, None)
+         return module
+ 
+</pre><h3>Mutant 2924</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -430,7 +430,6 @@
+             ModuleInfo(module, None, self, filename, code, None, None)
+         return module
+ 
+-    @property
+     def source(self):
+         """Return the template source code for this :class:`.Template`."""
+ 
+</pre><h3>Mutant 2927</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -446,7 +446,6 @@
+     def cache(self):
+         return cache.Cache(self)
+ 
+-    @property
+     def cache_dir(self):
+         return self.cache_args["dir"]
+ 
+</pre><h3>Mutant 2928</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -448,7 +448,7 @@
+ 
+     @property
+     def cache_dir(self):
+-        return self.cache_args["dir"]
++        return self.cache_args["XXdirXX"]
+ 
+     @property
+     def cache_url(self):
+</pre><h3>Mutant 2929</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -450,7 +450,6 @@
+     def cache_dir(self):
+         return self.cache_args["dir"]
+ 
+-    @property
+     def cache_url(self):
+         return self.cache_args["url"]
+ 
+</pre><h3>Mutant 2930</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -452,7 +452,7 @@
+ 
+     @property
+     def cache_url(self):
+-        return self.cache_args["url"]
++        return self.cache_args["XXurlXX"]
+ 
+     @property
+     def cache_type(self):
+</pre><h3>Mutant 2931</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -454,7 +454,6 @@
+     def cache_url(self):
+         return self.cache_args["url"]
+ 
+-    @property
+     def cache_type(self):
+         return self.cache_args["type"]
+ 
+</pre><h3>Mutant 2932</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -456,7 +456,7 @@
+ 
+     @property
+     def cache_type(self):
+-        return self.cache_args["type"]
++        return self.cache_args["XXtypeXX"]
+ 
+     def render(self, *args, **data):
+         """Render the output of this template as a string.
+</pre><h3>Mutant 2934</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -485,7 +485,7 @@
+         The data is written to the context's buffer.
+ 
+         """
+-        if getattr(context, "_with_template", None) is None:
++        if getattr(context, "XX_with_templateXX", None) is None:
+             context._set_with_template(self)
+         runtime._render_context(self, self.callable_, context, *args, **kwargs)
+ 
+</pre><h3>Mutant 2935</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -485,7 +485,7 @@
+         The data is written to the context's buffer.
+ 
+         """
+-        if getattr(context, "_with_template", None) is None:
++        if getattr(context, "_with_template", None) is not None:
+             context._set_with_template(self)
+         runtime._render_context(self, self.callable_, context, *args, **kwargs)
+ 
+</pre><h3>Mutant 2946</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -508,7 +508,6 @@
+     def _get_def_callable(self, name):
+         return getattr(self.module, "render_%s" % name)
+ 
+-    @property
+     def last_modified(self):
+         return self.module._modified_time
+ 
+</pre><h3>Mutant 2947</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -540,7 +540,7 @@
+         module_source=None,
+         template_source=None,
+         output_encoding=None,
+-        encoding_errors="strict",
++        encoding_errors="XXstrictXX",
+         disable_unicode=False,
+         bytestring_passthrough=False,
+         format_exceptions=False,
+</pre><h3>Mutant 2949</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -542,7 +542,7 @@
+         output_encoding=None,
+         encoding_errors="strict",
+         disable_unicode=False,
+-        bytestring_passthrough=False,
++        bytestring_passthrough=True,
+         format_exceptions=False,
+         error_handler=None,
+         lookup=None,
+</pre><h3>Mutant 2950</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -543,7 +543,7 @@
+         encoding_errors="strict",
+         disable_unicode=False,
+         bytestring_passthrough=False,
+-        format_exceptions=False,
++        format_exceptions=True,
+         error_handler=None,
+         lookup=None,
+         cache_args=None,
+</pre><h3>Mutant 2951</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -547,7 +547,7 @@
+         error_handler=None,
+         lookup=None,
+         cache_args=None,
+-        cache_impl="beaker",
++        cache_impl="XXbeakerXX",
+         cache_enabled=True,
+         cache_type=None,
+         cache_dir=None,
+</pre><h3>Mutant 2952</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -548,7 +548,7 @@
+         lookup=None,
+         cache_args=None,
+         cache_impl="beaker",
+-        cache_enabled=True,
++        cache_enabled=False,
+         cache_type=None,
+         cache_dir=None,
+         cache_url=None,
+</pre><h3>Mutant 2953</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -554,7 +554,7 @@
+         cache_url=None,
+         include_error_handler=None,
+     ):
+-        self.module_id = re.sub(r"\W", "_", module._template_uri)
++        self.module_id = re.sub(r"XX\WXX", "_", module._template_uri)
+         self.uri = module._template_uri
+         self.input_encoding = module._source_encoding
+         self.output_encoding = output_encoding
+</pre><h3>Mutant 2954</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -554,7 +554,7 @@
+         cache_url=None,
+         include_error_handler=None,
+     ):
+-        self.module_id = re.sub(r"\W", "_", module._template_uri)
++        self.module_id = re.sub(r"\W", "XX_XX", module._template_uri)
+         self.uri = module._template_uri
+         self.input_encoding = module._source_encoding
+         self.output_encoding = output_encoding
+</pre><h3>Mutant 2955</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -554,7 +554,7 @@
+         cache_url=None,
+         include_error_handler=None,
+     ):
+-        self.module_id = re.sub(r"\W", "_", module._template_uri)
++        self.module_id = None
+         self.uri = module._template_uri
+         self.input_encoding = module._source_encoding
+         self.output_encoding = output_encoding
+</pre><h3>Mutant 2956</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -555,7 +555,7 @@
+         include_error_handler=None,
+     ):
+         self.module_id = re.sub(r"\W", "_", module._template_uri)
+-        self.uri = module._template_uri
++        self.uri = None
+         self.input_encoding = module._source_encoding
+         self.output_encoding = output_encoding
+         self.encoding_errors = encoding_errors
+</pre><h3>Mutant 2957</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -556,7 +556,7 @@
+     ):
+         self.module_id = re.sub(r"\W", "_", module._template_uri)
+         self.uri = module._template_uri
+-        self.input_encoding = module._source_encoding
++        self.input_encoding = None
+         self.output_encoding = output_encoding
+         self.encoding_errors = encoding_errors
+         self.disable_unicode = disable_unicode
+</pre><h3>Mutant 2958</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -557,7 +557,7 @@
+         self.module_id = re.sub(r"\W", "_", module._template_uri)
+         self.uri = module._template_uri
+         self.input_encoding = module._source_encoding
+-        self.output_encoding = output_encoding
++        self.output_encoding = None
+         self.encoding_errors = encoding_errors
+         self.disable_unicode = disable_unicode
+         self.bytestring_passthrough = bytestring_passthrough or disable_unicode
+</pre><h3>Mutant 2959</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -558,7 +558,7 @@
+         self.uri = module._template_uri
+         self.input_encoding = module._source_encoding
+         self.output_encoding = output_encoding
+-        self.encoding_errors = encoding_errors
++        self.encoding_errors = None
+         self.disable_unicode = disable_unicode
+         self.bytestring_passthrough = bytestring_passthrough or disable_unicode
+         self.enable_loop = module._enable_loop
+</pre><h3>Mutant 2960</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -559,7 +559,7 @@
+         self.input_encoding = module._source_encoding
+         self.output_encoding = output_encoding
+         self.encoding_errors = encoding_errors
+-        self.disable_unicode = disable_unicode
++        self.disable_unicode = None
+         self.bytestring_passthrough = bytestring_passthrough or disable_unicode
+         self.enable_loop = module._enable_loop
+ 
+</pre><h3>Mutant 2961</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -560,7 +560,7 @@
+         self.output_encoding = output_encoding
+         self.encoding_errors = encoding_errors
+         self.disable_unicode = disable_unicode
+-        self.bytestring_passthrough = bytestring_passthrough or disable_unicode
++        self.bytestring_passthrough = bytestring_passthrough and disable_unicode
+         self.enable_loop = module._enable_loop
+ 
+         if compat.py3k and disable_unicode:
+</pre><h3>Mutant 2962</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -560,7 +560,7 @@
+         self.output_encoding = output_encoding
+         self.encoding_errors = encoding_errors
+         self.disable_unicode = disable_unicode
+-        self.bytestring_passthrough = bytestring_passthrough or disable_unicode
++        self.bytestring_passthrough = None
+         self.enable_loop = module._enable_loop
+ 
+         if compat.py3k and disable_unicode:
+</pre><h3>Mutant 2963</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -561,7 +561,7 @@
+         self.encoding_errors = encoding_errors
+         self.disable_unicode = disable_unicode
+         self.bytestring_passthrough = bytestring_passthrough or disable_unicode
+-        self.enable_loop = module._enable_loop
++        self.enable_loop = None
+ 
+         if compat.py3k and disable_unicode:
+             raise exceptions.UnsupportedError(
+</pre><h3>Mutant 2965</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -565,7 +565,7 @@
+ 
+         if compat.py3k and disable_unicode:
+             raise exceptions.UnsupportedError(
+-                "Mako for Python 3 does not " "support disabling Unicode"
++                "XXMako for Python 3 does not XX" "support disabling Unicode"
+             )
+         elif output_encoding and disable_unicode:
+             raise exceptions.UnsupportedError(
+</pre><h3>Mutant 2966</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -565,7 +565,7 @@
+ 
+         if compat.py3k and disable_unicode:
+             raise exceptions.UnsupportedError(
+-                "Mako for Python 3 does not " "support disabling Unicode"
++                "Mako for Python 3 does not " "XXsupport disabling UnicodeXX"
+             )
+         elif output_encoding and disable_unicode:
+             raise exceptions.UnsupportedError(
+</pre><h3>Mutant 2967</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -567,7 +567,7 @@
+             raise exceptions.UnsupportedError(
+                 "Mako for Python 3 does not " "support disabling Unicode"
+             )
+-        elif output_encoding and disable_unicode:
++        elif output_encoding or disable_unicode:
+             raise exceptions.UnsupportedError(
+                 "output_encoding must be set to "
+                 "None when disable_unicode is used."
+</pre><h3>Mutant 2968</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -569,7 +569,7 @@
+             )
+         elif output_encoding and disable_unicode:
+             raise exceptions.UnsupportedError(
+-                "output_encoding must be set to "
++                "XXoutput_encoding must be set to XX"
+                 "None when disable_unicode is used."
+             )
+ 
+</pre><h3>Mutant 2969</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -570,7 +570,7 @@
+         elif output_encoding and disable_unicode:
+             raise exceptions.UnsupportedError(
+                 "output_encoding must be set to "
+-                "None when disable_unicode is used."
++                "XXNone when disable_unicode is used.XX"
+             )
+ 
+         self.module = module
+</pre><h3>Mutant 2971</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -574,7 +574,7 @@
+             )
+ 
+         self.module = module
+-        self.filename = template_filename
++        self.filename = None
+         ModuleInfo(
+             module,
+             module_filename,
+</pre><h3>Mutant 2973</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -586,7 +586,7 @@
+         )
+ 
+         self.callable_ = self.module.render_body
+-        self.format_exceptions = format_exceptions
++        self.format_exceptions = None
+         self.error_handler = error_handler
+         self.include_error_handler = include_error_handler
+         self.lookup = lookup
+</pre><h3>Mutant 2974</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -587,7 +587,7 @@
+ 
+         self.callable_ = self.module.render_body
+         self.format_exceptions = format_exceptions
+-        self.error_handler = error_handler
++        self.error_handler = None
+         self.include_error_handler = include_error_handler
+         self.lookup = lookup
+         self._setup_cache_args(
+</pre><h3>Mutant 2975</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -588,7 +588,7 @@
+         self.callable_ = self.module.render_body
+         self.format_exceptions = format_exceptions
+         self.error_handler = error_handler
+-        self.include_error_handler = include_error_handler
++        self.include_error_handler = None
+         self.lookup = lookup
+         self._setup_cache_args(
+             cache_impl,
+</pre><h3>Mutant 2979</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -608,7 +608,7 @@
+     def __init__(self, parent, callable_):
+         self.parent = parent
+         self.callable_ = callable_
+-        self.output_encoding = parent.output_encoding
++        self.output_encoding = None
+         self.module = parent.module
+         self.encoding_errors = parent.encoding_errors
+         self.format_exceptions = parent.format_exceptions
+</pre><h3>Mutant 2980</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -609,7 +609,7 @@
+         self.parent = parent
+         self.callable_ = callable_
+         self.output_encoding = parent.output_encoding
+-        self.module = parent.module
++        self.module = None
+         self.encoding_errors = parent.encoding_errors
+         self.format_exceptions = parent.format_exceptions
+         self.error_handler = parent.error_handler
+</pre><h3>Mutant 2981</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -610,7 +610,7 @@
+         self.callable_ = callable_
+         self.output_encoding = parent.output_encoding
+         self.module = parent.module
+-        self.encoding_errors = parent.encoding_errors
++        self.encoding_errors = None
+         self.format_exceptions = parent.format_exceptions
+         self.error_handler = parent.error_handler
+         self.include_error_handler = parent.include_error_handler
+</pre><h3>Mutant 2982</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -611,7 +611,7 @@
+         self.output_encoding = parent.output_encoding
+         self.module = parent.module
+         self.encoding_errors = parent.encoding_errors
+-        self.format_exceptions = parent.format_exceptions
++        self.format_exceptions = None
+         self.error_handler = parent.error_handler
+         self.include_error_handler = parent.include_error_handler
+         self.enable_loop = parent.enable_loop
+</pre><h3>Mutant 2983</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -612,7 +612,7 @@
+         self.module = parent.module
+         self.encoding_errors = parent.encoding_errors
+         self.format_exceptions = parent.format_exceptions
+-        self.error_handler = parent.error_handler
++        self.error_handler = None
+         self.include_error_handler = parent.include_error_handler
+         self.enable_loop = parent.enable_loop
+         self.lookup = parent.lookup
+</pre><h3>Mutant 2984</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -613,7 +613,7 @@
+         self.encoding_errors = parent.encoding_errors
+         self.format_exceptions = parent.format_exceptions
+         self.error_handler = parent.error_handler
+-        self.include_error_handler = parent.include_error_handler
++        self.include_error_handler = None
+         self.enable_loop = parent.enable_loop
+         self.lookup = parent.lookup
+         self.bytestring_passthrough = parent.bytestring_passthrough
+</pre><h3>Mutant 2985</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -614,7 +614,7 @@
+         self.format_exceptions = parent.format_exceptions
+         self.error_handler = parent.error_handler
+         self.include_error_handler = parent.include_error_handler
+-        self.enable_loop = parent.enable_loop
++        self.enable_loop = None
+         self.lookup = parent.lookup
+         self.bytestring_passthrough = parent.bytestring_passthrough
+ 
+</pre><h3>Mutant 2987</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -616,7 +616,7 @@
+         self.include_error_handler = parent.include_error_handler
+         self.enable_loop = parent.enable_loop
+         self.lookup = parent.lookup
+-        self.bytestring_passthrough = parent.bytestring_passthrough
++        self.bytestring_passthrough = None
+ 
+     def get_def(self, name):
+         return self.parent.get_def(name)
+</pre><h3>Mutant 2998</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -653,7 +653,7 @@
+             self._modules[module_filename] = self
+ 
+     @classmethod
+-    def get_module_source_metadata(cls, module_source, full_line_map=False):
++    def get_module_source_metadata(cls, module_source, full_line_map=True):
+         source_map = re.search(
+             r"__M_BEGIN_METADATA(.+?)__M_END_METADATA", module_source, re.S
+         ).group(1)
+</pre><h3>Mutant 3030</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -736,7 +736,7 @@
+ 
+     cid = identifier
+     if not compat.py3k and isinstance(cid, compat.text_type):
+-        cid = cid.encode()
++        cid = None
+     module = types.ModuleType(cid)
+     code = compile(source, cid, "exec")
+ 
+</pre><h3>Mutant 3036</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -751,7 +751,7 @@
+     )
+ 
+     if isinstance(source, compat.text_type):
+-        source = source.encode(lexer.encoding or "ascii")
++        source = source.encode(lexer.encoding or "XXasciiXX")
+ 
+     if module_writer:
+         module_writer(source, outputpath)
+</pre><h3>Mutant 3041</h3><pre>--- mako/template.py
++++ mako/template.py
+@@ -770,7 +770,7 @@
+     if compat.py3k:
+         return _get_module_info(callable_.__globals__["__name__"])
+     else:
+-        return _get_module_info(callable_.func_globals["__name__"])
++        return _get_module_info(callable_.func_globals["XX__name__XX"])
+ 
+ 
+ def _get_module_info(filename):
+</pre></body></html>

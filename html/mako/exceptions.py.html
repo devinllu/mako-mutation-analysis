@@ -1,0 +1,473 @@
+<html><body><h1>mako/exceptions.py</h1>Killed 84 out of 127 mutants<h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 2352</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -25,7 +25,7 @@
+     if filename is None:
+         return " at line: %d char: %d" % (lineno, pos)
+     else:
+-        return " in file '%s' at line: %d char: %d" % (filename, lineno, pos)
++        return "XX in file '%s' at line: %d char: %dXX" % (filename, lineno, pos)
+ 
+ 
+ class CompileException(MakoException):
+</pre><h3>Mutant 2356</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -34,7 +34,7 @@
+             self, message + _format_filepos(lineno, pos, filename)
+         )
+         self.lineno = lineno
+-        self.pos = pos
++        self.pos = None
+         self.filename = filename
+         self.source = source
+ 
+</pre><h3>Mutant 2357</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -35,7 +35,7 @@
+         )
+         self.lineno = lineno
+         self.pos = pos
+-        self.filename = filename
++        self.filename = None
+         self.source = source
+ 
+ 
+</pre><h3>Mutant 2360</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -44,7 +44,7 @@
+         MakoException.__init__(
+             self, message + _format_filepos(lineno, pos, filename)
+         )
+-        self.lineno = lineno
++        self.lineno = None
+         self.pos = pos
+         self.filename = filename
+         self.source = source
+</pre><h3>Mutant 2361</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -45,7 +45,7 @@
+             self, message + _format_filepos(lineno, pos, filename)
+         )
+         self.lineno = lineno
+-        self.pos = pos
++        self.pos = None
+         self.filename = filename
+         self.source = source
+ 
+</pre><h3>Mutant 2362</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -46,7 +46,7 @@
+         )
+         self.lineno = lineno
+         self.pos = pos
+-        self.filename = filename
++        self.filename = None
+         self.source = source
+ 
+ 
+</pre><h3>Mutant 2363</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -47,7 +47,7 @@
+         self.lineno = lineno
+         self.pos = pos
+         self.filename = filename
+-        self.source = source
++        self.source = None
+ 
+ 
+ class UnsupportedError(MakoException):
+</pre><h3>Mutant 2365</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -78,7 +78,7 @@
+     """
+ 
+     def __init__(self, error=None, traceback=None):
+-        self.source, self.lineno = "", 0
++        self.source, self.lineno = "", 1
+ 
+         if error is None or traceback is None:
+             t, value, tback = sys.exc_info()
+</pre><h3>Mutant 2367</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -80,7 +80,7 @@
+     def __init__(self, error=None, traceback=None):
+         self.source, self.lineno = "", 0
+ 
+-        if error is None or traceback is None:
++        if error is not None or traceback is None:
+             t, value, tback = sys.exc_info()
+ 
+         if error is None:
+</pre><h3>Mutant 2380</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -95,7 +95,7 @@
+         if isinstance(self.error, (CompileException, SyntaxException)):
+             self.source = self.error.source
+             self.lineno = self.error.lineno
+-            self._has_source = True
++            self._has_source = False
+ 
+         self._init_message()
+ 
+</pre><h3>Mutant 2381</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -95,7 +95,7 @@
+         if isinstance(self.error, (CompileException, SyntaxException)):
+             self.source = self.error.source
+             self.lineno = self.error.lineno
+-            self._has_source = True
++            self._has_source = None
+ 
+         self._init_message()
+ 
+</pre><h3>Mutant 2384</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -109,7 +109,7 @@
+             self.message = compat.text_type(self.error)
+         except UnicodeError:
+             try:
+-                self.message = str(self.error)
++                self.message = None
+             except UnicodeEncodeError:
+                 # Fallback to args as neither unicode nor
+                 # str(Exception(u'\xe6')) work in Python < 2.6
+</pre><h3>Mutant 2385</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -113,7 +113,7 @@
+             except UnicodeEncodeError:
+                 # Fallback to args as neither unicode nor
+                 # str(Exception(u'\xe6')) work in Python < 2.6
+-                self.message = self.error.args[0]
++                self.message = self.error.args[1]
+         if not isinstance(self.message, compat.text_type):
+             self.message = compat.text_type(self.message, "ascii", "replace")
+ 
+</pre><h3>Mutant 2386</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -113,7 +113,7 @@
+             except UnicodeEncodeError:
+                 # Fallback to args as neither unicode nor
+                 # str(Exception(u'\xe6')) work in Python < 2.6
+-                self.message = self.error.args[0]
++                self.message = None
+         if not isinstance(self.message, compat.text_type):
+             self.message = compat.text_type(self.message, "ascii", "replace")
+ 
+</pre><h3>Mutant 2388</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -115,7 +115,7 @@
+                 # str(Exception(u'\xe6')) work in Python < 2.6
+                 self.message = self.error.args[0]
+         if not isinstance(self.message, compat.text_type):
+-            self.message = compat.text_type(self.message, "ascii", "replace")
++            self.message = compat.text_type(self.message, "XXasciiXX", "replace")
+ 
+     def _get_reformatted_records(self, records):
+         for rec in records:
+</pre><h3>Mutant 2389</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -115,7 +115,7 @@
+                 # str(Exception(u'\xe6')) work in Python < 2.6
+                 self.message = self.error.args[0]
+         if not isinstance(self.message, compat.text_type):
+-            self.message = compat.text_type(self.message, "ascii", "replace")
++            self.message = compat.text_type(self.message, "ascii", "XXreplaceXX")
+ 
+     def _get_reformatted_records(self, records):
+         for rec in records:
+</pre><h3>Mutant 2390</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -115,7 +115,7 @@
+                 # str(Exception(u'\xe6')) work in Python < 2.6
+                 self.message = self.error.args[0]
+         if not isinstance(self.message, compat.text_type):
+-            self.message = compat.text_type(self.message, "ascii", "replace")
++            self.message = None
+ 
+     def _get_reformatted_records(self, records):
+         for rec in records:
+</pre><h3>Mutant 2391</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -119,7 +119,7 @@
+ 
+     def _get_reformatted_records(self, records):
+         for rec in records:
+-            if rec[6] is not None:
++            if rec[7] is not None:
+                 yield (rec[4], rec[5], rec[2], rec[6])
+             else:
+                 yield tuple(rec[0:4])
+</pre><h3>Mutant 2405</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -156,7 +156,7 @@
+         rawrecords = traceback.extract_tb(trcback)
+         new_trcback = []
+         for filename, lineno, function, line in rawrecords:
+-            if not line:
++            if  line:
+                 line = ""
+             try:
+                 (line_map, template_lines, template_filename) = mods[filename]
+</pre><h3>Mutant 2406</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -157,7 +157,7 @@
+         new_trcback = []
+         for filename, lineno, function, line in rawrecords:
+             if not line:
+-                line = ""
++                line = "XXXX"
+             try:
+                 (line_map, template_lines, template_filename) = mods[filename]
+             except KeyError:
+</pre><h3>Mutant 2407</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -157,7 +157,7 @@
+         new_trcback = []
+         for filename, lineno, function, line in rawrecords:
+             if not line:
+-                line = ""
++                line = None
+             try:
+                 (line_map, template_lines, template_filename) = mods[filename]
+             except KeyError:
+</pre><h3>Mutant 2415</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -172,7 +172,7 @@
+                     # A normal .py file (not a Template)
+                     if not compat.py3k:
+                         try:
+-                            fp = open(filename, "rb")
++                            fp = open(filename, "XXrbXX")
+                             encoding = util.parse_encoding(fp)
+                             fp.close()
+                         except IOError:
+</pre><h3>Mutant 2416</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -172,7 +172,7 @@
+                     # A normal .py file (not a Template)
+                     if not compat.py3k:
+                         try:
+-                            fp = open(filename, "rb")
++                            fp = None
+                             encoding = util.parse_encoding(fp)
+                             fp.close()
+                         except IOError:
+</pre><h3>Mutant 2417</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -173,7 +173,7 @@
+                     if not compat.py3k:
+                         try:
+                             fp = open(filename, "rb")
+-                            encoding = util.parse_encoding(fp)
++                            encoding = None
+                             fp.close()
+                         except IOError:
+                             encoding = None
+</pre><h3>Mutant 2418</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -176,7 +176,7 @@
+                             encoding = util.parse_encoding(fp)
+                             fp.close()
+                         except IOError:
+-                            encoding = None
++                            encoding = ""
+                         if encoding:
+                             line = line.decode(encoding)
+                         else:
+</pre><h3>Mutant 2419</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -178,7 +178,7 @@
+                         except IOError:
+                             encoding = None
+                         if encoding:
+-                            line = line.decode(encoding)
++                            line = None
+                         else:
+                             line = line.decode("ascii", "replace")
+                     new_trcback.append(
+</pre><h3>Mutant 2420</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -180,7 +180,7 @@
+                         if encoding:
+                             line = line.decode(encoding)
+                         else:
+-                            line = line.decode("ascii", "replace")
++                            line = line.decode("XXasciiXX", "replace")
+                     new_trcback.append(
+                         (
+                             filename,
+</pre><h3>Mutant 2421</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -180,7 +180,7 @@
+                         if encoding:
+                             line = line.decode(encoding)
+                         else:
+-                            line = line.decode("ascii", "replace")
++                            line = line.decode("ascii", "XXreplaceXX")
+                     new_trcback.append(
+                         (
+                             filename,
+</pre><h3>Mutant 2422</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -180,7 +180,7 @@
+                         if encoding:
+                             line = line.decode(encoding)
+                         else:
+-                            line = line.decode("ascii", "replace")
++                            line = None
+                     new_trcback.append(
+                         (
+                             filename,
+</pre><h3>Mutant 2424</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -195,7 +195,7 @@
+                     )
+                     continue
+ 
+-                template_ln = 1
++                template_ln = 2
+ 
+                 mtm = mako.template.ModuleInfo
+                 source_map = mtm.get_module_source_metadata(
+</pre><h3>Mutant 2425</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -195,7 +195,7 @@
+                     )
+                     continue
+ 
+-                template_ln = 1
++                template_ln = None
+ 
+                 mtm = mako.template.ModuleInfo
+                 source_map = mtm.get_module_source_metadata(
+</pre><h3>Mutant 2441</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -213,7 +213,7 @@
+             if template_ln <= len(template_lines):
+                 template_line = template_lines[template_ln - 1]
+             else:
+-                template_line = None
++                template_line = ""
+             new_trcback.append(
+                 (
+                     filename,
+</pre><h3>Mutant 2445</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -227,7 +227,7 @@
+                 )
+             )
+         if not self.source:
+-            for l in range(len(new_trcback) - 1, 0, -1):
++            for l in range(len(new_trcback) - 1, 1, -1):
+                 if new_trcback[l][5]:
+                     self.source = new_trcback[l][7]
+                     self.lineno = new_trcback[l][5]
+</pre><h3>Mutant 2447</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -227,7 +227,7 @@
+                 )
+             )
+         if not self.source:
+-            for l in range(len(new_trcback) - 1, 0, -1):
++            for l in range(len(new_trcback) - 1, 0, -2):
+                 if new_trcback[l][5]:
+                     self.source = new_trcback[l][7]
+                     self.lineno = new_trcback[l][5]
+</pre><h3>Mutant 2448</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -228,7 +228,7 @@
+             )
+         if not self.source:
+             for l in range(len(new_trcback) - 1, 0, -1):
+-                if new_trcback[l][5]:
++                if new_trcback[l][6]:
+                     self.source = new_trcback[l][7]
+                     self.lineno = new_trcback[l][5]
+                     break
+</pre><h3>Mutant 2459</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -237,7 +237,7 @@
+                     try:
+                         # A normal .py file (not a Template)
+                         fp = open(new_trcback[-1][0], "rb")
+-                        encoding = util.parse_encoding(fp)
++                        encoding = None
+                         if compat.py3k and not encoding:
+                             encoding = "utf-8"
+                         fp.seek(0)
+</pre><h3>Mutant 2461</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -238,7 +238,7 @@
+                         # A normal .py file (not a Template)
+                         fp = open(new_trcback[-1][0], "rb")
+                         encoding = util.parse_encoding(fp)
+-                        if compat.py3k and not encoding:
++                        if compat.py3k or not encoding:
+                             encoding = "utf-8"
+                         fp.seek(0)
+                         self.source = fp.read()
+</pre><h3>Mutant 2464</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -240,7 +240,7 @@
+                         encoding = util.parse_encoding(fp)
+                         if compat.py3k and not encoding:
+                             encoding = "utf-8"
+-                        fp.seek(0)
++                        fp.seek(1)
+                         self.source = fp.read()
+                         fp.close()
+                         if encoding:
+</pre><h3>Mutant 2467</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -246,7 +246,7 @@
+                         if encoding:
+                             self.source = self.source.decode(encoding)
+                     except IOError:
+-                        self.source = ""
++                        self.source = "XXXX"
+                     self.lineno = new_trcback[-1][1]
+         return new_trcback
+ 
+</pre><h3>Mutant 2468</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -246,7 +246,7 @@
+                         if encoding:
+                             self.source = self.source.decode(encoding)
+                     except IOError:
+-                        self.source = ""
++                        self.source = None
+                     self.lineno = new_trcback[-1][1]
+         return new_trcback
+ 
+</pre><h3>Mutant 2473</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -289,7 +289,7 @@
+     global syntax_highlight, pygments_html_formatter
+     from mako.filters import html_escape
+ 
+-    pygments_html_formatter = None
++    pygments_html_formatter = ""
+ 
+     def syntax_highlight(filename="", language=None):
+         return html_escape
+</pre><h3>Mutant 2474</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -291,7 +291,7 @@
+ 
+     pygments_html_formatter = None
+ 
+-    def syntax_highlight(filename="", language=None):
++    def syntax_highlight(filename="XXXX", language=None):
+         return html_escape
+ 
+ 
+</pre><h3>Mutant 2475</h3><pre>--- mako/exceptions.py
++++ mako/exceptions.py
+@@ -426,6 +426,6 @@
+ % endif
+ """,
+         output_encoding=sys.getdefaultencoding(),
+-        encoding_errors="htmlentityreplace",
++        encoding_errors="XXhtmlentityreplaceXX",
+     )
+ 
+</pre></body></html>

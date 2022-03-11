@@ -1,0 +1,822 @@
+<html><body><h1>mako/filters.py</h1>Killed 21 out of 95 mutants<h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 2719</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -15,7 +15,7 @@
+ from mako.compat import unquote_plus
+ 
+ xml_escapes = {
+-    "&": "&amp;",
++    "XX&XX": "&amp;",
+     ">": "&gt;",
+     "<": "&lt;",
+     '"': "&#34;",  # also &quot; in html-only
+</pre><h3>Mutant 2720</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -15,7 +15,7 @@
+ from mako.compat import unquote_plus
+ 
+ xml_escapes = {
+-    "&": "&amp;",
++    "&": "XX&amp;XX",
+     ">": "&gt;",
+     "<": "&lt;",
+     '"': "&#34;",  # also &quot; in html-only
+</pre><h3>Mutant 2721</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -16,7 +16,7 @@
+ 
+ xml_escapes = {
+     "&": "&amp;",
+-    ">": "&gt;",
++    "XX>XX": "&gt;",
+     "<": "&lt;",
+     '"': "&#34;",  # also &quot; in html-only
+     "'": "&#39;",  # also &apos; in html-only
+</pre><h3>Mutant 2722</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -16,7 +16,7 @@
+ 
+ xml_escapes = {
+     "&": "&amp;",
+-    ">": "&gt;",
++    ">": "XX&gt;XX",
+     "<": "&lt;",
+     '"': "&#34;",  # also &quot; in html-only
+     "'": "&#39;",  # also &apos; in html-only
+</pre><h3>Mutant 2723</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -17,7 +17,7 @@
+ xml_escapes = {
+     "&": "&amp;",
+     ">": "&gt;",
+-    "<": "&lt;",
++    "XX<XX": "&lt;",
+     '"': "&#34;",  # also &quot; in html-only
+     "'": "&#39;",  # also &apos; in html-only
+ }
+</pre><h3>Mutant 2724</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -17,7 +17,7 @@
+ xml_escapes = {
+     "&": "&amp;",
+     ">": "&gt;",
+-    "<": "&lt;",
++    "<": "XX&lt;XX",
+     '"': "&#34;",  # also &quot; in html-only
+     "'": "&#39;",  # also &apos; in html-only
+ }
+</pre><h3>Mutant 2725</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -18,7 +18,7 @@
+     "&": "&amp;",
+     ">": "&gt;",
+     "<": "&lt;",
+-    '"': "&#34;",  # also &quot; in html-only
++    'XX"XX': "&#34;",  # also &quot; in html-only
+     "'": "&#39;",  # also &apos; in html-only
+ }
+ 
+</pre><h3>Mutant 2726</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -18,7 +18,7 @@
+     "&": "&amp;",
+     ">": "&gt;",
+     "<": "&lt;",
+-    '"': "&#34;",  # also &quot; in html-only
++    '"': "XX&#34;XX",  # also &quot; in html-only
+     "'": "&#39;",  # also &apos; in html-only
+ }
+ 
+</pre><h3>Mutant 2727</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -19,7 +19,7 @@
+     ">": "&gt;",
+     "<": "&lt;",
+     '"': "&#34;",  # also &quot; in html-only
+-    "'": "&#39;",  # also &apos; in html-only
++    "XX'XX": "&#39;",  # also &apos; in html-only
+ }
+ 
+ # XXX: &quot; is valid in HTML and XML
+</pre><h3>Mutant 2728</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -19,7 +19,7 @@
+     ">": "&gt;",
+     "<": "&lt;",
+     '"': "&#34;",  # also &quot; in html-only
+-    "'": "&#39;",  # also &apos; in html-only
++    "'": "XX&#39;XX",  # also &apos; in html-only
+ }
+ 
+ # XXX: &quot; is valid in HTML and XML
+</pre><h3>Mutant 2729</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -14,13 +14,7 @@
+ from mako.compat import quote_plus
+ from mako.compat import unquote_plus
+ 
+-xml_escapes = {
+-    "&": "&amp;",
+-    ">": "&gt;",
+-    "<": "&lt;",
+-    '"': "&#34;",  # also &quot; in html-only
+-    "'": "&#39;",  # also &apos; in html-only
+-}
++xml_escapes = None
+ 
+ # XXX: &quot; is valid in HTML and XML
+ #      &apos; is not valid HTML, but is valid XML
+</pre><h3>Mutant 2730</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -28,7 +28,7 @@
+ 
+ def legacy_html_escape(s):
+     """legacy HTML escape for non-unicode mode."""
+-    s = s.replace("&", "&amp;")
++    s = s.replace("XX&XX", "&amp;")
+     s = s.replace(">", "&gt;")
+     s = s.replace("<", "&lt;")
+     s = s.replace('"', "&#34;")
+</pre><h3>Mutant 2731</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -28,7 +28,7 @@
+ 
+ def legacy_html_escape(s):
+     """legacy HTML escape for non-unicode mode."""
+-    s = s.replace("&", "&amp;")
++    s = s.replace("&", "XX&amp;XX")
+     s = s.replace(">", "&gt;")
+     s = s.replace("<", "&lt;")
+     s = s.replace('"', "&#34;")
+</pre><h3>Mutant 2732</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -28,7 +28,7 @@
+ 
+ def legacy_html_escape(s):
+     """legacy HTML escape for non-unicode mode."""
+-    s = s.replace("&", "&amp;")
++    s = None
+     s = s.replace(">", "&gt;")
+     s = s.replace("<", "&lt;")
+     s = s.replace('"', "&#34;")
+</pre><h3>Mutant 2733</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -29,7 +29,7 @@
+ def legacy_html_escape(s):
+     """legacy HTML escape for non-unicode mode."""
+     s = s.replace("&", "&amp;")
+-    s = s.replace(">", "&gt;")
++    s = s.replace("XX>XX", "&gt;")
+     s = s.replace("<", "&lt;")
+     s = s.replace('"', "&#34;")
+     s = s.replace("'", "&#39;")
+</pre><h3>Mutant 2734</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -29,7 +29,7 @@
+ def legacy_html_escape(s):
+     """legacy HTML escape for non-unicode mode."""
+     s = s.replace("&", "&amp;")
+-    s = s.replace(">", "&gt;")
++    s = s.replace(">", "XX&gt;XX")
+     s = s.replace("<", "&lt;")
+     s = s.replace('"', "&#34;")
+     s = s.replace("'", "&#39;")
+</pre><h3>Mutant 2735</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -29,7 +29,7 @@
+ def legacy_html_escape(s):
+     """legacy HTML escape for non-unicode mode."""
+     s = s.replace("&", "&amp;")
+-    s = s.replace(">", "&gt;")
++    s = None
+     s = s.replace("<", "&lt;")
+     s = s.replace('"', "&#34;")
+     s = s.replace("'", "&#39;")
+</pre><h3>Mutant 2736</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -30,7 +30,7 @@
+     """legacy HTML escape for non-unicode mode."""
+     s = s.replace("&", "&amp;")
+     s = s.replace(">", "&gt;")
+-    s = s.replace("<", "&lt;")
++    s = s.replace("XX<XX", "&lt;")
+     s = s.replace('"', "&#34;")
+     s = s.replace("'", "&#39;")
+     return s
+</pre><h3>Mutant 2737</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -30,7 +30,7 @@
+     """legacy HTML escape for non-unicode mode."""
+     s = s.replace("&", "&amp;")
+     s = s.replace(">", "&gt;")
+-    s = s.replace("<", "&lt;")
++    s = s.replace("<", "XX&lt;XX")
+     s = s.replace('"', "&#34;")
+     s = s.replace("'", "&#39;")
+     return s
+</pre><h3>Mutant 2738</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -30,7 +30,7 @@
+     """legacy HTML escape for non-unicode mode."""
+     s = s.replace("&", "&amp;")
+     s = s.replace(">", "&gt;")
+-    s = s.replace("<", "&lt;")
++    s = None
+     s = s.replace('"', "&#34;")
+     s = s.replace("'", "&#39;")
+     return s
+</pre><h3>Mutant 2739</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -31,7 +31,7 @@
+     s = s.replace("&", "&amp;")
+     s = s.replace(">", "&gt;")
+     s = s.replace("<", "&lt;")
+-    s = s.replace('"', "&#34;")
++    s = s.replace('XX"XX', "&#34;")
+     s = s.replace("'", "&#39;")
+     return s
+ 
+</pre><h3>Mutant 2740</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -31,7 +31,7 @@
+     s = s.replace("&", "&amp;")
+     s = s.replace(">", "&gt;")
+     s = s.replace("<", "&lt;")
+-    s = s.replace('"', "&#34;")
++    s = s.replace('"', "XX&#34;XX")
+     s = s.replace("'", "&#39;")
+     return s
+ 
+</pre><h3>Mutant 2741</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -31,7 +31,7 @@
+     s = s.replace("&", "&amp;")
+     s = s.replace(">", "&gt;")
+     s = s.replace("<", "&lt;")
+-    s = s.replace('"', "&#34;")
++    s = None
+     s = s.replace("'", "&#39;")
+     return s
+ 
+</pre><h3>Mutant 2742</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -32,7 +32,7 @@
+     s = s.replace(">", "&gt;")
+     s = s.replace("<", "&lt;")
+     s = s.replace('"', "&#34;")
+-    s = s.replace("'", "&#39;")
++    s = s.replace("XX'XX", "&#39;")
+     return s
+ 
+ 
+</pre><h3>Mutant 2743</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -32,7 +32,7 @@
+     s = s.replace(">", "&gt;")
+     s = s.replace("<", "&lt;")
+     s = s.replace('"', "&#34;")
+-    s = s.replace("'", "&#39;")
++    s = s.replace("'", "XX&#39;XX")
+     return s
+ 
+ 
+</pre><h3>Mutant 2744</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -32,7 +32,7 @@
+     s = s.replace(">", "&gt;")
+     s = s.replace("<", "&lt;")
+     s = s.replace('"', "&#34;")
+-    s = s.replace("'", "&#39;")
++    s = None
+     return s
+ 
+ 
+</pre><h3>Mutant 2746</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -41,7 +41,7 @@
+ 
+     html_escape = markupsafe.escape
+ except ImportError:
+-    html_escape = legacy_html_escape
++    html_escape = None
+ 
+ 
+ def xml_escape(string):
+</pre><h3>Mutant 2747</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -45,7 +45,7 @@
+ 
+ 
+ def xml_escape(string):
+-    return re.sub(r'([&<"\'>])', lambda m: xml_escapes[m.group()], string)
++    return re.sub(r'XX([&<"\'>])XX', lambda m: xml_escapes[m.group()], string)
+ 
+ 
+ def url_escape(string):
+</pre><h3>Mutant 2748</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -45,7 +45,7 @@
+ 
+ 
+ def xml_escape(string):
+-    return re.sub(r'([&<"\'>])', lambda m: xml_escapes[m.group()], string)
++    return re.sub(r'([&<"\'>])', lambda m: None, string)
+ 
+ 
+ def url_escape(string):
+</pre><h3>Mutant 2751</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -60,7 +60,7 @@
+ 
+ 
+ def url_unescape(string):
+-    text = unquote_plus(string)
++    text = None
+     if not is_ascii_str(text):
+         text = text.decode("utf8")
+     return text
+</pre><h3>Mutant 2752</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -61,7 +61,7 @@
+ 
+ def url_unescape(string):
+     text = unquote_plus(string)
+-    if not is_ascii_str(text):
++    if  is_ascii_str(text):
+         text = text.decode("utf8")
+     return text
+ 
+</pre><h3>Mutant 2753</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -62,7 +62,7 @@
+ def url_unescape(string):
+     text = unquote_plus(string)
+     if not is_ascii_str(text):
+-        text = text.decode("utf8")
++        text = text.decode("XXutf8XX")
+     return text
+ 
+ 
+</pre><h3>Mutant 2754</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -62,7 +62,7 @@
+ def url_unescape(string):
+     text = unquote_plus(string)
+     if not is_ascii_str(text):
+-        text = text.decode("utf8")
++        text = None
+     return text
+ 
+ 
+</pre><h3>Mutant 2757</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -86,7 +86,7 @@
+ decode = Decode()
+ 
+ 
+-_ASCII_re = re.compile(r"\A[\x00-\x7f]*\Z")
++_ASCII_re = re.compile(r"XX\A[\x00-\x7f]*\ZXX")
+ 
+ 
+ def is_ascii_str(text):
+</pre><h3>Mutant 2758</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -86,7 +86,7 @@
+ decode = Decode()
+ 
+ 
+-_ASCII_re = re.compile(r"\A[\x00-\x7f]*\Z")
++_ASCII_re = None
+ 
+ 
+ def is_ascii_str(text):
+</pre><h3>Mutant 2759</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -90,7 +90,7 @@
+ 
+ 
+ def is_ascii_str(text):
+-    return isinstance(text, str) and _ASCII_re.match(text)
++    return isinstance(text, str) or _ASCII_re.match(text)
+ 
+ 
+ ################################################################
+</pre><h3>Mutant 2763</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -104,7 +104,7 @@
+                 for c, n in codepoint2name.items()
+             ]
+         )
+-        self.name2codepoint = name2codepoint
++        self.name2codepoint = None
+ 
+     def escape_entities(self, text):
+         """Replace characters with their character entity references.
+</pre><h3>Mutant 2764</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -114,7 +114,7 @@
+         return compat.text_type(text).translate(self.codepoint2entity)
+ 
+     def __escape(self, m):
+-        codepoint = ord(m.group())
++        codepoint = None
+         try:
+             return self.codepoint2entity[codepoint]
+         except (KeyError, IndexError):
+</pre><h3>Mutant 2765</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -118,7 +118,7 @@
+         try:
+             return self.codepoint2entity[codepoint]
+         except (KeyError, IndexError):
+-            return "&#x%X;" % codepoint
++            return "XX&#x%X;XX" % codepoint
+ 
+     __escapable = re.compile(r'["&<>]|[^\x00-\x7f]')
+ 
+</pre><h3>Mutant 2766</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -118,7 +118,7 @@
+         try:
+             return self.codepoint2entity[codepoint]
+         except (KeyError, IndexError):
+-            return "&#x%X;" % codepoint
++            return "&#x%X;" / codepoint
+ 
+     __escapable = re.compile(r'["&<>]|[^\x00-\x7f]')
+ 
+</pre><h3>Mutant 2767</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -120,7 +120,7 @@
+         except (KeyError, IndexError):
+             return "&#x%X;" % codepoint
+ 
+-    __escapable = re.compile(r'["&<>]|[^\x00-\x7f]')
++    __escapable = re.compile(r'XX["&<>]|[^\x00-\x7f]XX')
+ 
+     def escape(self, text):
+         """Replace characters with their character references.
+</pre><h3>Mutant 2768</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -120,7 +120,7 @@
+         except (KeyError, IndexError):
+             return "&#x%X;" % codepoint
+ 
+-    __escapable = re.compile(r'["&<>]|[^\x00-\x7f]')
++    __escapable = None
+ 
+     def escape(self, text):
+         """Replace characters with their character references.
+</pre><h3>Mutant 2769</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -133,7 +133,7 @@
+         """
+         return self.__escapable.sub(
+             self.__escape, compat.text_type(text)
+-        ).encode("ascii")
++        ).encode("XXasciiXX")
+ 
+     # XXX: This regexp will not match all valid XML entity names__.
+     # (It punts on details involving involving CombiningChars and Extenders.)
+</pre><h3>Mutant 2770</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -145,7 +145,7 @@
+                                           | \#x([\da-f]+)
+                                           | ( (?!\d) [:\w] [-.:\w]+ )
+                                           ) ;""",
+-        re.X | re.UNICODE,
++        re.X & re.UNICODE,
+     )
+ 
+     def __unescape(self, m):
+</pre><h3>Mutant 2771</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -139,14 +139,7 @@
+     # (It punts on details involving involving CombiningChars and Extenders.)
+     #
+     # .. __: http://www.w3.org/TR/2000/REC-xml-20001006#NT-EntityRef
+-    __characterrefs = re.compile(
+-        r"""& (?:
+-                                          \#(\d+)
+-                                          | \#x([\da-f]+)
+-                                          | ( (?!\d) [:\w] [-.:\w]+ )
+-                                          ) ;""",
+-        re.X | re.UNICODE,
+-    )
++    __characterrefs = None
+ 
+     def __unescape(self, m):
+         dval, hval, name = m.groups()
+</pre><h3>Mutant 2772</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -149,7 +149,7 @@
+     )
+ 
+     def __unescape(self, m):
+-        dval, hval, name = m.groups()
++        dval, hval, name = None
+         if dval:
+             codepoint = int(dval)
+         elif hval:
+</pre><h3>Mutant 2773</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -151,7 +151,7 @@
+     def __unescape(self, m):
+         dval, hval, name = m.groups()
+         if dval:
+-            codepoint = int(dval)
++            codepoint = None
+         elif hval:
+             codepoint = int(hval, 16)
+         else:
+</pre><h3>Mutant 2774</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -153,7 +153,7 @@
+         if dval:
+             codepoint = int(dval)
+         elif hval:
+-            codepoint = int(hval, 16)
++            codepoint = int(hval, 17)
+         else:
+             codepoint = self.name2codepoint.get(name, 0xFFFD)
+             # U+FFFD = "REPLACEMENT CHARACTER"
+</pre><h3>Mutant 2775</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -153,7 +153,7 @@
+         if dval:
+             codepoint = int(dval)
+         elif hval:
+-            codepoint = int(hval, 16)
++            codepoint = None
+         else:
+             codepoint = self.name2codepoint.get(name, 0xFFFD)
+             # U+FFFD = "REPLACEMENT CHARACTER"
+</pre><h3>Mutant 2776</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -155,7 +155,7 @@
+         elif hval:
+             codepoint = int(hval, 16)
+         else:
+-            codepoint = self.name2codepoint.get(name, 0xFFFD)
++            codepoint = self.name2codepoint.get(name, 65534)
+             # U+FFFD = "REPLACEMENT CHARACTER"
+         if codepoint < 128:
+             return chr(codepoint)
+</pre><h3>Mutant 2777</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -155,7 +155,7 @@
+         elif hval:
+             codepoint = int(hval, 16)
+         else:
+-            codepoint = self.name2codepoint.get(name, 0xFFFD)
++            codepoint = None
+             # U+FFFD = "REPLACEMENT CHARACTER"
+         if codepoint < 128:
+             return chr(codepoint)
+</pre><h3>Mutant 2778</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -157,7 +157,7 @@
+         else:
+             codepoint = self.name2codepoint.get(name, 0xFFFD)
+             # U+FFFD = "REPLACEMENT CHARACTER"
+-        if codepoint < 128:
++        if codepoint <= 128:
+             return chr(codepoint)
+         return chr(codepoint)
+ 
+</pre><h3>Mutant 2779</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -157,7 +157,7 @@
+         else:
+             codepoint = self.name2codepoint.get(name, 0xFFFD)
+             # U+FFFD = "REPLACEMENT CHARACTER"
+-        if codepoint < 128:
++        if codepoint < 129:
+             return chr(codepoint)
+         return chr(codepoint)
+ 
+</pre><h3>Mutant 2782</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -173,7 +173,7 @@
+ _html_entities_escaper = XMLEntityEscaper(codepoint2name, name2codepoint)
+ 
+ html_entities_escape = _html_entities_escaper.escape_entities
+-html_entities_unescape = _html_entities_escaper.unescape
++html_entities_unescape = None
+ 
+ 
+ def htmlentityreplace_errors(ex):
+</pre><h3>Mutant 2783</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -188,7 +188,7 @@
+     """
+     if isinstance(ex, UnicodeEncodeError):
+         # Handle encoding errors
+-        bad_text = ex.object[ex.start : ex.end]
++        bad_text = None
+         text = _html_entities_escaper.escape(bad_text)
+         return (compat.text_type(text), ex.end)
+     raise ex
+</pre><h3>Mutant 2784</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -189,7 +189,7 @@
+     if isinstance(ex, UnicodeEncodeError):
+         # Handle encoding errors
+         bad_text = ex.object[ex.start : ex.end]
+-        text = _html_entities_escaper.escape(bad_text)
++        text = None
+         return (compat.text_type(text), ex.end)
+     raise ex
+ 
+</pre><h3>Mutant 2785</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -194,7 +194,7 @@
+     raise ex
+ 
+ 
+-codecs.register_error("htmlentityreplace", htmlentityreplace_errors)
++codecs.register_error("XXhtmlentityreplaceXX", htmlentityreplace_errors)
+ 
+ 
+ # TODO: options to make this dynamic per-compilation will be added in a later
+</pre><h3>Mutant 2786</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -200,7 +200,7 @@
+ # TODO: options to make this dynamic per-compilation will be added in a later
+ # release
+ DEFAULT_ESCAPES = {
+-    "x": "filters.xml_escape",
++    "XXxXX": "filters.xml_escape",
+     "h": "filters.html_escape",
+     "u": "filters.url_escape",
+     "trim": "filters.trim",
+</pre><h3>Mutant 2787</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -200,7 +200,7 @@
+ # TODO: options to make this dynamic per-compilation will be added in a later
+ # release
+ DEFAULT_ESCAPES = {
+-    "x": "filters.xml_escape",
++    "x": "XXfilters.xml_escapeXX",
+     "h": "filters.html_escape",
+     "u": "filters.url_escape",
+     "trim": "filters.trim",
+</pre><h3>Mutant 2796</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -205,7 +205,7 @@
+     "u": "filters.url_escape",
+     "trim": "filters.trim",
+     "entity": "filters.html_entities_escape",
+-    "unicode": "unicode",
++    "XXunicodeXX": "unicode",
+     "decode": "decode",
+     "str": "str",
+     "n": "n",
+</pre><h3>Mutant 2797</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -205,7 +205,7 @@
+     "u": "filters.url_escape",
+     "trim": "filters.trim",
+     "entity": "filters.html_entities_escape",
+-    "unicode": "unicode",
++    "unicode": "XXunicodeXX",
+     "decode": "decode",
+     "str": "str",
+     "n": "n",
+</pre><h3>Mutant 2798</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -206,7 +206,7 @@
+     "trim": "filters.trim",
+     "entity": "filters.html_entities_escape",
+     "unicode": "unicode",
+-    "decode": "decode",
++    "XXdecodeXX": "decode",
+     "str": "str",
+     "n": "n",
+ }
+</pre><h3>Mutant 2799</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -206,7 +206,7 @@
+     "trim": "filters.trim",
+     "entity": "filters.html_entities_escape",
+     "unicode": "unicode",
+-    "decode": "decode",
++    "decode": "XXdecodeXX",
+     "str": "str",
+     "n": "n",
+ }
+</pre><h3>Mutant 2800</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -207,7 +207,7 @@
+     "entity": "filters.html_entities_escape",
+     "unicode": "unicode",
+     "decode": "decode",
+-    "str": "str",
++    "XXstrXX": "str",
+     "n": "n",
+ }
+ 
+</pre><h3>Mutant 2802</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -208,7 +208,7 @@
+     "unicode": "unicode",
+     "decode": "decode",
+     "str": "str",
+-    "n": "n",
++    "XXnXX": "n",
+ }
+ 
+ if compat.py3k:
+</pre><h3>Mutant 2803</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -208,7 +208,7 @@
+     "unicode": "unicode",
+     "decode": "decode",
+     "str": "str",
+-    "n": "n",
++    "n": "XXnXX",
+ }
+ 
+ if compat.py3k:
+</pre><h3>Mutant 2805</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -212,7 +212,7 @@
+ }
+ 
+ if compat.py3k:
+-    DEFAULT_ESCAPES.update({"unicode": "str"})
++    DEFAULT_ESCAPES.update({"XXunicodeXX": "str"})
+ 
+ NON_UNICODE_ESCAPES = DEFAULT_ESCAPES.copy()
+ NON_UNICODE_ESCAPES["h"] = "filters.legacy_html_escape"
+</pre><h3>Mutant 2806</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -212,7 +212,7 @@
+ }
+ 
+ if compat.py3k:
+-    DEFAULT_ESCAPES.update({"unicode": "str"})
++    DEFAULT_ESCAPES.update({"unicode": "XXstrXX"})
+ 
+ NON_UNICODE_ESCAPES = DEFAULT_ESCAPES.copy()
+ NON_UNICODE_ESCAPES["h"] = "filters.legacy_html_escape"
+</pre><h3>Mutant 2808</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -215,6 +215,6 @@
+     DEFAULT_ESCAPES.update({"unicode": "str"})
+ 
+ NON_UNICODE_ESCAPES = DEFAULT_ESCAPES.copy()
+-NON_UNICODE_ESCAPES["h"] = "filters.legacy_html_escape"
++NON_UNICODE_ESCAPES["XXhXX"] = "filters.legacy_html_escape"
+ NON_UNICODE_ESCAPES["u"] = "filters.legacy_url_escape"
+ 
+</pre><h3>Mutant 2809</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -215,6 +215,6 @@
+     DEFAULT_ESCAPES.update({"unicode": "str"})
+ 
+ NON_UNICODE_ESCAPES = DEFAULT_ESCAPES.copy()
+-NON_UNICODE_ESCAPES["h"] = "filters.legacy_html_escape"
++NON_UNICODE_ESCAPES["h"] = "XXfilters.legacy_html_escapeXX"
+ NON_UNICODE_ESCAPES["u"] = "filters.legacy_url_escape"
+ 
+</pre><h3>Mutant 2810</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -215,6 +215,6 @@
+     DEFAULT_ESCAPES.update({"unicode": "str"})
+ 
+ NON_UNICODE_ESCAPES = DEFAULT_ESCAPES.copy()
+-NON_UNICODE_ESCAPES["h"] = "filters.legacy_html_escape"
++NON_UNICODE_ESCAPES["h"] = None
+ NON_UNICODE_ESCAPES["u"] = "filters.legacy_url_escape"
+ 
+</pre><h3>Mutant 2811</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -216,5 +216,5 @@
+ 
+ NON_UNICODE_ESCAPES = DEFAULT_ESCAPES.copy()
+ NON_UNICODE_ESCAPES["h"] = "filters.legacy_html_escape"
+-NON_UNICODE_ESCAPES["u"] = "filters.legacy_url_escape"
+-
++NON_UNICODE_ESCAPES["XXuXX"] = "filters.legacy_url_escape"
++
+</pre><h3>Mutant 2812</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -216,5 +216,5 @@
+ 
+ NON_UNICODE_ESCAPES = DEFAULT_ESCAPES.copy()
+ NON_UNICODE_ESCAPES["h"] = "filters.legacy_html_escape"
+-NON_UNICODE_ESCAPES["u"] = "filters.legacy_url_escape"
+-
++NON_UNICODE_ESCAPES["u"] = "XXfilters.legacy_url_escapeXX"
++
+</pre><h3>Mutant 2813</h3><pre>--- mako/filters.py
++++ mako/filters.py
+@@ -216,5 +216,5 @@
+ 
+ NON_UNICODE_ESCAPES = DEFAULT_ESCAPES.copy()
+ NON_UNICODE_ESCAPES["h"] = "filters.legacy_html_escape"
+-NON_UNICODE_ESCAPES["u"] = "filters.legacy_url_escape"
+-
++NON_UNICODE_ESCAPES["u"] = None
++
+</pre></body></html>

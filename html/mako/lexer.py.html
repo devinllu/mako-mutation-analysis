@@ -1,0 +1,872 @@
+<html><body><h1>mako/lexer.py</h1>Killed 279 out of 358 mutants<h2>Timeouts</h2>Mutants that made the test suite take a lot longer so the tests were killed.<h3>Mutant 1944</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -88,7 +88,7 @@
+         if match:
+             (start, end) = match.span()
+             if end == start:
+-                self.match_position = end + 1
++                self.match_position = end - 1
+             else:
+                 self.match_position = end
+             self.matched_lineno = self.lineno
+</pre><h3>Mutant 1960</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -95,7 +95,7 @@
+             lines = re.findall(r"\n", self.text[mp : self.match_position])
+             cp = mp - 1
+             while cp >= 0 and cp < self.textlength and self.text[cp] != "\n":
+-                cp -= 1
++                cp = 1
+             self.matched_charpos = mp - cp
+             self.lineno += len(lines)
+             # print "MATCHED:", match.group(0), "LINE START:",
+</pre><h3>Mutant 2164</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -339,7 +339,7 @@
+                     return self.match_tag_end()
+             return True
+         else:
+-            return False
++            return True
+ 
+     def match_tag_end(self):
+         match = self.match(r"\</%[\t ]*(.+?)[\t ]*>")
+</pre><h3>Mutant 2181</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -359,7 +359,7 @@
+             self.tag.pop()
+             return True
+         else:
+-            return False
++            return True
+ 
+     def match_end(self):
+         match = self.match(r"\Z", re.S)
+</pre><h3>Mutant 2206</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -418,7 +418,7 @@
+             )
+             return True
+         else:
+-            return False
++            return True
+ 
+     def match_expression(self):
+         match = self.match(r"\${")
+</pre><h3>Mutant 2225</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -439,7 +439,7 @@
+             )
+             return True
+         else:
+-            return False
++            return True
+ 
+     def match_control_line(self):
+         match = self.match(
+</pre><h3>Mutant 2256</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -478,7 +478,7 @@
+                 self.append_node(parsetree.Comment, text)
+             return True
+         else:
+-            return False
++            return True
+ 
+     def match_comment(self):
+         """matches the multiline version of a comment"""
+</pre><h3>Mutant 2261</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -487,5 +487,5 @@
+             self.append_node(parsetree.Comment, match.group(1))
+             return True
+         else:
+-            return False
+-
++            return True
++
+</pre><h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 1907</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -27,7 +27,7 @@
+         preprocessor=None,
+     ):
+         self.text = text
+-        self.filename = filename
++        self.filename = None
+         self.template = parsetree.TemplateNode(self.filename)
+         self.matched_lineno = 1
+         self.matched_charpos = 0
+</pre><h3>Mutant 1909</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -29,7 +29,7 @@
+         self.text = text
+         self.filename = filename
+         self.template = parsetree.TemplateNode(self.filename)
+-        self.matched_lineno = 1
++        self.matched_lineno = 2
+         self.matched_charpos = 0
+         self.lineno = 1
+         self.match_position = 0
+</pre><h3>Mutant 1910</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -29,7 +29,7 @@
+         self.text = text
+         self.filename = filename
+         self.template = parsetree.TemplateNode(self.filename)
+-        self.matched_lineno = 1
++        self.matched_lineno = None
+         self.matched_charpos = 0
+         self.lineno = 1
+         self.match_position = 0
+</pre><h3>Mutant 1911</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -30,7 +30,7 @@
+         self.filename = filename
+         self.template = parsetree.TemplateNode(self.filename)
+         self.matched_lineno = 1
+-        self.matched_charpos = 0
++        self.matched_charpos = 1
+         self.lineno = 1
+         self.match_position = 0
+         self.tag = []
+</pre><h3>Mutant 1912</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -30,7 +30,7 @@
+         self.filename = filename
+         self.template = parsetree.TemplateNode(self.filename)
+         self.matched_lineno = 1
+-        self.matched_charpos = 0
++        self.matched_charpos = None
+         self.lineno = 1
+         self.match_position = 0
+         self.tag = []
+</pre><h3>Mutant 1920</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -36,7 +36,7 @@
+         self.tag = []
+         self.control_line = []
+         self.ternary_stack = []
+-        self.disable_unicode = disable_unicode
++        self.disable_unicode = None
+         self.encoding = input_encoding
+ 
+         if compat.py3k and disable_unicode:
+</pre><h3>Mutant 1921</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -37,7 +37,7 @@
+         self.control_line = []
+         self.ternary_stack = []
+         self.disable_unicode = disable_unicode
+-        self.encoding = input_encoding
++        self.encoding = None
+ 
+         if compat.py3k and disable_unicode:
+             raise exceptions.UnsupportedError(
+</pre><h3>Mutant 1923</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -41,7 +41,7 @@
+ 
+         if compat.py3k and disable_unicode:
+             raise exceptions.UnsupportedError(
+-                "Mako for Python 3 does not " "support disabling Unicode"
++                "XXMako for Python 3 does not XX" "support disabling Unicode"
+             )
+ 
+         if preprocessor is None:
+</pre><h3>Mutant 1924</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -41,7 +41,7 @@
+ 
+         if compat.py3k and disable_unicode:
+             raise exceptions.UnsupportedError(
+-                "Mako for Python 3 does not " "support disabling Unicode"
++                "Mako for Python 3 does not " "XXsupport disabling UnicodeXX"
+             )
+ 
+         if preprocessor is None:
+</pre><h3>Mutant 1928</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -46,7 +46,7 @@
+ 
+         if preprocessor is None:
+             self.preprocessor = []
+-        elif not hasattr(preprocessor, "__iter__"):
++        elif not hasattr(preprocessor, "XX__iter__XX"):
+             self.preprocessor = [preprocessor]
+         else:
+             self.preprocessor = preprocessor
+</pre><h3>Mutant 1930</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -49,7 +49,7 @@
+         elif not hasattr(preprocessor, "__iter__"):
+             self.preprocessor = [preprocessor]
+         else:
+-            self.preprocessor = preprocessor
++            self.preprocessor = None
+ 
+     @property
+     def exception_kwargs(self):
+</pre><h3>Mutant 1956</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -94,7 +94,7 @@
+             self.matched_lineno = self.lineno
+             lines = re.findall(r"\n", self.text[mp : self.match_position])
+             cp = mp - 1
+-            while cp >= 0 and cp < self.textlength and self.text[cp] != "\n":
++            while cp >= 0 and cp <= self.textlength and self.text[cp] != "\n":
+                 cp -= 1
+             self.matched_charpos = mp - cp
+             self.lineno += len(lines)
+</pre><h3>Mutant 1992</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -122,7 +122,7 @@
+             match = self.match(r"(%s)" % text_re)
+             if match and not (
+                 watch_nesting
+-                and (brace_level > 0 or paren_level > 0 or bracket_level > 0)
++                and (brace_level > 0 or paren_level > 0 or bracket_level > 1)
+             ):
+                 return (
+                     self.text[
+</pre><h3>Mutant 2011</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -135,7 +135,7 @@
+             if match:
+                 brace_level += match.group(1).count("{")
+                 brace_level -= match.group(1).count("}")
+-                paren_level += match.group(1).count("(")
++                paren_level = match.group(1).count("(")
+                 paren_level -= match.group(1).count(")")
+                 bracket_level += match.group(1).count("[")
+                 bracket_level -= match.group(1).count("]")
+</pre><h3>Mutant 2019</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -137,7 +137,7 @@
+                 brace_level -= match.group(1).count("}")
+                 paren_level += match.group(1).count("(")
+                 paren_level -= match.group(1).count(")")
+-                bracket_level += match.group(1).count("[")
++                bracket_level = match.group(1).count("[")
+                 bracket_level -= match.group(1).count("]")
+                 continue
+             raise exceptions.SyntaxException(
+</pre><h3>Mutant 2020</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -137,7 +137,7 @@
+                 brace_level -= match.group(1).count("}")
+                 paren_level += match.group(1).count("(")
+                 paren_level -= match.group(1).count(")")
+-                bracket_level += match.group(1).count("[")
++                bracket_level -= match.group(1).count("[")
+                 bracket_level -= match.group(1).count("]")
+                 continue
+             raise exceptions.SyntaxException(
+</pre><h3>Mutant 2022</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -137,7 +137,7 @@
+                 brace_level -= match.group(1).count("}")
+                 paren_level += match.group(1).count("(")
+                 paren_level -= match.group(1).count(")")
+-                bracket_level += match.group(1).count("[")
++                bracket_level += match.group(1).count("XX[XX")
+                 bracket_level -= match.group(1).count("]")
+                 continue
+             raise exceptions.SyntaxException(
+</pre><h3>Mutant 2030</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -141,7 +141,7 @@
+                 bracket_level -= match.group(1).count("]")
+                 continue
+             raise exceptions.SyntaxException(
+-                "Expected: %s" % ",".join(text), **self.exception_kwargs
++                "Expected: %s" % "XX,XX".join(text), **self.exception_kwargs
+             )
+ 
+     def append_node(self, nodecls, *args, **kwargs):
+</pre><h3>Mutant 2035</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -148,7 +148,7 @@
+         kwargs.setdefault("source", self.text)
+         kwargs.setdefault("lineno", self.matched_lineno)
+         kwargs.setdefault("pos", self.matched_charpos)
+-        kwargs["filename"] = self.filename
++        kwargs["filename"] = None
+         node = nodecls(*args, **kwargs)
+         if len(self.tag):
+             self.tag[-1].nodes.append(node)
+</pre><h3>Mutant 2056</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -178,7 +178,7 @@
+             elif node.is_primary:
+                 self.control_line.append(node)
+                 self.ternary_stack.append([])
+-            elif self.control_line and self.control_line[-1].is_ternary(
++            elif self.control_line or self.control_line[-1].is_ternary(
+                 node.keyword
+             ):
+                 self.ternary_stack[-1].append(node)
+</pre><h3>Mutant 2059</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -182,7 +182,7 @@
+                 node.keyword
+             ):
+                 self.ternary_stack[-1].append(node)
+-            elif self.control_line and not self.control_line[-1].is_ternary(
++            elif self.control_line and  self.control_line[-1].is_ternary(
+                 node.keyword
+             ):
+                 raise exceptions.SyntaxException(
+</pre><h3>Mutant 2060</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -182,7 +182,7 @@
+                 node.keyword
+             ):
+                 self.ternary_stack[-1].append(node)
+-            elif self.control_line and not self.control_line[-1].is_ternary(
++            elif self.control_line and not self.control_line[+1].is_ternary(
+                 node.keyword
+             ):
+                 raise exceptions.SyntaxException(
+</pre><h3>Mutant 2061</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -182,7 +182,7 @@
+                 node.keyword
+             ):
+                 self.ternary_stack[-1].append(node)
+-            elif self.control_line and not self.control_line[-1].is_ternary(
++            elif self.control_line and not self.control_line[-2].is_ternary(
+                 node.keyword
+             ):
+                 raise exceptions.SyntaxException(
+</pre><h3>Mutant 2062</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -182,7 +182,7 @@
+                 node.keyword
+             ):
+                 self.ternary_stack[-1].append(node)
+-            elif self.control_line and not self.control_line[-1].is_ternary(
++            elif self.control_line or not self.control_line[-1].is_ternary(
+                 node.keyword
+             ):
+                 raise exceptions.SyntaxException(
+</pre><h3>Mutant 2063</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -186,7 +186,7 @@
+                 node.keyword
+             ):
+                 raise exceptions.SyntaxException(
+-                    "Keyword '%s' not a legal ternary for keyword '%s'"
++                    "XXKeyword '%s' not a legal ternary for keyword '%s'XX"
+                     % (node.keyword, self.control_line[-1].keyword),
+                     **self.exception_kwargs
+                 )
+</pre><h3>Mutant 2064</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -187,7 +187,7 @@
+             ):
+                 raise exceptions.SyntaxException(
+                     "Keyword '%s' not a legal ternary for keyword '%s'"
+-                    % (node.keyword, self.control_line[-1].keyword),
++                    / (node.keyword, self.control_line[-1].keyword),
+                     **self.exception_kwargs
+                 )
+ 
+</pre><h3>Mutant 2065</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -187,7 +187,7 @@
+             ):
+                 raise exceptions.SyntaxException(
+                     "Keyword '%s' not a legal ternary for keyword '%s'"
+-                    % (node.keyword, self.control_line[-1].keyword),
++                    % (node.keyword, self.control_line[+1].keyword),
+                     **self.exception_kwargs
+                 )
+ 
+</pre><h3>Mutant 2066</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -187,7 +187,7 @@
+             ):
+                 raise exceptions.SyntaxException(
+                     "Keyword '%s' not a legal ternary for keyword '%s'"
+-                    % (node.keyword, self.control_line[-1].keyword),
++                    % (node.keyword, self.control_line[-2].keyword),
+                     **self.exception_kwargs
+                 )
+ 
+</pre><h3>Mutant 2069</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -200,7 +200,7 @@
+ 
+         """
+         if isinstance(text, compat.text_type):
+-            m = self._coding_re.match(text)
++            m = None
+             encoding = m and m.group(1) or known_encoding or "utf-8"
+             return encoding, text
+ 
+</pre><h3>Mutant 2073</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -201,7 +201,7 @@
+         """
+         if isinstance(text, compat.text_type):
+             m = self._coding_re.match(text)
+-            encoding = m and m.group(1) or known_encoding or "utf-8"
++            encoding = m and m.group(1) and known_encoding or "utf-8"
+             return encoding, text
+ 
+         if text.startswith(codecs.BOM_UTF8):
+</pre><h3>Mutant 2079</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -207,7 +207,7 @@
+         if text.startswith(codecs.BOM_UTF8):
+             text = text[len(codecs.BOM_UTF8) :]
+             parsed_encoding = "utf-8"
+-            m = self._coding_re.match(text.decode("utf-8", "ignore"))
++            m = self._coding_re.match(text.decode("utf-8", "XXignoreXX"))
+             if m is not None and m.group(1) != "utf-8":
+                 raise exceptions.CompileException(
+                     "Found utf-8 BOM in file, with conflicting "
+</pre><h3>Mutant 2086</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -210,7 +210,7 @@
+             m = self._coding_re.match(text.decode("utf-8", "ignore"))
+             if m is not None and m.group(1) != "utf-8":
+                 raise exceptions.CompileException(
+-                    "Found utf-8 BOM in file, with conflicting "
++                    "XXFound utf-8 BOM in file, with conflicting XX"
+                     "magic encoding comment of '%s'" % m.group(1),
+                     text.decode("utf-8", "ignore"),
+                     0,
+</pre><h3>Mutant 2087</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -211,7 +211,7 @@
+             if m is not None and m.group(1) != "utf-8":
+                 raise exceptions.CompileException(
+                     "Found utf-8 BOM in file, with conflicting "
+-                    "magic encoding comment of '%s'" % m.group(1),
++                    "XXmagic encoding comment of '%s'XX" % m.group(1),
+                     text.decode("utf-8", "ignore"),
+                     0,
+                     0,
+</pre><h3>Mutant 2091</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -212,7 +212,7 @@
+                 raise exceptions.CompileException(
+                     "Found utf-8 BOM in file, with conflicting "
+                     "magic encoding comment of '%s'" % m.group(1),
+-                    text.decode("utf-8", "ignore"),
++                    text.decode("utf-8", "XXignoreXX"),
+                     0,
+                     0,
+                     filename,
+</pre><h3>Mutant 2092</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -213,7 +213,7 @@
+                     "Found utf-8 BOM in file, with conflicting "
+                     "magic encoding comment of '%s'" % m.group(1),
+                     text.decode("utf-8", "ignore"),
+-                    0,
++                    1,
+                     0,
+                     filename,
+                 )
+</pre><h3>Mutant 2093</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -214,7 +214,7 @@
+                     "magic encoding comment of '%s'" % m.group(1),
+                     text.decode("utf-8", "ignore"),
+                     0,
+-                    0,
++                    1,
+                     filename,
+                 )
+         else:
+</pre><h3>Mutant 2095</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -218,7 +218,7 @@
+                     filename,
+                 )
+         else:
+-            m = self._coding_re.match(text.decode("utf-8", "ignore"))
++            m = self._coding_re.match(text.decode("utf-8", "XXignoreXX"))
+             if m:
+                 parsed_encoding = m.group(1)
+             else:
+</pre><h3>Mutant 2096</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -218,7 +218,7 @@
+                     filename,
+                 )
+         else:
+-            m = self._coding_re.match(text.decode("utf-8", "ignore"))
++            m = None
+             if m:
+                 parsed_encoding = m.group(1)
+             else:
+</pre><h3>Mutant 2103</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -229,7 +229,7 @@
+                 text = text.decode(parsed_encoding)
+             except UnicodeDecodeError:
+                 raise exceptions.CompileException(
+-                    "Unicode decode operation of encoding '%s' failed"
++                    "XXUnicode decode operation of encoding '%s' failedXX"
+                     % parsed_encoding,
+                     text.decode("utf-8", "ignore"),
+                     0,
+</pre><h3>Mutant 2104</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -230,7 +230,7 @@
+             except UnicodeDecodeError:
+                 raise exceptions.CompileException(
+                     "Unicode decode operation of encoding '%s' failed"
+-                    % parsed_encoding,
++                    / parsed_encoding,
+                     text.decode("utf-8", "ignore"),
+                     0,
+                     0,
+</pre><h3>Mutant 2105</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -231,7 +231,7 @@
+                 raise exceptions.CompileException(
+                     "Unicode decode operation of encoding '%s' failed"
+                     % parsed_encoding,
+-                    text.decode("utf-8", "ignore"),
++                    text.decode("XXutf-8XX", "ignore"),
+                     0,
+                     0,
+                     filename,
+</pre><h3>Mutant 2106</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -231,7 +231,7 @@
+                 raise exceptions.CompileException(
+                     "Unicode decode operation of encoding '%s' failed"
+                     % parsed_encoding,
+-                    text.decode("utf-8", "ignore"),
++                    text.decode("utf-8", "XXignoreXX"),
+                     0,
+                     0,
+                     filename,
+</pre><h3>Mutant 2107</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -232,7 +232,7 @@
+                     "Unicode decode operation of encoding '%s' failed"
+                     % parsed_encoding,
+                     text.decode("utf-8", "ignore"),
+-                    0,
++                    1,
+                     0,
+                     filename,
+                 )
+</pre><h3>Mutant 2108</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -233,7 +233,7 @@
+                     % parsed_encoding,
+                     text.decode("utf-8", "ignore"),
+                     0,
+-                    0,
++                    1,
+                     filename,
+                 )
+ 
+</pre><h3>Mutant 2115</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -255,7 +255,7 @@
+ 
+         while True:
+             if self.match_position > self.textlength:
+-                break
++                continue
+ 
+             if self.match_end():
+                 break
+</pre><h3>Mutant 2116</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -258,7 +258,7 @@
+                 break
+ 
+             if self.match_end():
+-                break
++                continue
+             if self.match_expression():
+                 continue
+             if self.match_control_line():
+</pre><h3>Mutant 2124</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -274,7 +274,7 @@
+             if self.match_text():
+                 continue
+ 
+-            if self.match_position > self.textlength:
++            if self.match_position >= self.textlength:
+                 break
+             raise exceptions.CompileException("assertion failed")
+ 
+</pre><h3>Mutant 2125</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -275,7 +275,7 @@
+                 continue
+ 
+             if self.match_position > self.textlength:
+-                break
++                continue
+             raise exceptions.CompileException("assertion failed")
+ 
+         if len(self.tag):
+</pre><h3>Mutant 2126</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -276,7 +276,7 @@
+ 
+             if self.match_position > self.textlength:
+                 break
+-            raise exceptions.CompileException("assertion failed")
++            raise exceptions.CompileException("XXassertion failedXX")
+ 
+         if len(self.tag):
+             raise exceptions.SyntaxException(
+</pre><h3>Mutant 2143</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -314,7 +314,7 @@
+ 
+         if match:
+             keyword, attr, isend = match.groups()
+-            self.keyword = keyword
++            self.keyword = None
+             attributes = {}
+             if attr:
+                 for att in re.findall(
+</pre><h3>Mutant 2158</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -332,7 +332,7 @@
+                     match = self.match(r"(.*?)(?=\</%text>)", re.S)
+                     if not match:
+                         raise exceptions.SyntaxException(
+-                            "Unclosed tag: <%%%s>" % self.tag[-1].keyword,
++                            "XXUnclosed tag: <%%%s>XX" % self.tag[-1].keyword,
+                             **self.exception_kwargs
+                         )
+                     self.append_node(parsetree.Text, match.group(1))
+</pre><h3>Mutant 2159</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -332,7 +332,7 @@
+                     match = self.match(r"(.*?)(?=\</%text>)", re.S)
+                     if not match:
+                         raise exceptions.SyntaxException(
+-                            "Unclosed tag: <%%%s>" % self.tag[-1].keyword,
++                            "Unclosed tag: <%%%s>" / self.tag[-1].keyword,
+                             **self.exception_kwargs
+                         )
+                     self.append_node(parsetree.Text, match.group(1))
+</pre><h3>Mutant 2160</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -332,7 +332,7 @@
+                     match = self.match(r"(.*?)(?=\</%text>)", re.S)
+                     if not match:
+                         raise exceptions.SyntaxException(
+-                            "Unclosed tag: <%%%s>" % self.tag[-1].keyword,
++                            "Unclosed tag: <%%%s>" % self.tag[+1].keyword,
+                             **self.exception_kwargs
+                         )
+                     self.append_node(parsetree.Text, match.group(1))
+</pre><h3>Mutant 2161</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -332,7 +332,7 @@
+                     match = self.match(r"(.*?)(?=\</%text>)", re.S)
+                     if not match:
+                         raise exceptions.SyntaxException(
+-                            "Unclosed tag: <%%%s>" % self.tag[-1].keyword,
++                            "Unclosed tag: <%%%s>" % self.tag[-2].keyword,
+                             **self.exception_kwargs
+                         )
+                     self.append_node(parsetree.Text, match.group(1))
+</pre><h3>Mutant 2168</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -346,7 +346,7 @@
+         if match:
+             if not len(self.tag):
+                 raise exceptions.SyntaxException(
+-                    "Closing tag without opening tag: </%%%s>"
++                    "XXClosing tag without opening tag: </%%%s>XX"
+                     % match.group(1),
+                     **self.exception_kwargs
+                 )
+</pre><h3>Mutant 2175</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -352,7 +352,7 @@
+                 )
+             elif self.tag[-1].keyword != match.group(1):
+                 raise exceptions.SyntaxException(
+-                    "Closing tag </%%%s> does not match tag: <%%%s>"
++                    "XXClosing tag </%%%s> does not match tag: <%%%s>XX"
+                     % (match.group(1), self.tag[-1].keyword),
+                     **self.exception_kwargs
+                 )
+</pre><h3>Mutant 2178</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -353,7 +353,7 @@
+             elif self.tag[-1].keyword != match.group(1):
+                 raise exceptions.SyntaxException(
+                     "Closing tag </%%%s> does not match tag: <%%%s>"
+-                    % (match.group(1), self.tag[-1].keyword),
++                    % (match.group(1), self.tag[+1].keyword),
+                     **self.exception_kwargs
+                 )
+             self.tag.pop()
+</pre><h3>Mutant 2179</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -353,7 +353,7 @@
+             elif self.tag[-1].keyword != match.group(1):
+                 raise exceptions.SyntaxException(
+                     "Closing tag </%%%s> does not match tag: <%%%s>"
+-                    % (match.group(1), self.tag[-1].keyword),
++                    % (match.group(1), self.tag[-2].keyword),
+                     **self.exception_kwargs
+                 )
+             self.tag.pop()
+</pre><h3>Mutant 2182</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -362,7 +362,7 @@
+             return False
+ 
+     def match_end(self):
+-        match = self.match(r"\Z", re.S)
++        match = self.match(r"XX\ZXX", re.S)
+         if match:
+             string = match.group()
+             if string:
+</pre><h3>Mutant 2183</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -362,7 +362,7 @@
+             return False
+ 
+     def match_end(self):
+-        match = self.match(r"\Z", re.S)
++        match = None
+         if match:
+             string = match.group()
+             if string:
+</pre><h3>Mutant 2184</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -364,7 +364,7 @@
+     def match_end(self):
+         match = self.match(r"\Z", re.S)
+         if match:
+-            string = match.group()
++            string = None
+             if string:
+                 return string
+             else:
+</pre><h3>Mutant 2192</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -399,7 +399,7 @@
+                 self.append_node(parsetree.Text, text)
+             return True
+         else:
+-            return False
++            return True
+ 
+     def match_python_block(self):
+         match = self.match(r"<%(!)?")
+</pre><h3>Mutant 2196</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -405,7 +405,7 @@
+         match = self.match(r"<%(!)?")
+         if match:
+             line, pos = self.matched_lineno, self.matched_charpos
+-            text, end = self.parse_until_text(False, r"%>")
++            text, end = self.parse_until_text(True, r"%>")
+             # the trailing newline helps
+             # compiler.parse() not complain about indentation
+             text = adjust_whitespace(text) + "\n"
+</pre><h3>Mutant 2216</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -426,7 +426,7 @@
+             line, pos = self.matched_lineno, self.matched_charpos
+             text, end = self.parse_until_text(True, r"\|", r"}")
+             if end == "|":
+-                escapes, end = self.parse_until_text(True, r"}")
++                escapes, end = self.parse_until_text(False, r"}")
+             else:
+                 escapes = ""
+             text = text.replace("\r\n", "\n")
+</pre><h3>Mutant 2224</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -437,7 +437,7 @@
+                 lineno=line,
+                 pos=pos,
+             )
+-            return True
++            return False
+         else:
+             return False
+ 
+</pre><h3>Mutant 2238</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -454,7 +454,7 @@
+                 m2 = re.match(r"(end)?(\w+)\s*(.*)", text)
+                 if not m2:
+                     raise exceptions.SyntaxException(
+-                        "Invalid control line: '%s'" % text,
++                        "XXInvalid control line: '%s'XX" % text,
+                         **self.exception_kwargs
+                     )
+                 isend, keyword = m2.group(1, 2)
+</pre><h3>Mutant 2239</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -454,7 +454,7 @@
+                 m2 = re.match(r"(end)?(\w+)\s*(.*)", text)
+                 if not m2:
+                     raise exceptions.SyntaxException(
+-                        "Invalid control line: '%s'" % text,
++                        "Invalid control line: '%s'" / text,
+                         **self.exception_kwargs
+                     )
+                 isend, keyword = m2.group(1, 2)
+</pre><h3>Mutant 2246</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -463,7 +463,7 @@
+                 if isend:
+                     if not len(self.control_line):
+                         raise exceptions.SyntaxException(
+-                            "No starting keyword '%s' for '%s'"
++                            "XXNo starting keyword '%s' for '%s'XX"
+                             % (keyword, text),
+                             **self.exception_kwargs
+                         )
+</pre><h3>Mutant 2247</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -464,7 +464,7 @@
+                     if not len(self.control_line):
+                         raise exceptions.SyntaxException(
+                             "No starting keyword '%s' for '%s'"
+-                            % (keyword, text),
++                            / (keyword, text),
+                             **self.exception_kwargs
+                         )
+                     elif self.control_line[-1].keyword != keyword:
+</pre><h3>Mutant 2253</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -470,7 +470,7 @@
+                     elif self.control_line[-1].keyword != keyword:
+                         raise exceptions.SyntaxException(
+                             "Keyword '%s' doesn't match keyword '%s'"
+-                            % (text, self.control_line[-1].keyword),
++                            % (text, self.control_line[+1].keyword),
+                             **self.exception_kwargs
+                         )
+                 self.append_node(parsetree.ControlLine, keyword, isend, text)
+</pre><h3>Mutant 2260</h3><pre>--- mako/lexer.py
++++ mako/lexer.py
+@@ -485,7 +485,7 @@
+         match = self.match(r"<%doc>(.*?)</%doc>", re.S)
+         if match:
+             self.append_node(parsetree.Comment, match.group(1))
+-            return True
+-        else:
+-            return False
+-
++            return False
++        else:
++            return False
++
+</pre></body></html>

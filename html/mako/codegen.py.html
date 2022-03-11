@@ -1,0 +1,1069 @@
+<html><body><h1>mako/codegen.py</h1>Killed 584 out of 681 mutants<h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 1223</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -20,7 +20,7 @@
+ from mako.pygen import PythonPrinter
+ 
+ 
+-MAGIC_NUMBER = 10
++MAGIC_NUMBER = 11
+ 
+ # names which are hardwired into the
+ # template and are not accessed via the
+</pre><h3>Mutant 1224</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -20,7 +20,7 @@
+ from mako.pygen import PythonPrinter
+ 
+ 
+-MAGIC_NUMBER = 10
++MAGIC_NUMBER = None
+ 
+ # names which are hardwired into the
+ # template and are not accessed via the
+</pre><h3>Mutant 1231</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -38,7 +38,7 @@
+     imports=None,
+     future_imports=None,
+     source_encoding=None,
+-    generate_magic_comment=True,
++    generate_magic_comment=False,
+     disable_unicode=False,
+     strict_undefined=False,
+     enable_loop=True,
+</pre><h3>Mutant 1232</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -39,7 +39,7 @@
+     future_imports=None,
+     source_encoding=None,
+     generate_magic_comment=True,
+-    disable_unicode=False,
++    disable_unicode=True,
+     strict_undefined=False,
+     enable_loop=True,
+     reserved_names=frozenset(),
+</pre><h3>Mutant 1233</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -40,7 +40,7 @@
+     source_encoding=None,
+     generate_magic_comment=True,
+     disable_unicode=False,
+-    strict_undefined=False,
++    strict_undefined=True,
+     enable_loop=True,
+     reserved_names=frozenset(),
+ ):
+</pre><h3>Mutant 1234</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -41,7 +41,7 @@
+     generate_magic_comment=True,
+     disable_unicode=False,
+     strict_undefined=False,
+-    enable_loop=True,
++    enable_loop=False,
+     reserved_names=frozenset(),
+ ):
+     """Generate module source code given a parsetree node,
+</pre><h3>Mutant 1237</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -52,7 +52,7 @@
+     # the generated source and we don't want to coerce the
+     # result into a unicode object, in "disable_unicode" mode
+     if not compat.py3k and isinstance(source_encoding, compat.text_type):
+-        source_encoding = source_encoding.encode(source_encoding)
++        source_encoding = None
+ 
+     buf = util.FastEncodingBuffer()
+ 
+</pre><h3>Mutant 1241</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -95,7 +95,7 @@
+         reserved_names,
+     ):
+         self.uri = uri
+-        self.filename = filename
++        self.filename = None
+         self.default_filters = default_filters
+         self.buffer_filters = buffer_filters
+         self.imports = imports
+</pre><h3>Mutant 1245</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -99,7 +99,7 @@
+         self.default_filters = default_filters
+         self.buffer_filters = buffer_filters
+         self.imports = imports
+-        self.future_imports = future_imports
++        self.future_imports = None
+         self.source_encoding = source_encoding
+         self.generate_magic_comment = generate_magic_comment
+         self.disable_unicode = disable_unicode
+</pre><h3>Mutant 1248</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -102,7 +102,7 @@
+         self.future_imports = future_imports
+         self.source_encoding = source_encoding
+         self.generate_magic_comment = generate_magic_comment
+-        self.disable_unicode = disable_unicode
++        self.disable_unicode = None
+         self.strict_undefined = strict_undefined
+         self.enable_loop = enable_loop
+         self.reserved_names = reserved_names
+</pre><h3>Mutant 1270</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -128,7 +128,7 @@
+             filtered = len(node.filter_args.args) > 0
+             buffered = eval(node.attributes.get("buffered", "False"))
+             cached = eval(node.attributes.get("cached", "False"))
+-            defs = None
++            defs = ""
+             pagetag = None
+             if node.is_block and not node.is_anonymous:
+                 args += ["**pageargs"]
+</pre><h3>Mutant 1271</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -129,7 +129,7 @@
+             buffered = eval(node.attributes.get("buffered", "False"))
+             cached = eval(node.attributes.get("cached", "False"))
+             defs = None
+-            pagetag = None
++            pagetag = ""
+             if node.is_block and not node.is_anonymous:
+                 args += ["**pageargs"]
+         else:
+</pre><h3>Mutant 1291</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -142,7 +142,7 @@
+                     args += ["**pageargs"]
+                 cached = eval(pagetag.attributes.get("cached", "False"))
+                 self.compiler.enable_loop = self.compiler.enable_loop or eval(
+-                    pagetag.attributes.get("enable_loop", "False")
++                    pagetag.attributes.get("enable_loop", "XXFalseXX")
+                 )
+             else:
+                 args = ["**pageargs"]
+</pre><h3>Mutant 1297</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -146,7 +146,7 @@
+                 )
+             else:
+                 args = ["**pageargs"]
+-                cached = False
++                cached = None
+             buffered = filtered = False
+         if args is None:
+             args = ["context"]
+</pre><h3>Mutant 1299</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -147,7 +147,7 @@
+             else:
+                 args = ["**pageargs"]
+                 cached = False
+-            buffered = filtered = False
++            buffered = filtered = None
+         if args is None:
+             args = ["context"]
+         else:
+</pre><h3>Mutant 1301</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -149,7 +149,7 @@
+                 cached = False
+             buffered = filtered = False
+         if args is None:
+-            args = ["context"]
++            args = ["XXcontextXX"]
+         else:
+             args = [a for a in ["context"] + args]
+ 
+</pre><h3>Mutant 1302</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -149,7 +149,7 @@
+                 cached = False
+             buffered = filtered = False
+         if args is None:
+-            args = ["context"]
++            args = None
+         else:
+             args = [a for a in ["context"] + args]
+ 
+</pre><h3>Mutant 1320</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -183,7 +183,7 @@
+ 
+     @property
+     def identifiers(self):
+-        return self.identifier_stack[-1]
++        return self.identifier_stack[+1]
+ 
+     def write_toplevel(self):
+         """Traverse a template structure for module-level directives and
+</pre><h3>Mutant 1339</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -235,7 +235,7 @@
+         if self.compiler.future_imports:
+             self.printer.writeline(
+                 "from __future__ import %s"
+-                % (", ".join(self.compiler.future_imports),)
++                % ("XX, XX".join(self.compiler.future_imports),)
+             )
+         self.printer.writeline("from mako import runtime, filters, cache")
+         self.printer.writeline("UNDEFINED = runtime.UNDEFINED")
+</pre><h3>Mutant 1359</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -255,7 +255,7 @@
+         if self.compiler.imports:
+             buf = ""
+             for imp in self.compiler.imports:
+-                buf += imp + "\n"
++                buf = imp + "\n"
+                 self.printer.writeline(imp)
+             impcode = ast.PythonCode(
+                 buf,
+</pre><h3>Mutant 1363</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -259,7 +259,7 @@
+                 self.printer.writeline(imp)
+             impcode = ast.PythonCode(
+                 buf,
+-                source="",
++                source="XXXX",
+                 lineno=0,
+                 pos=0,
+                 filename="template defined imports",
+</pre><h3>Mutant 1364</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -260,7 +260,7 @@
+             impcode = ast.PythonCode(
+                 buf,
+                 source="",
+-                lineno=0,
++                lineno=1,
+                 pos=0,
+                 filename="template defined imports",
+             )
+</pre><h3>Mutant 1365</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -261,7 +261,7 @@
+                 buf,
+                 source="",
+                 lineno=0,
+-                pos=0,
++                pos=1,
+                 filename="template defined imports",
+             )
+         else:
+</pre><h3>Mutant 1366</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -262,7 +262,7 @@
+                 source="",
+                 lineno=0,
+                 pos=0,
+-                filename="template defined imports",
++                filename="XXtemplate defined importsXX",
+             )
+         else:
+             impcode = None
+</pre><h3>Mutant 1368</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -265,7 +265,7 @@
+                 filename="template defined imports",
+             )
+         else:
+-            impcode = None
++            impcode = ""
+ 
+         main_identifiers = module_identifiers.branch(self.node)
+         mit = module_identifiers.topleveldefs
+</pre><h3>Mutant 1392</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -321,7 +321,7 @@
+         self.identifier_stack.append(
+             self.compiler.identifiers.branch(self.node)
+         )
+-        if (not self.in_def or self.node.is_block) and "**pageargs" in args:
++        if (not self.in_def or self.node.is_block) or "**pageargs" in args:
+             self.identifier_stack[-1].argument_declared.add("pageargs")
+ 
+         if not self.in_def and (
+</pre><h3>Mutant 1393</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -322,7 +322,7 @@
+             self.compiler.identifiers.branch(self.node)
+         )
+         if (not self.in_def or self.node.is_block) and "**pageargs" in args:
+-            self.identifier_stack[-1].argument_declared.add("pageargs")
++            self.identifier_stack[+1].argument_declared.add("pageargs")
+ 
+         if not self.in_def and (
+             len(self.identifiers.locally_assigned) > 0
+</pre><h3>Mutant 1397</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -325,7 +325,7 @@
+             self.identifier_stack[-1].argument_declared.add("pageargs")
+ 
+         if not self.in_def and (
+-            len(self.identifiers.locally_assigned) > 0
++            len(self.identifiers.locally_assigned) >= 0
+             or len(self.identifiers.argument_declared) > 0
+         ):
+             self.printer.writeline(
+</pre><h3>Mutant 1398</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -325,7 +325,7 @@
+             self.identifier_stack[-1].argument_declared.add("pageargs")
+ 
+         if not self.in_def and (
+-            len(self.identifiers.locally_assigned) > 0
++            len(self.identifiers.locally_assigned) > 1
+             or len(self.identifiers.argument_declared) > 0
+         ):
+             self.printer.writeline(
+</pre><h3>Mutant 1399</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -326,7 +326,7 @@
+ 
+         if not self.in_def and (
+             len(self.identifiers.locally_assigned) > 0
+-            or len(self.identifiers.argument_declared) > 0
++            or len(self.identifiers.argument_declared) >= 0
+         ):
+             self.printer.writeline(
+                 "__M_locals = __M_dict_builtin(%s)"
+</pre><h3>Mutant 1434</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -406,7 +406,7 @@
+                                 "<%namespace>",
+                                 **node.exception_kwargs
+                             )
+-                        self.write_inline_def(node, identifiers, nested=False)
++                        self.write_inline_def(node, identifiers, nested=True)
+                         export.append(node.funcname)
+ 
+                 vis = NSDefVisitor()
+</pre><h3>Mutant 1440</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -414,7 +414,7 @@
+                     n.accept_visitor(vis)
+                 self.printer.writeline("return [%s]" % (",".join(export)))
+                 self.printer.writeline(None)
+-                self.in_def = False
++                self.in_def = None
+                 callable_name = "make_namespace()"
+             else:
+                 callable_name = "None"
+</pre><h3>Mutant 1444</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -417,7 +417,7 @@
+                 self.in_def = False
+                 callable_name = "make_namespace()"
+             else:
+-                callable_name = "None"
++                callable_name = None
+ 
+             if "file" in node.parsed_attributes:
+                 self.printer.writeline(
+</pre><h3>Mutant 1453</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -427,7 +427,7 @@
+                     " calling_uri=_template_uri)"
+                     % (
+                         node.name,
+-                        node.parsed_attributes.get("file", "None"),
++                        node.parsed_attributes.get("file", "XXNoneXX"),
+                         callable_name,
+                     )
+                 )
+</pre><h3>Mutant 1462</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -440,7 +440,7 @@
+                     % (
+                         node.name,
+                         callable_name,
+-                        node.parsed_attributes.get("module", "None"),
++                        node.parsed_attributes.get("module", "XXNoneXX"),
+                     )
+                 )
+             else:
+</pre><h3>Mutant 1473</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -456,7 +456,7 @@
+             self.printer.writeline(
+                 "context.namespaces[(__name__, %s)] = ns" % repr(node.name)
+             )
+-            self.printer.write_blanks(1)
++            self.printer.write_blanks(2)
+         if not len(namespaces):
+             self.printer.writeline("pass")
+         self.printer.writeline(None)
+</pre><h3>Mutant 1476</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -461,7 +461,7 @@
+             self.printer.writeline("pass")
+         self.printer.writeline(None)
+ 
+-    def write_variable_declares(self, identifiers, toplevel=False, limit=None):
++    def write_variable_declares(self, identifiers, toplevel=True, limit=None):
+         """write variable declarations at the top of a function.
+ 
+         the variable declarations are in the form of callable
+</pre><h3>Mutant 1487</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -509,7 +509,7 @@
+             has_loop = "loop" in to_write
+             to_write.discard("loop")
+         else:
+-            has_loop = False
++            has_loop = True
+ 
+         # if a limiting set was sent, constraint to those items in that list
+         # (this is used for the caching decorator)
+</pre><h3>Mutant 1488</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -509,7 +509,7 @@
+             has_loop = "loop" in to_write
+             to_write.discard("loop")
+         else:
+-            has_loop = False
++            has_loop = None
+ 
+         # if a limiting set was sent, constraint to those items in that list
+         # (this is used for the caching decorator)
+</pre><h3>Mutant 1495</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -518,7 +518,7 @@
+ 
+         if toplevel and getattr(self.compiler, "has_ns_imports", False):
+             self.printer.writeline("_import_ns = {}")
+-            self.compiler.has_imports = True
++            self.compiler.has_imports = False
+             for ident, ns in self.compiler.namespaces.items():
+                 if "import" in ns.attributes:
+                     self.printer.writeline(
+</pre><h3>Mutant 1496</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -518,7 +518,7 @@
+ 
+         if toplevel and getattr(self.compiler, "has_ns_imports", False):
+             self.printer.writeline("_import_ns = {}")
+-            self.compiler.has_imports = True
++            self.compiler.has_imports = None
+             for ident, ns in self.compiler.namespaces.items():
+                 if "import" in ns.attributes:
+                     self.printer.writeline(
+</pre><h3>Mutant 1508</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -540,7 +540,7 @@
+                     if not comp.is_anonymous:
+                         self.write_def_decl(comp, identifiers)
+                     else:
+-                        self.write_inline_def(comp, identifiers, nested=True)
++                        self.write_inline_def(comp, identifiers, nested=False)
+                 else:
+                     if comp.is_root():
+                         self.write_def_decl(comp, identifiers)
+</pre><h3>Mutant 1509</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -545,7 +545,7 @@
+                     if comp.is_root():
+                         self.write_def_decl(comp, identifiers)
+                     else:
+-                        self.write_inline_def(comp, identifiers, nested=True)
++                        self.write_inline_def(comp, identifiers, nested=False)
+ 
+             elif ident in self.compiler.namespaces:
+                 self.printer.writeline(
+</pre><h3>Mutant 1542</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -594,7 +594,7 @@
+         nameargs = node.get_argument_expressions(as_call=True)
+ 
+         if not self.in_def and (
+-            len(self.identifiers.locally_assigned) > 0
++            len(self.identifiers.locally_assigned) >= 0
+             or len(self.identifiers.argument_declared) > 0
+         ):
+             nameargs.insert(0, "context._locals(__M_locals)")
+</pre><h3>Mutant 1543</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -594,7 +594,7 @@
+         nameargs = node.get_argument_expressions(as_call=True)
+ 
+         if not self.in_def and (
+-            len(self.identifiers.locally_assigned) > 0
++            len(self.identifiers.locally_assigned) > 1
+             or len(self.identifiers.argument_declared) > 0
+         ):
+             nameargs.insert(0, "context._locals(__M_locals)")
+</pre><h3>Mutant 1544</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -595,7 +595,7 @@
+ 
+         if not self.in_def and (
+             len(self.identifiers.locally_assigned) > 0
+-            or len(self.identifiers.argument_declared) > 0
++            or len(self.identifiers.argument_declared) >= 0
+         ):
+             nameargs.insert(0, "context._locals(__M_locals)")
+         else:
+</pre><h3>Mutant 1545</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -595,7 +595,7 @@
+ 
+         if not self.in_def and (
+             len(self.identifiers.locally_assigned) > 0
+-            or len(self.identifiers.argument_declared) > 0
++            or len(self.identifiers.argument_declared) > 1
+         ):
+             nameargs.insert(0, "context._locals(__M_locals)")
+         else:
+</pre><h3>Mutant 1550</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -599,7 +599,7 @@
+         ):
+             nameargs.insert(0, "context._locals(__M_locals)")
+         else:
+-            nameargs.insert(0, "context")
++            nameargs.insert(1, "context")
+         self.printer.writeline("def %s(%s):" % (funcname, ",".join(namedecls)))
+         self.printer.writeline(
+             "return render_%s(%s)" % (funcname, ",".join(nameargs))
+</pre><h3>Mutant 1565</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -619,7 +619,7 @@
+         self.printer.writeline(
+             "def %s(%s):" % (node.funcname, ",".join(namedecls))
+         )
+-        filtered = len(node.filter_args.args) > 0
++        filtered = len(node.filter_args.args) >= 0
+         buffered = eval(node.attributes.get("buffered", "False"))
+         cached = eval(node.attributes.get("cached", "False"))
+         self.printer.writelines(
+</pre><h3>Mutant 1568</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -620,7 +620,7 @@
+             "def %s(%s):" % (node.funcname, ",".join(namedecls))
+         )
+         filtered = len(node.filter_args.args) > 0
+-        buffered = eval(node.attributes.get("buffered", "False"))
++        buffered = eval(node.attributes.get("XXbufferedXX", "False"))
+         cached = eval(node.attributes.get("cached", "False"))
+         self.printer.writelines(
+             # push new frame, assign current frame to __M_caller
+</pre><h3>Mutant 1570</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -620,7 +620,7 @@
+             "def %s(%s):" % (node.funcname, ",".join(namedecls))
+         )
+         filtered = len(node.filter_args.args) > 0
+-        buffered = eval(node.attributes.get("buffered", "False"))
++        buffered = None
+         cached = eval(node.attributes.get("cached", "False"))
+         self.printer.writelines(
+             # push new frame, assign current frame to __M_caller
+</pre><h3>Mutant 1579</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -646,7 +646,7 @@
+                 node,
+                 node.funcname,
+                 namedecls,
+-                False,
++                True,
+                 identifiers,
+                 inline=True,
+                 toplevel=False,
+</pre><h3>Mutant 1580</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -648,7 +648,7 @@
+                 namedecls,
+                 False,
+                 identifiers,
+-                inline=True,
++                inline=False,
+                 toplevel=False,
+             )
+ 
+</pre><h3>Mutant 1581</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -649,7 +649,7 @@
+                 False,
+                 identifiers,
+                 inline=True,
+-                toplevel=False,
++                toplevel=True,
+             )
+ 
+     def write_def_finish(
+</pre><h3>Mutant 1591</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -671,7 +671,7 @@
+                 )
+ 
+         if buffered or filtered or cached:
+-            if buffered or cached:
++            if buffered and cached:
+                 # in a caching scenario, don't try to get a writer
+                 # from the context after popping; assume the caching
+                 # implemenation might be using a context with no
+</pre><h3>Mutant 1599</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -691,7 +691,7 @@
+             s = "__M_buf.getvalue()"
+             if filtered:
+                 s = self.create_filter_callable(
+-                    node.filter_args.args, s, False
++                    node.filter_args.args, s, True
+                 )
+             self.printer.writeline(None)
+             if buffered and not cached:
+</pre><h3>Mutant 1611</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -710,7 +710,7 @@
+         args,
+         buffered,
+         identifiers,
+-        inline=False,
++        inline=True,
+         toplevel=False,
+     ):
+         """write a post-function decorator to replace a rendering
+</pre><h3>Mutant 1612</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -711,7 +711,7 @@
+         buffered,
+         identifiers,
+         inline=False,
+-        toplevel=False,
++        toplevel=True,
+     ):
+         """write a post-function decorator to replace a rendering
+             callable with a cached version of itself."""
+</pre><h3>Mutant 1643</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -740,7 +740,7 @@
+ 
+         # form "arg1, arg2, arg3=arg3, arg4=arg4", etc.
+         pass_args = [
+-            "%s=%s" % ((a.split("=")[0],) * 2) if "=" in a else a for a in args
++            "%s=%s" % ((a.split("=")[0],) * 2) if "XX=XX" in a else a for a in args
+         ]
+ 
+         self.write_variable_declares(
+</pre><h3>Mutant 1650</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -756,7 +756,7 @@
+                 % (
+                     cachekey,
+                     name,
+-                    ",".join(pass_args),
++                    "XX,XX".join(pass_args),
+                     "".join(
+                         ["%s=%s, " % (k, v) for k, v in cache_args.items()]
+                     ),
+</pre><h3>Mutant 1651</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -757,7 +757,7 @@
+                     cachekey,
+                     name,
+                     ",".join(pass_args),
+-                    "".join(
++                    "XXXX".join(
+                         ["%s=%s, " % (k, v) for k, v in cache_args.items()]
+                     ),
+                     name,
+</pre><h3>Mutant 1652</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -758,7 +758,7 @@
+                     name,
+                     ",".join(pass_args),
+                     "".join(
+-                        ["%s=%s, " % (k, v) for k, v in cache_args.items()]
++                        ["XX%s=%s, XX" % (k, v) for k, v in cache_args.items()]
+                     ),
+                     name,
+                 )
+</pre><h3>Mutant 1653</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -758,7 +758,7 @@
+                     name,
+                     ",".join(pass_args),
+                     "".join(
+-                        ["%s=%s, " % (k, v) for k, v in cache_args.items()]
++                        ["%s=%s, " / (k, v) for k, v in cache_args.items()]
+                     ),
+                     name,
+                 )
+</pre><h3>Mutant 1655</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -765,7 +765,7 @@
+             )
+             # apply buffer_filters
+             s = self.create_filter_callable(
+-                self.compiler.buffer_filters, s, False
++                self.compiler.buffer_filters, s, True
+             )
+             self.printer.writelines("return " + s, None)
+         else:
+</pre><h3>Mutant 1683</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -809,7 +809,7 @@
+             # if filter given as a function, get just the identifier portion
+             if e == "n":
+                 continue
+-            m = re.match(r"(.+?)(\(.*\))", e)
++            m = re.match(r"XX(.+?)(\(.*\))XX", e)
+             if m:
+                 ident, fargs = m.group(1, 2)
+                 f = locate_encode(ident)
+</pre><h3>Mutant 1684</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -809,7 +809,7 @@
+             # if filter given as a function, get just the identifier portion
+             if e == "n":
+                 continue
+-            m = re.match(r"(.+?)(\(.*\))", e)
++            m = None
+             if m:
+                 ident, fargs = m.group(1, 2)
+                 f = locate_encode(ident)
+</pre><h3>Mutant 1698</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -823,8 +823,7 @@
+     def visitExpression(self, node):
+         self.printer.start_source(node.lineno)
+         if (
+-            len(node.escapes)
+-            or (
++            len(node.escapes) and (
+                 self.compiler.pagetag is not None
+                 and len(self.compiler.pagetag.filter_args.args)
+             )
+</pre><h3>Mutant 1711</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -847,7 +847,7 @@
+                 self.printer.writeline(None)
+         else:
+             self.printer.start_source(node.lineno)
+-            if self.compiler.enable_loop and node.keyword == "for":
++            if self.compiler.enable_loop or node.keyword == "for":
+                 text = mangle_mako_loop(node, self.printer)
+             else:
+                 text = node.text
+</pre><h3>Mutant 1722</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -876,7 +876,7 @@
+         self.printer.writeline("__M_writer(%s)" % repr(node.content))
+ 
+     def visitTextTag(self, node):
+-        filtered = len(node.filter_args.args) > 0
++        filtered = len(node.filter_args.args) >= 0
+         if filtered:
+             self.printer.writelines(
+                 "__M_writer = context._push_writer()", "try:"
+</pre><h3>Mutant 1732</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -889,7 +889,7 @@
+                 "__M_buf, __M_writer = context._pop_buffer_and_writer()",
+                 "__M_writer(%s)"
+                 % self.create_filter_callable(
+-                    node.filter_args.args, "__M_buf.getvalue()", False
++                    node.filter_args.args, "__M_buf.getvalue()", True
+                 ),
+                 None,
+             )
+</pre><h3>Mutant 1735</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -900,7 +900,7 @@
+                 node.text, starting_lineno=node.lineno
+             )
+ 
+-            if not self.in_def and len(self.identifiers.locally_assigned) > 0:
++            if not self.in_def and len(self.identifiers.locally_assigned) >= 0:
+                 # if we are the "template" def, fudge locally
+                 # declared/modified variables into the "__M_locals" dictionary,
+                 # which is used for def calls within the same template,
+</pre><h3>Mutant 1754</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -939,7 +939,7 @@
+         if node.is_anonymous:
+             self.printer.writeline("%s()" % node.funcname)
+         else:
+-            nameargs = node.get_argument_expressions(as_call=True)
++            nameargs = node.get_argument_expressions(as_call=False)
+             nameargs += ["**pageargs"]
+             self.printer.writeline(
+                 "if 'parent' not in context._data or "
+</pre><h3>Mutant 1769</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -959,7 +959,7 @@
+     def visitCallTag(self, node):
+         self.printer.writeline("def ccall(caller):")
+         export = ["body"]
+-        callable_identifiers = self.identifiers.branch(node, nested=True)
++        callable_identifiers = self.identifiers.branch(node, nested=False)
+         body_identifiers = callable_identifiers.branch(node, nested=False)
+         # we want the 'caller' passed to ccall to be used
+         # for the body() function, but for other non-body()
+</pre><h3>Mutant 1783</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -995,7 +995,7 @@
+ 
+         # TODO: figure out best way to specify
+         # buffering/nonbuffering (at call time would be better)
+-        buffered = False
++        buffered = None
+         if buffered:
+             self.printer.writelines("context._push_buffer()", "try:")
+         self.write_variable_declares(body_identifiers)
+</pre><h3>Mutant 1784</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -997,7 +997,7 @@
+         # buffering/nonbuffering (at call time would be better)
+         buffered = False
+         if buffered:
+-            self.printer.writelines("context._push_buffer()", "try:")
++            self.printer.writelines("XXcontext._push_buffer()XX", "try:")
+         self.write_variable_declares(body_identifiers)
+         self.identifier_stack.append(body_identifiers)
+ 
+</pre><h3>Mutant 1785</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -997,7 +997,7 @@
+         # buffering/nonbuffering (at call time would be better)
+         buffered = False
+         if buffered:
+-            self.printer.writelines("context._push_buffer()", "try:")
++            self.printer.writelines("context._push_buffer()", "XXtry:XX")
+         self.write_variable_declares(body_identifiers)
+         self.identifier_stack.append(body_identifiers)
+ 
+</pre><h3>Mutant 1798</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -1018,7 +1018,7 @@
+         self.printer.start_source(node.lineno)
+         self.printer.writelines(
+             "__M_writer(%s)"
+-            % self.create_filter_callable([], node.expression, True),
++            % self.create_filter_callable([], node.expression, False),
+             "finally:",
+             "context.caller_stack.nextcaller = None",
+             None,
+</pre><h3>Mutant 1801</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -1029,7 +1029,7 @@
+ 
+     """tracks the status of identifier names as template code is rendered."""
+ 
+-    def __init__(self, compiler, node=None, parent=None, nested=False):
++    def __init__(self, compiler, node=None, parent=None, nested=True):
+         if parent is not None:
+             # if we are the branch created in write_namespaces(),
+             # we don't share any context from the main body().
+</pre><h3>Mutant 1808</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -1056,7 +1056,7 @@
+                 # top level defs that are available
+                 self.topleveldefs = util.SetLikeDict(**parent.topleveldefs)
+         else:
+-            self.declared = set()
++            self.declared = None
+             self.topleveldefs = util.SetLikeDict()
+ 
+         self.compiler = compiler
+</pre><h3>Mutant 1819</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -1092,7 +1092,7 @@
+         )
+         if illegal_names:
+             raise exceptions.NameConflictError(
+-                "Reserved words declared in template: %s"
++                "XXReserved words declared in template: %sXX"
+                 % ", ".join(illegal_names)
+             )
+ 
+</pre><h3>Mutant 1821</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -1093,7 +1093,7 @@
+         if illegal_names:
+             raise exceptions.NameConflictError(
+                 "Reserved words declared in template: %s"
+-                % ", ".join(illegal_names)
++                % "XX, XX".join(illegal_names)
+             )
+ 
+     def branch(self, node, **kwargs):
+</pre><h3>Mutant 1823</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -1108,7 +1108,7 @@
+ 
+     def __repr__(self):
+         return (
+-            "Identifiers(declared=%r, locally_declared=%r, "
++            "XXIdentifiers(declared=%r, locally_declared=%r, XX"
+             "undeclared=%r, topleveldefs=%r, closuredefs=%r, "
+             "argumentdeclared=%r)"
+             % (
+</pre><h3>Mutant 1824</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -1109,7 +1109,7 @@
+     def __repr__(self):
+         return (
+             "Identifiers(declared=%r, locally_declared=%r, "
+-            "undeclared=%r, topleveldefs=%r, closuredefs=%r, "
++            "XXundeclared=%r, topleveldefs=%r, closuredefs=%r, XX"
+             "argumentdeclared=%r)"
+             % (
+                 list(self.declared),
+</pre><h3>Mutant 1825</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -1110,7 +1110,7 @@
+         return (
+             "Identifiers(declared=%r, locally_declared=%r, "
+             "undeclared=%r, topleveldefs=%r, closuredefs=%r, "
+-            "argumentdeclared=%r)"
++            "XXargumentdeclared=%r)XX"
+             % (
+                 list(self.declared),
+                 list(self.locally_declared),
+</pre><h3>Mutant 1826</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -1111,7 +1111,7 @@
+             "Identifiers(declared=%r, locally_declared=%r, "
+             "undeclared=%r, topleveldefs=%r, closuredefs=%r, "
+             "argumentdeclared=%r)"
+-            % (
++            / (
+                 list(self.declared),
+                 list(self.locally_declared),
+                 list(self.undeclared),
+</pre><h3>Mutant 1848</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -1180,7 +1180,7 @@
+             self._check_name_exists(self.closuredefs, node)
+ 
+         for ident in node.undeclared_identifiers():
+-            if ident != "context" and ident not in self.declared.union(
++            if ident != "XXcontextXX" and ident not in self.declared.union(
+                 self.locally_declared
+             ):
+                 self.undeclared.add(ident)
+</pre><h3>Mutant 1855</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -1198,7 +1198,7 @@
+ 
+             if isinstance(self.node, parsetree.DefTag):
+                 raise exceptions.CompileException(
+-                    "Named block '%s' not allowed inside of def '%s'"
++                    "XXNamed block '%s' not allowed inside of def '%s'XX"
+                     % (node.name, self.node.name),
+                     **node.exception_kwargs
+                 )
+</pre><h3>Mutant 1857</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -1206,7 +1206,7 @@
+                 self.node, (parsetree.CallTag, parsetree.CallNamespaceTag)
+             ):
+                 raise exceptions.CompileException(
+-                    "Named block '%s' not allowed inside of <%%call> tag"
++                    "XXNamed block '%s' not allowed inside of <%%call> tagXX"
+                     % (node.name,),
+                     **node.exception_kwargs
+                 )
+</pre><h3>Mutant 1860</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -1212,7 +1212,7 @@
+                 )
+ 
+         for ident in node.undeclared_identifiers():
+-            if ident != "context" and ident not in self.declared.union(
++            if ident != "XXcontextXX" and ident not in self.declared.union(
+                 self.locally_declared
+             ):
+                 self.undeclared.add(ident)
+</pre><h3>Mutant 1862</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -1212,7 +1212,7 @@
+                 )
+ 
+         for ident in node.undeclared_identifiers():
+-            if ident != "context" and ident not in self.declared.union(
++            if ident != "context" or ident not in self.declared.union(
+                 self.locally_declared
+             ):
+                 self.undeclared.add(ident)
+</pre><h3>Mutant 1866</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -1229,7 +1229,7 @@
+ 
+     def visitTextTag(self, node):
+         for ident in node.undeclared_identifiers():
+-            if ident != "context" and ident not in self.declared.union(
++            if ident != "XXcontextXX" and ident not in self.declared.union(
+                 self.locally_declared
+             ):
+                 self.undeclared.add(ident)
+</pre><h3>Mutant 1868</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -1229,7 +1229,7 @@
+ 
+     def visitTextTag(self, node):
+         for ident in node.undeclared_identifiers():
+-            if ident != "context" and ident not in self.declared.union(
++            if ident != "context" or ident not in self.declared.union(
+                 self.locally_declared
+             ):
+                 self.undeclared.add(ident)
+</pre><h3>Mutant 1872</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -1248,7 +1248,7 @@
+     def visitCallTag(self, node):
+         if node is self.node:
+             for ident in node.undeclared_identifiers():
+-                if ident != "context" and ident not in self.declared.union(
++                if ident != "context" and ident  in self.declared.union(
+                     self.locally_declared
+                 ):
+                     self.undeclared.add(ident)
+</pre><h3>Mutant 1895</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -1287,7 +1287,7 @@
+             )
+             text = "for %s in loop:" % match.group(1)
+         else:
+-            raise SyntaxError("Couldn't apply loop context: %s" % node.text)
++            raise SyntaxError("XXCouldn't apply loop context: %sXX" % node.text)
+     else:
+         text = node.text
+     return text
+</pre><h3>Mutant 1896</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -1287,7 +1287,7 @@
+             )
+             text = "for %s in loop:" % match.group(1)
+         else:
+-            raise SyntaxError("Couldn't apply loop context: %s" % node.text)
++            raise SyntaxError("Couldn't apply loop context: %s" / node.text)
+     else:
+         text = node.text
+     return text
+</pre><h3>Mutant 1899</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -1299,7 +1299,7 @@
+     identifiers."""
+ 
+     def __init__(self):
+-        self.detected = False
++        self.detected = None
+ 
+     def _loop_reference_detected(self, node):
+         if "loop" in node.undeclared_identifiers():
+</pre><h2>Suspicious</h2>Mutants that made the test suite take longer, but otherwise seemed ok<h3>Mutant 1256</h3><pre>--- mako/codegen.py
++++ mako/codegen.py
+@@ -120,7 +120,7 @@
+         self.compiler = compiler
+         self.node = node
+         self.identifier_stack = [None]
+-        self.in_def = isinstance(node, (parsetree.DefTag, parsetree.BlockTag))
++        self.in_def = None
+ 
+         if self.in_def:
+             name = "render_%s" % node.funcname
+</pre></body></html>

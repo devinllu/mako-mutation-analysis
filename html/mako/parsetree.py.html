@@ -1,0 +1,419 @@
+<html><body><h1>mako/parsetree.py</h1>Killed 246 out of 284 mutants<h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 4</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -23,7 +23,7 @@
+         self.source = source
+         self.lineno = lineno
+         self.pos = pos
+-        self.filename = filename
++        self.filename = None
+ 
+     @property
+     def exception_kwargs(self):
+</pre><h3>Mutant 14</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -51,7 +51,7 @@
+     """a 'container' node that stores the overall collection of nodes."""
+ 
+     def __init__(self, filename):
+-        super(TemplateNode, self).__init__("", 0, 0, filename)
++        super(TemplateNode, self).__init__("XXXX", 0, 0, filename)
+         self.nodes = []
+         self.page_attributes = {}
+ 
+</pre><h3>Mutant 16</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -51,7 +51,7 @@
+     """a 'container' node that stores the overall collection of nodes."""
+ 
+     def __init__(self, filename):
+-        super(TemplateNode, self).__init__("", 0, 0, filename)
++        super(TemplateNode, self).__init__("", 0, 1, filename)
+         self.nodes = []
+         self.page_attributes = {}
+ 
+</pre><h3>Mutant 22</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -77,7 +77,7 @@
+ 
+     """
+ 
+-    has_loop_context = False
++    has_loop_context = None
+ 
+     def __init__(self, keyword, isend, text, **kwargs):
+         super(ControlLine, self).__init__(**kwargs)
+</pre><h3>Mutant 45</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -109,7 +109,7 @@
+ 
+         return keyword in {
+             "if": set(["else", "elif"]),
+-            "try": set(["except", "finally"]),
++            "try": set(["except", "XXfinallyXX"]),
+             "for": set(["else"]),
+         }.get(self.keyword, [])
+ 
+</pre><h3>Mutant 46</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -110,7 +110,7 @@
+         return keyword in {
+             "if": set(["else", "elif"]),
+             "try": set(["except", "finally"]),
+-            "for": set(["else"]),
++            "XXforXX": set(["else"]),
+         }.get(self.keyword, [])
+ 
+     def __repr__(self):
+</pre><h3>Mutant 47</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -110,7 +110,7 @@
+         return keyword in {
+             "if": set(["else", "elif"]),
+             "try": set(["except", "finally"]),
+-            "for": set(["else"]),
++            "for": set(["XXelseXX"]),
+         }.get(self.keyword, [])
+ 
+     def __repr__(self):
+</pre><h3>Mutant 76</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -245,7 +245,7 @@
+             cls = _TagMeta._classmap[keyword]
+         except KeyError:
+             raise exceptions.CompileException(
+-                "No such tag: '%s'" % keyword,
++                "XXNo such tag: '%s'XX" % keyword,
+                 source=kwargs["source"],
+                 lineno=kwargs["lineno"],
+                 pos=kwargs["pos"],
+</pre><h3>Mutant 82</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -267,7 +267,7 @@
+ 
+     """
+ 
+-    __keyword__ = None
++    __keyword__ = ""
+ 
+     def __init__(
+         self,
+</pre><h3>Mutant 87</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -304,7 +304,7 @@
+         missing = [r for r in required if r not in self.parsed_attributes]
+         if len(missing):
+             raise exceptions.CompileException(
+-                "Missing attribute(s): %s"
++                "XXMissing attribute(s): %sXX"
+                 % ",".join([repr(m) for m in missing]),
+                 **self.exception_kwargs
+             )
+</pre><h3>Mutant 89</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -305,7 +305,7 @@
+         if len(missing):
+             raise exceptions.CompileException(
+                 "Missing attribute(s): %s"
+-                % ",".join([repr(m) for m in missing]),
++                % "XX,XX".join([repr(m) for m in missing]),
+                 **self.exception_kwargs
+             )
+         self.parent = None
+</pre><h3>Mutant 107</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -342,7 +342,7 @@
+                     else:
+                         if x:
+                             expr.append(repr(x))
+-                self.parsed_attributes[key] = " + ".join(expr) or repr("")
++                self.parsed_attributes[key] = " + ".join(expr) or repr("XXXX")
+             elif key in nonexpressions:
+                 if re.search(r"\${.+?}", self.attributes[key]):
+                     raise exceptions.CompileException(
+</pre><h3>Mutant 112</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -346,7 +346,7 @@
+             elif key in nonexpressions:
+                 if re.search(r"\${.+?}", self.attributes[key]):
+                     raise exceptions.CompileException(
+-                        "Attibute '%s' in tag '%s' does not allow embedded "
++                        "XXAttibute '%s' in tag '%s' does not allow embedded XX"
+                         "expressions" % (key, self.keyword),
+                         **self.exception_kwargs
+                     )
+</pre><h3>Mutant 113</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -347,7 +347,7 @@
+                 if re.search(r"\${.+?}", self.attributes[key]):
+                     raise exceptions.CompileException(
+                         "Attibute '%s' in tag '%s' does not allow embedded "
+-                        "expressions" % (key, self.keyword),
++                        "XXexpressionsXX" % (key, self.keyword),
+                         **self.exception_kwargs
+                     )
+                 self.parsed_attributes[key] = repr(self.attributes[key])
+</pre><h3>Mutant 116</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -353,7 +353,7 @@
+                 self.parsed_attributes[key] = repr(self.attributes[key])
+             else:
+                 raise exceptions.CompileException(
+-                    "Invalid attribute for tag '%s': '%s'"
++                    "XXInvalid attribute for tag '%s': '%s'XX"
+                     % (self.keyword, key),
+                     **self.exception_kwargs
+                 )
+</pre><h3>Mutant 117</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -354,7 +354,7 @@
+             else:
+                 raise exceptions.CompileException(
+                     "Invalid attribute for tag '%s': '%s'"
+-                    % (self.keyword, key),
++                    / (self.keyword, key),
+                     **self.exception_kwargs
+                 )
+         self.expression_undeclared_identifiers = undeclared_identifiers
+</pre><h3>Mutant 124</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -382,7 +382,7 @@
+         super(IncludeTag, self).__init__(
+             keyword,
+             attributes,
+-            ("file", "import", "args"),
++            ("file", "XXimportXX", "args"),
+             (),
+             ("file",),
+             **kwargs
+</pre><h3>Mutant 142</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -416,7 +416,7 @@
+             **kwargs
+         )
+ 
+-        self.name = attributes.get("name", "__anon_%s" % hex(abs(id(self))))
++        self.name = attributes.get("name", "XX__anon_%sXX" % hex(abs(id(self))))
+         if "name" not in attributes and "import" not in attributes:
+             raise exceptions.CompileException(
+                 "'name' and/or 'import' attributes are required "
+</pre><h3>Mutant 150</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -419,7 +419,7 @@
+         self.name = attributes.get("name", "__anon_%s" % hex(abs(id(self))))
+         if "name" not in attributes and "import" not in attributes:
+             raise exceptions.CompileException(
+-                "'name' and/or 'import' attributes are required "
++                "XX'name' and/or 'import' attributes are required XX"
+                 "for <%namespace>",
+                 **self.exception_kwargs
+             )
+</pre><h3>Mutant 151</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -420,7 +420,7 @@
+         if "name" not in attributes and "import" not in attributes:
+             raise exceptions.CompileException(
+                 "'name' and/or 'import' attributes are required "
+-                "for <%namespace>",
++                "XXfor <%namespace>XX",
+                 **self.exception_kwargs
+             )
+         if "file" in attributes and "module" in attributes:
+</pre><h3>Mutant 152</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -423,7 +423,7 @@
+                 "for <%namespace>",
+                 **self.exception_kwargs
+             )
+-        if "file" in attributes and "module" in attributes:
++        if "XXfileXX" in attributes and "module" in attributes:
+             raise exceptions.CompileException(
+                 "<%namespace> may only have one of 'file' or 'module'",
+                 **self.exception_kwargs
+</pre><h3>Mutant 154</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -423,7 +423,7 @@
+                 "for <%namespace>",
+                 **self.exception_kwargs
+             )
+-        if "file" in attributes and "module" in attributes:
++        if "file" in attributes and "XXmoduleXX" in attributes:
+             raise exceptions.CompileException(
+                 "<%namespace> may only have one of 'file' or 'module'",
+                 **self.exception_kwargs
+</pre><h3>Mutant 157</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -425,7 +425,7 @@
+             )
+         if "file" in attributes and "module" in attributes:
+             raise exceptions.CompileException(
+-                "<%namespace> may only have one of 'file' or 'module'",
++                "XX<%namespace> may only have one of 'file' or 'module'XX",
+                 **self.exception_kwargs
+             )
+ 
+</pre><h3>Mutant 160</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -438,7 +438,7 @@
+ 
+     def __init__(self, keyword, attributes, **kwargs):
+         super(TextTag, self).__init__(
+-            keyword, attributes, (), ("filter"), (), **kwargs
++            keyword, attributes, (), ("XXfilterXX"), (), **kwargs
+         )
+         self.filter_args = ast.ArgumentList(
+             attributes.get("filter", ""), **self.exception_kwargs
+</pre><h3>Mutant 178</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -469,7 +469,7 @@
+         name = attributes["name"]
+         if re.match(r"^[\w_]+$", name):
+             raise exceptions.CompileException(
+-                "Missing parenthesis in %def", **self.exception_kwargs
++                "XXMissing parenthesis in %defXX", **self.exception_kwargs
+             )
+         self.function_decl = ast.FunctionDecl(
+             "def " + name + ":pass", **self.exception_kwargs
+</pre><h3>Mutant 192</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -480,7 +480,7 @@
+             attributes.get("filter", ""), **self.exception_kwargs
+         )
+ 
+-    is_anonymous = False
++    is_anonymous = None
+     is_block = False
+ 
+     @property
+</pre><h3>Mutant 194</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -481,7 +481,7 @@
+         )
+ 
+     is_anonymous = False
+-    is_block = False
++    is_block = None
+ 
+     @property
+     def funcname(self):
+</pre><h3>Mutant 197</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -496,7 +496,7 @@
+     def undeclared_identifiers(self):
+         res = []
+         for c in self.function_decl.defaults:
+-            res += list(
++            res = list(
+                 ast.PythonCode(
+                     c, **self.exception_kwargs
+                 ).undeclared_identifiers
+</pre><h3>Mutant 201</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -517,7 +517,7 @@
+     __keyword__ = "block"
+ 
+     def __init__(self, keyword, attributes, **kwargs):
+-        expressions = ["buffered", "cached", "args"] + [
++        expressions = ["XXbufferedXX", "cached", "args"] + [
+             c for c in attributes if c.startswith("cache_")
+         ]
+ 
+</pre><h3>Mutant 209</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -525,7 +525,7 @@
+             keyword,
+             attributes,
+             expressions,
+-            ("name", "filter", "decorator"),
++            ("name", "filter", "XXdecoratorXX"),
+             (),
+             **kwargs
+         )
+</pre><h3>Mutant 215</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -532,7 +532,7 @@
+         name = attributes.get("name")
+         if name and not re.match(r"^[\w_]+$", name):
+             raise exceptions.CompileException(
+-                "%block may not specify an argument signature",
++                "XX%block may not specify an argument signatureXX",
+                 **self.exception_kwargs
+             )
+         if not name and attributes.get("args", None):
+</pre><h3>Mutant 217</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -535,7 +535,7 @@
+                 "%block may not specify an argument signature",
+                 **self.exception_kwargs
+             )
+-        if not name and attributes.get("args", None):
++        if not name and attributes.get("XXargsXX", None):
+             raise exceptions.CompileException(
+                 "Only named %blocks may specify args", **self.exception_kwargs
+             )
+</pre><h3>Mutant 219</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -537,7 +537,7 @@
+             )
+         if not name and attributes.get("args", None):
+             raise exceptions.CompileException(
+-                "Only named %blocks may specify args", **self.exception_kwargs
++                "XXOnly named %blocks may specify argsXX", **self.exception_kwargs
+             )
+         self.body_decl = ast.FunctionArgs(
+             attributes.get("args", ""), **self.exception_kwargs
+</pre><h3>Mutant 224</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -544,7 +544,7 @@
+         )
+ 
+         self.name = name
+-        self.decorator = attributes.get("decorator", "")
++        self.decorator = attributes.get("XXdecoratorXX", "")
+         self.filter_args = ast.ArgumentList(
+             attributes.get("filter", ""), **self.exception_kwargs
+         )
+</pre><h3>Mutant 226</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -544,7 +544,7 @@
+         )
+ 
+         self.name = name
+-        self.decorator = attributes.get("decorator", "")
++        self.decorator = None
+         self.filter_args = ast.ArgumentList(
+             attributes.get("filter", ""), **self.exception_kwargs
+         )
+</pre><h3>Mutant 235</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -557,7 +557,7 @@
+ 
+     @property
+     def funcname(self):
+-        return self.name or "__M_anon_%d" % (self.lineno,)
++        return self.name or "XX__M_anon_%dXX" % (self.lineno,)
+ 
+     def get_argument_expressions(self, **kw):
+         return self.body_decl.get_argument_expressions(**kw)
+</pre><h3>Mutant 240</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -578,7 +578,7 @@
+ 
+     def __init__(self, keyword, attributes, **kwargs):
+         super(CallTag, self).__init__(
+-            keyword, attributes, ("args"), ("expr",), ("expr",), **kwargs
++            keyword, attributes, ("XXargsXX"), ("expr",), ("expr",), **kwargs
+         )
+         self.expression = attributes["expr"]
+         self.code = ast.PythonCode(self.expression, **self.exception_kwargs)
+</pre><h3>Mutant 253</h3><pre>--- mako/parsetree.py
++++ mako/parsetree.py
+@@ -600,7 +600,7 @@
+         super(CallNamespaceTag, self).__init__(
+             namespace + ":" + defname,
+             attributes,
+-            tuple(attributes.keys()) + ("args",),
++            tuple(attributes.keys()) + ("XXargsXX",),
+             (),
+             (),
+             **kwargs
+</pre></body></html>

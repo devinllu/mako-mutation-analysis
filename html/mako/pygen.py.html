@@ -1,0 +1,430 @@
+<html><body><h1>mako/pygen.py</h1>Killed 129 out of 168 mutants<h2>Timeouts</h2>Mutants that made the test suite take a lot longer so the tests were killed.<h3>Mutant 2610</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -261,7 +261,7 @@
+             state[backslashed] = False
+ 
+         def match(reg, t):
+-            m = re.match(reg, t)
++            m = None
+             if m:
+                 return m, t[len(m.group(0)) :]
+             else:
+</pre><h3>Mutant 2612</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -269,7 +269,7 @@
+ 
+         while line:
+             if state[triplequoted]:
+-                m, line = match(r"%s" % state[triplequoted], line)
++                m, line = match(r"XX%sXX" % state[triplequoted], line)
+                 if m:
+                     state[triplequoted] = False
+                 else:
+</pre><h3>Mutant 2617</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -273,7 +273,7 @@
+                 if m:
+                     state[triplequoted] = False
+                 else:
+-                    m, line = match(r".*?(?=%s|$)" % state[triplequoted], line)
++                    m, line = match(r"XX.*?(?=%s|$)XX" % state[triplequoted], line)
+             else:
+                 m, line = match(r"#", line)
+                 if m:
+</pre><h3>Mutant 2620</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -275,7 +275,7 @@
+                 else:
+                     m, line = match(r".*?(?=%s|$)" % state[triplequoted], line)
+             else:
+-                m, line = match(r"#", line)
++                m, line = match(r"XX#XX", line)
+                 if m:
+                     return start_state
+ 
+</pre><h3>Mutant 2622</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -279,7 +279,7 @@
+                 if m:
+                     return start_state
+ 
+-                m, line = match(r"\"\"\"|\'\'\'", line)
++                m, line = match(r"XX\"\"\"|\'\'\'XX", line)
+                 if m:
+                     state[triplequoted] = m.group(0)
+                     continue
+</pre><h3>Mutant 2627</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -284,7 +284,7 @@
+                     state[triplequoted] = m.group(0)
+                     continue
+ 
+-                m, line = match(r".*?(?=\"\"\"|\'\'\'|#|$)", line)
++                m, line = match(r"XX.*?(?=\"\"\"|\'\'\'|#|$)XX", line)
+ 
+         return start_state
+ 
+</pre><h3>Mutant 2635</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -294,7 +294,7 @@
+     lines = []
+     stripspace = None
+ 
+-    for line in re.split(r"\r?\n", text):
++    for line in re.split(r"XX\r?\nXX", text):
+         if in_multi_line(line):
+             lines.append(line)
+         else:
+</pre><h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 2485</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -35,7 +35,7 @@
+         # which can be later printed relative to an indent level
+         self.line_buffer = []
+ 
+-        self.in_indent_lines = False
++        self.in_indent_lines = True
+ 
+         self._reset_multi_line_flags()
+ 
+</pre><h3>Mutant 2486</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -35,7 +35,7 @@
+         # which can be later printed relative to an indent level
+         self.line_buffer = []
+ 
+-        self.in_indent_lines = False
++        self.in_indent_lines = None
+ 
+         self._reset_multi_line_flags()
+ 
+</pre><h3>Mutant 2495</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -59,7 +59,7 @@
+ 
+         The indentation of the total block of lines will be adjusted to that of
+         the current indent level."""
+-        self.in_indent_lines = False
++        self.in_indent_lines = None
+         for i, l in enumerate(re.split(r"\r?\n", block)):
+             self.line_buffer.append(l)
+             if starting_lineno is not None:
+</pre><h3>Mutant 2501</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -82,7 +82,7 @@
+ 
+         if not self.in_indent_lines:
+             self._flush_adjusted_lines()
+-            self.in_indent_lines = True
++            self.in_indent_lines = False
+ 
+         if (
+             line is None
+</pre><h3>Mutant 2502</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -82,7 +82,7 @@
+ 
+         if not self.in_indent_lines:
+             self._flush_adjusted_lines()
+-            self.in_indent_lines = True
++            self.in_indent_lines = None
+ 
+         if (
+             line is None
+</pre><h3>Mutant 2504</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -86,7 +86,7 @@
+ 
+         if (
+             line is None
+-            or re.match(r"^\s*#", line)
++            or re.match(r"XX^\s*#XX", line)
+             or re.match(r"^\s*$", line)
+         ):
+             hastext = False
+</pre><h3>Mutant 2508</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -89,7 +89,7 @@
+             or re.match(r"^\s*#", line)
+             or re.match(r"^\s*$", line)
+         ):
+-            hastext = False
++            hastext = None
+         else:
+             hastext = True
+ 
+</pre><h3>Mutant 2513</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -93,7 +93,7 @@
+         else:
+             hastext = True
+ 
+-        is_comment = line and len(line) and line[0] == "#"
++        is_comment = line and len(line) and line[0] == "XX#XX"
+ 
+         # see if this line should decrease the indentation level
+         if not is_comment and (not hastext or self._is_unindentor(line)):
+</pre><h3>Mutant 2515</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -93,7 +93,7 @@
+         else:
+             hastext = True
+ 
+-        is_comment = line and len(line) and line[0] == "#"
++        is_comment = None
+ 
+         # see if this line should decrease the indentation level
+         if not is_comment and (not hastext or self._is_unindentor(line)):
+</pre><h3>Mutant 2520</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -98,7 +98,7 @@
+         # see if this line should decrease the indentation level
+         if not is_comment and (not hastext or self._is_unindentor(line)):
+ 
+-            if self.indent > 0:
++            if self.indent >= 0:
+                 self.indent -= 1
+                 # if the indent_detail stack is empty, the user
+                 # probably put extra closures - the resulting
+</pre><h3>Mutant 2527</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -105,7 +105,7 @@
+                 # module wont compile.
+                 if len(self.indent_detail) == 0:
+                     raise exceptions.SyntaxException(
+-                        "Too many whitespace closures"
++                        "XXToo many whitespace closuresXX"
+                     )
+                 self.indent_detail.pop()
+ 
+</pre><h3>Mutant 2540</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -132,7 +132,7 @@
+                 self.indent += 1
+                 self.indent_detail.append(indentor)
+             else:
+-                indentor = None
++                indentor = ""
+                 # its not a "compound" keyword.  but lets also
+                 # test for valid Python keywords that might be indenting us,
+                 # else assume its a non-indenting line
+</pre><h3>Mutant 2548</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -155,7 +155,7 @@
+ 
+         # no indentation detail has been pushed on; return False
+         if len(self.indent_detail) == 0:
+-            return False
++            return True
+ 
+         indentor = self.indent_detail[-1]
+ 
+</pre><h3>Mutant 2566</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -216,7 +216,7 @@
+         # a literal multiline string with unfortunately placed
+         # whitespace
+ 
+-        current_state = self.backslashed or self.triplequoted
++        current_state = self.backslashed and self.triplequoted
+ 
+         if re.search(r"\\$", line):
+             self.backslashed = True
+</pre><h3>Mutant 2567</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -216,7 +216,7 @@
+         # a literal multiline string with unfortunately placed
+         # whitespace
+ 
+-        current_state = self.backslashed or self.triplequoted
++        current_state = None
+ 
+         if re.search(r"\\$", line):
+             self.backslashed = True
+</pre><h3>Mutant 2568</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -218,7 +218,7 @@
+ 
+         current_state = self.backslashed or self.triplequoted
+ 
+-        if re.search(r"\\$", line):
++        if re.search(r"XX\\$XX", line):
+             self.backslashed = True
+         else:
+             self.backslashed = False
+</pre><h3>Mutant 2569</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -219,7 +219,7 @@
+         current_state = self.backslashed or self.triplequoted
+ 
+         if re.search(r"\\$", line):
+-            self.backslashed = True
++            self.backslashed = False
+         else:
+             self.backslashed = False
+ 
+</pre><h3>Mutant 2570</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -219,7 +219,7 @@
+         current_state = self.backslashed or self.triplequoted
+ 
+         if re.search(r"\\$", line):
+-            self.backslashed = True
++            self.backslashed = None
+         else:
+             self.backslashed = False
+ 
+</pre><h3>Mutant 2572</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -221,7 +221,7 @@
+         if re.search(r"\\$", line):
+             self.backslashed = True
+         else:
+-            self.backslashed = False
++            self.backslashed = None
+ 
+         triples = len(re.findall(r"\"\"\"|\'\'\'", line))
+         if triples == 1 or triples % 2 != 0:
+</pre><h3>Mutant 2573</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -223,7 +223,7 @@
+         else:
+             self.backslashed = False
+ 
+-        triples = len(re.findall(r"\"\"\"|\'\'\'", line))
++        triples = len(re.findall(r"XX\"\"\"|\'\'\'XX", line))
+         if triples == 1 or triples % 2 != 0:
+             self.triplequoted = not self.triplequoted
+ 
+</pre><h3>Mutant 2576</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -224,7 +224,7 @@
+             self.backslashed = False
+ 
+         triples = len(re.findall(r"\"\"\"|\'\'\'", line))
+-        if triples == 1 or triples % 2 != 0:
++        if triples == 2 or triples % 2 != 0:
+             self.triplequoted = not self.triplequoted
+ 
+         return current_state
+</pre><h3>Mutant 2577</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -224,7 +224,7 @@
+             self.backslashed = False
+ 
+         triples = len(re.findall(r"\"\"\"|\'\'\'", line))
+-        if triples == 1 or triples % 2 != 0:
++        if triples == 1 or triples / 2 != 0:
+             self.triplequoted = not self.triplequoted
+ 
+         return current_state
+</pre><h3>Mutant 2578</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -224,7 +224,7 @@
+             self.backslashed = False
+ 
+         triples = len(re.findall(r"\"\"\"|\'\'\'", line))
+-        if triples == 1 or triples % 2 != 0:
++        if triples == 1 or triples % 3 != 0:
+             self.triplequoted = not self.triplequoted
+ 
+         return current_state
+</pre><h3>Mutant 2581</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -224,7 +224,7 @@
+             self.backslashed = False
+ 
+         triples = len(re.findall(r"\"\"\"|\'\'\'", line))
+-        if triples == 1 or triples % 2 != 0:
++        if triples == 1 and triples % 2 != 0:
+             self.triplequoted = not self.triplequoted
+ 
+         return current_state
+</pre><h3>Mutant 2582</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -225,7 +225,7 @@
+ 
+         triples = len(re.findall(r"\"\"\"|\'\'\'", line))
+         if triples == 1 or triples % 2 != 0:
+-            self.triplequoted = not self.triplequoted
++            self.triplequoted =  self.triplequoted
+ 
+         return current_state
+ 
+</pre><h3>Mutant 2583</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -225,7 +225,7 @@
+ 
+         triples = len(re.findall(r"\"\"\"|\'\'\'", line))
+         if triples == 1 or triples % 2 != 0:
+-            self.triplequoted = not self.triplequoted
++            self.triplequoted = None
+ 
+         return current_state
+ 
+</pre><h3>Mutant 2605</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -255,7 +255,7 @@
+     def in_multi_line(line):
+         start_state = state[backslashed] or state[triplequoted]
+ 
+-        if re.search(r"\\$", line):
++        if re.search(r"XX\\$XX", line):
+             state[backslashed] = True
+         else:
+             state[backslashed] = False
+</pre><h3>Mutant 2606</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -256,7 +256,7 @@
+         start_state = state[backslashed] or state[triplequoted]
+ 
+         if re.search(r"\\$", line):
+-            state[backslashed] = True
++            state[backslashed] = False
+         else:
+             state[backslashed] = False
+ 
+</pre><h3>Mutant 2607</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -256,7 +256,7 @@
+         start_state = state[backslashed] or state[triplequoted]
+ 
+         if re.search(r"\\$", line):
+-            state[backslashed] = True
++            state[backslashed] = None
+         else:
+             state[backslashed] = False
+ 
+</pre><h3>Mutant 2609</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -258,7 +258,7 @@
+         if re.search(r"\\$", line):
+             state[backslashed] = True
+         else:
+-            state[backslashed] = False
++            state[backslashed] = None
+ 
+         def match(reg, t):
+             m = re.match(reg, t)
+</pre><h3>Mutant 2616</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -271,7 +271,7 @@
+             if state[triplequoted]:
+                 m, line = match(r"%s" % state[triplequoted], line)
+                 if m:
+-                    state[triplequoted] = False
++                    state[triplequoted] = None
+                 else:
+                     m, line = match(r".*?(?=%s|$)" % state[triplequoted], line)
+             else:
+</pre><h3>Mutant 2629</h3><pre>--- mako/pygen.py
++++ mako/pygen.py
+@@ -288,7 +288,7 @@
+ 
+         return start_state
+ 
+-    def _indent_line(line, stripspace=""):
++    def _indent_line(line, stripspace="XXXX"):
+         return re.sub(r"^%s" % stripspace, "", line)
+ 
+     lines = []
+</pre></body></html>

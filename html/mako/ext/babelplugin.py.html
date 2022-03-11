@@ -1,0 +1,171 @@
+<html><body><h1>mako/ext/babelplugin.py</h1>Killed 0 out of 15 mutants<h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 3255</h3><pre>--- mako/ext/babelplugin.py
++++ mako/ext/babelplugin.py
+@@ -12,7 +12,7 @@
+ 
+ class BabelMakoExtractor(MessageExtractor):
+     def __init__(self, keywords, comment_tags, options):
+-        self.keywords = keywords
++        self.keywords = None
+         self.options = options
+         self.config = {
+             "comment-tags": u" ".join(comment_tags),
+</pre><h3>Mutant 3256</h3><pre>--- mako/ext/babelplugin.py
++++ mako/ext/babelplugin.py
+@@ -13,7 +13,7 @@
+ class BabelMakoExtractor(MessageExtractor):
+     def __init__(self, keywords, comment_tags, options):
+         self.keywords = keywords
+-        self.options = options
++        self.options = None
+         self.config = {
+             "comment-tags": u" ".join(comment_tags),
+             "encoding": options.get(
+</pre><h3>Mutant 3257</h3><pre>--- mako/ext/babelplugin.py
++++ mako/ext/babelplugin.py
+@@ -15,7 +15,7 @@
+         self.keywords = keywords
+         self.options = options
+         self.config = {
+-            "comment-tags": u" ".join(comment_tags),
++            "XXcomment-tagsXX": u" ".join(comment_tags),
+             "encoding": options.get(
+                 "input_encoding", options.get("encoding", None)
+             ),
+</pre><h3>Mutant 3258</h3><pre>--- mako/ext/babelplugin.py
++++ mako/ext/babelplugin.py
+@@ -15,7 +15,7 @@
+         self.keywords = keywords
+         self.options = options
+         self.config = {
+-            "comment-tags": u" ".join(comment_tags),
++            "comment-tags": u"XX XX".join(comment_tags),
+             "encoding": options.get(
+                 "input_encoding", options.get("encoding", None)
+             ),
+</pre><h3>Mutant 3259</h3><pre>--- mako/ext/babelplugin.py
++++ mako/ext/babelplugin.py
+@@ -16,7 +16,7 @@
+         self.options = options
+         self.config = {
+             "comment-tags": u" ".join(comment_tags),
+-            "encoding": options.get(
++            "XXencodingXX": options.get(
+                 "input_encoding", options.get("encoding", None)
+             ),
+         }
+</pre><h3>Mutant 3260</h3><pre>--- mako/ext/babelplugin.py
++++ mako/ext/babelplugin.py
+@@ -17,7 +17,7 @@
+         self.config = {
+             "comment-tags": u" ".join(comment_tags),
+             "encoding": options.get(
+-                "input_encoding", options.get("encoding", None)
++                "XXinput_encodingXX", options.get("encoding", None)
+             ),
+         }
+         super(BabelMakoExtractor, self).__init__()
+</pre><h3>Mutant 3261</h3><pre>--- mako/ext/babelplugin.py
++++ mako/ext/babelplugin.py
+@@ -17,7 +17,7 @@
+         self.config = {
+             "comment-tags": u" ".join(comment_tags),
+             "encoding": options.get(
+-                "input_encoding", options.get("encoding", None)
++                "input_encoding", options.get("XXencodingXX", None)
+             ),
+         }
+         super(BabelMakoExtractor, self).__init__()
+</pre><h3>Mutant 3262</h3><pre>--- mako/ext/babelplugin.py
++++ mako/ext/babelplugin.py
+@@ -14,12 +14,7 @@
+     def __init__(self, keywords, comment_tags, options):
+         self.keywords = keywords
+         self.options = options
+-        self.config = {
+-            "comment-tags": u" ".join(comment_tags),
+-            "encoding": options.get(
+-                "input_encoding", options.get("encoding", None)
+-            ),
+-        }
++        self.config = None
+         super(BabelMakoExtractor, self).__init__()
+ 
+     def __call__(self, fileobj):
+</pre><h3>Mutant 3263</h3><pre>--- mako/ext/babelplugin.py
++++ mako/ext/babelplugin.py
+@@ -26,7 +26,7 @@
+         return self.process_file(fileobj)
+ 
+     def process_python(self, code, code_lineno, translator_strings):
+-        comment_tags = self.config["comment-tags"]
++        comment_tags = self.config["XXcomment-tagsXX"]
+         for (
+             lineno,
+             funcname,
+</pre><h3>Mutant 3264</h3><pre>--- mako/ext/babelplugin.py
++++ mako/ext/babelplugin.py
+@@ -26,7 +26,7 @@
+         return self.process_file(fileobj)
+ 
+     def process_python(self, code, code_lineno, translator_strings):
+-        comment_tags = self.config["comment-tags"]
++        comment_tags = None
+         for (
+             lineno,
+             funcname,
+</pre><h3>Mutant 3265</h3><pre>--- mako/ext/babelplugin.py
++++ mako/ext/babelplugin.py
+@@ -34,7 +34,7 @@
+             python_translator_comments,
+         ) in extract_python(code, self.keywords, comment_tags, self.options):
+             yield (
+-                code_lineno + (lineno - 1),
++                code_lineno - (lineno - 1),
+                 funcname,
+                 messages,
+                 translator_strings + python_translator_comments,
+</pre><h3>Mutant 3266</h3><pre>--- mako/ext/babelplugin.py
++++ mako/ext/babelplugin.py
+@@ -34,7 +34,7 @@
+             python_translator_comments,
+         ) in extract_python(code, self.keywords, comment_tags, self.options):
+             yield (
+-                code_lineno + (lineno - 1),
++                code_lineno + (lineno + 1),
+                 funcname,
+                 messages,
+                 translator_strings + python_translator_comments,
+</pre><h3>Mutant 3267</h3><pre>--- mako/ext/babelplugin.py
++++ mako/ext/babelplugin.py
+@@ -34,7 +34,7 @@
+             python_translator_comments,
+         ) in extract_python(code, self.keywords, comment_tags, self.options):
+             yield (
+-                code_lineno + (lineno - 1),
++                code_lineno + (lineno - 2),
+                 funcname,
+                 messages,
+                 translator_strings + python_translator_comments,
+</pre><h3>Mutant 3268</h3><pre>--- mako/ext/babelplugin.py
++++ mako/ext/babelplugin.py
+@@ -37,7 +37,7 @@
+                 code_lineno + (lineno - 1),
+                 funcname,
+                 messages,
+-                translator_strings + python_translator_comments,
++                translator_strings - python_translator_comments,
+             )
+ 
+ 
+</pre><h3>Mutant 3269</h3><pre>--- mako/ext/babelplugin.py
++++ mako/ext/babelplugin.py
+@@ -53,7 +53,7 @@
+     :return: an iterator over ``(lineno, funcname, message, comments)`` tuples
+     :rtype: ``iterator``
+     """
+-    extractor = BabelMakoExtractor(keywords, comment_tags, options)
++    extractor = None
+     for message in extractor(fileobj):
+         yield message
+ 
+</pre></body></html>

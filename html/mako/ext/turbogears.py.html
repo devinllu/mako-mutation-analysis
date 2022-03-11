@@ -1,0 +1,122 @@
+<html><body><h1>mako/ext/turbogears.py</h1>Killed 22 out of 33 mutants<h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 3419</h3><pre>--- mako/ext/turbogears.py
++++ mako/ext/turbogears.py
+@@ -13,7 +13,7 @@
+ 
+     """TurboGears compatible Template Plugin."""
+ 
+-    def __init__(self, extra_vars_func=None, options=None, extension="mak"):
++    def __init__(self, extra_vars_func=None, options=None, extension="XXmakXX"):
+         self.extra_vars_func = extra_vars_func
+         self.extension = extension
+         if not options:
+</pre><h3>Mutant 3420</h3><pre>--- mako/ext/turbogears.py
++++ mako/ext/turbogears.py
+@@ -14,7 +14,7 @@
+     """TurboGears compatible Template Plugin."""
+ 
+     def __init__(self, extra_vars_func=None, options=None, extension="mak"):
+-        self.extra_vars_func = extra_vars_func
++        self.extra_vars_func = None
+         self.extension = extension
+         if not options:
+             options = {}
+</pre><h3>Mutant 3423</h3><pre>--- mako/ext/turbogears.py
++++ mako/ext/turbogears.py
+@@ -17,7 +17,7 @@
+         self.extra_vars_func = extra_vars_func
+         self.extension = extension
+         if not options:
+-            options = {}
++            options = None
+ 
+         # Pull the options out and initialize the lookup
+         lookup_options = {}
+</pre><h3>Mutant 3425</h3><pre>--- mako/ext/turbogears.py
++++ mako/ext/turbogears.py
+@@ -22,7 +22,7 @@
+         # Pull the options out and initialize the lookup
+         lookup_options = {}
+         for k, v in options.items():
+-            if k.startswith("mako."):
++            if k.startswith("XXmako.XX"):
+                 lookup_options[k[5:]] = v
+             elif k in ["directories", "filesystem_checks", "module_directory"]:
+                 lookup_options[k] = v
+</pre><h3>Mutant 3426</h3><pre>--- mako/ext/turbogears.py
++++ mako/ext/turbogears.py
+@@ -23,7 +23,7 @@
+         lookup_options = {}
+         for k, v in options.items():
+             if k.startswith("mako."):
+-                lookup_options[k[5:]] = v
++                lookup_options[k[6:]] = v
+             elif k in ["directories", "filesystem_checks", "module_directory"]:
+                 lookup_options[k] = v
+         self.lookup = TemplateLookup(**lookup_options)
+</pre><h3>Mutant 3427</h3><pre>--- mako/ext/turbogears.py
++++ mako/ext/turbogears.py
+@@ -23,7 +23,7 @@
+         lookup_options = {}
+         for k, v in options.items():
+             if k.startswith("mako."):
+-                lookup_options[k[5:]] = v
++                lookup_options[k[5:]] = None
+             elif k in ["directories", "filesystem_checks", "module_directory"]:
+                 lookup_options[k] = v
+         self.lookup = TemplateLookup(**lookup_options)
+</pre><h3>Mutant 3430</h3><pre>--- mako/ext/turbogears.py
++++ mako/ext/turbogears.py
+@@ -24,7 +24,7 @@
+         for k, v in options.items():
+             if k.startswith("mako."):
+                 lookup_options[k[5:]] = v
+-            elif k in ["directories", "filesystem_checks", "module_directory"]:
++            elif k in ["directories", "XXfilesystem_checksXX", "module_directory"]:
+                 lookup_options[k] = v
+         self.lookup = TemplateLookup(**lookup_options)
+ 
+</pre><h3>Mutant 3431</h3><pre>--- mako/ext/turbogears.py
++++ mako/ext/turbogears.py
+@@ -24,7 +24,7 @@
+         for k, v in options.items():
+             if k.startswith("mako."):
+                 lookup_options[k[5:]] = v
+-            elif k in ["directories", "filesystem_checks", "module_directory"]:
++            elif k in ["directories", "filesystem_checks", "XXmodule_directoryXX"]:
+                 lookup_options[k] = v
+         self.lookup = TemplateLookup(**lookup_options)
+ 
+</pre><h3>Mutant 3437</h3><pre>--- mako/ext/turbogears.py
++++ mako/ext/turbogears.py
+@@ -33,7 +33,7 @@
+         # in getargspec
+         for kw in compat.inspect_getargspec(Template.__init__)[0]:
+             if kw in lookup_options:
+-                self.tmpl_options[kw] = lookup_options[kw]
++                self.tmpl_options[kw] = None
+ 
+     def load_template(self, templatename, template_string=None):
+         """Loads a template from a file or a string"""
+</pre><h3>Mutant 3449</h3><pre>--- mako/ext/turbogears.py
++++ mako/ext/turbogears.py
+@@ -49,7 +49,7 @@
+         return self.lookup.get_template(templatename)
+ 
+     def render(
+-        self, info, format="html", fragment=False, template=None  # noqa
++        self, info, format="XXhtmlXX", fragment=False, template=None  # noqa
+     ):
+         if isinstance(template, compat.string_types):
+             template = self.load_template(template)
+</pre><h3>Mutant 3450</h3><pre>--- mako/ext/turbogears.py
++++ mako/ext/turbogears.py
+@@ -49,7 +49,7 @@
+         return self.lookup.get_template(templatename)
+ 
+     def render(
+-        self, info, format="html", fragment=False, template=None  # noqa
++        self, info, format="html", fragment=True, template=None  # noqa
+     ):
+         if isinstance(template, compat.string_types):
+             template = self.load_template(template)
+</pre></body></html>
